@@ -1,0 +1,17 @@
+/* Estilo de la sección SERVICIOS MEDICOS */  
+.section-services {  
+    padding: 1rem; 
+    text-align: center;  
+}  
+
+.services-grid {  
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Define las columnas */  
+    gap: 5rem; /* Espacio entre los elementos */  
+    margin-top: 1.5rem; 
+}  
+
+.services-item img {  
+    width: 20%;  
+    height: auto;  
+}
