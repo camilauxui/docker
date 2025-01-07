@@ -1,0 +1,109 @@
+/* Estilos generales */
+.home {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #eaeff8;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    color: #023770;
+}
+
+/* Contenedor de los botones de navegación */
+.button-container {
+    display: flex;
+    justify-content: center; /* Alineación horizontal */
+    gap: 20px; /* Espacio entre los botones */
+    margin-bottom: 30px;
+}
+
+/* Estilos para cada botón */
+.banner-button {
+    background-color: #1882f3; 
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 250px; /* Ancho del banner */
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover */
+.banner-button:hover {
+    background-color: #0959b4; 
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos de las secciones */
+section {
+    margin-bottom: 40px;
+}
+
+/* Estilos para las listas */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* Sección sobre el centro médico */
+.about-center {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+/* Botón "Subir" */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Alineación de los botones en columna */
+    .button-container {
+        flex-direction: column; /* Alineación vertical */
+        gap: 15px; /* Espacio entre los botones */
+    }
+
+    /* Ajustar el tamaño de los botones para pantallas más pequeñas */
+    .banner-button {
+        width: 80%; /* Hacer los botones más anchos en móviles */
+        padding: 12px 0; /* Ajustar el padding */
+    }
+
+    /* Botón "Subir" en móviles */
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        font-size: 18px; /* Hacer el texto un poco más pequeño */
+        padding: 12px 18px;
+    }
+}
+

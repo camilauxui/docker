@@ -26,7 +26,7 @@ const DoctorList = () => {
 
     return (  
         <Profiler id="DoctorList" onRender={onRender}>  
-            <div className="doctor-cards-container">  
+            <> {/* Mejora: Utiliza un fragmento para evitar un div extra en el renderizado*/}  
                 {doctors.length > 0 ? (  
                     doctors.map((doctor) => (  
                         <DoctorCard   
@@ -43,9 +43,9 @@ const DoctorList = () => {
                 ) : (  
                     <p>No hay doctores disponibles.</p>  
                 )}  
-            </div>  
+            </>  
         </Profiler>  
-    );  
+    );
 };  
 
 export default DoctorList;

@@ -35,24 +35,22 @@ const ServiceList = ({ services = [] }) => {
                         />  
                         <h3>{service.title}</h3>  
                         <p>{service.description}</p>  
-                        <button onClick={() => openModal(service)}>Ver Más</button> {/* Botón "Ver Más" */}  
+                        <button onClick={() => openModal(service)}>Ver Más</button>  
                     </article>  
                 ))}  
             </div>  
-
-            {/* Modal para mostrar información del servicio seleccionado */}  
+    
             <Modal isOpen={isModalOpen} onClose={closeModal}>  
                 {selectedService && (  
                     <>  
                         <h2>{selectedService.title}</h2>  
                         <img src={selectedService.image} alt={selectedService.title} className="responsive-img" />  
                         <p>{selectedService.description}</p>  
-                        {/* Puedes añadir más información aquí si lo deseas */}  
                     </>  
                 )}  
             </Modal>  
         </section>  
-    );  
+    );
 };  
 
 ServiceList.propTypes = {  
