@@ -14,7 +14,7 @@ por especialidad.
 **- Vista de Citas:** Implementa un formulario para agendar citas con validaciones y
 uso de Hooks (useState, useEffect).
 
-# 2. Optimización del DOM Virtual y Uso de Fragmentos (1 punto)
+# 2. Optimización del DOM Virtual y Uso de Fragmentos
 - Usa el DOM Virtual para gestionar eficientemente la actualización de datos en las
 diferentes vistas, asegurando que solo los elementos necesarios se actualicen:
 Uso Correcto del Estado y Eficiencia del DOM Virtual
