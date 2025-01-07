@@ -1,9 +1,7 @@
 import React, { createContext, useState } from 'react';
 
-// Crear contexto  
 export const DoctorContext = createContext();  
 
-// Proveedor del contexto  
 export const DoctorProvider = ({ children }) => {  
     const [doctors, setDoctors] = useState([]);   
 

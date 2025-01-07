@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './ServiceList.css';  
 import Modal from './Modal'; 
 
-const ServiceList = ({ services }) => {  
+
+const ServiceList = ({ services = [] }) => { 
     const [isModalOpen, setIsModalOpen] = useState(false);  
     const [selectedService, setSelectedService] = useState(null);  
 

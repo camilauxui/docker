@@ -1,6 +1,6 @@
-import consultaIcono from './assets/consulta_icono.png';  
-import urgenciaIcono from './assets/urgencia_icono.png';  
-import especialidadesIcono from './assets/especialidades_icono.png';  
+import consultaIcono from '/src/assets/consulta_icono.png';
+import urgenciaIcono from '/src/assets/urgencia_icono.png';  
+import especialidadesIcono from '/src/assets/especialidades_icono.png';
 
 const servicesData = [  
     { id: 1, title: "Consultas", description: "Nuestro equipo de profesionales capacitados está disponible para proporcionar atención médica rápida y efectiva.", image: consultaIcono },  
