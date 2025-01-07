@@ -1,12 +1,12 @@
 import React from 'react';  
 import ServiceList from '../components/ServiceList';  
-import servicesData from '../components/ServicesData'; // Asegúrate de importar servicesData  
+import servicesData from '../components/ServicesData'; 
 
 const Home = () => {  
     return (  
         <div className="home">  
             <h1>Bienvenido al Centro Médico</h1>  
-            <ServiceList services={servicesData} />  {/* Pasa servicesData como prop aquí */}  
+            <ServiceList services={servicesData} />  {/* Pasa servicesData como prop (o propiedad)*/}  
             <section className="about-center">  
                 <h2>Información del Centro Médico</h2>  
                 <p>  

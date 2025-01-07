@@ -16,7 +16,7 @@ const DoctorList = () => {
             setDoctors(doctorsData);  
         };  
 
-        loadDoctors(); // Cargar los doctores al montar el componente  
+        loadDoctors(); // Cargar los doctores 
     }, [setDoctors]);  
 
     // Función para registrar las medidas del Profiler  

@@ -35,7 +35,7 @@ const ServiceList = ({ services = [] }) => {
                         />  
                         <h3>{service.title}</h3>  
                         <p>{service.description}</p>  
-                        <button onClick={() => openModal(service)}>Ver Más</button> {/* Botón de "Ver Más" */}  
+                        <button onClick={() => openModal(service)}>Ver Más</button> {/* Botón "Ver Más" */}  
                     </article>  
                 ))}  
             </div>  
