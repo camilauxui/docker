@@ -39,3 +39,7 @@ useEffect(() => {
 }, []);
 
 - **Callbacks** Se usan referencias de callback para gestionar el desplazamiento a diferentes secciones + botòn para subir al inicio de la pàgina, en la vista Home.
+
+# 4. Manejo de Datos con API REST Simulada
+- **API REST Simulada:** Primero, se crea un archivo JSON local que sirva como API simulada, llamado doctors.json en la carpeta src/data.
+Luego se modifica DoctorList para obtener estos datos utilizando fetch y async/await
