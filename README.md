@@ -43,3 +43,9 @@ useEffect(() => {
 # 4. Manejo de Datos con API REST Simulada
 - **API REST Simulada:** Primero, se crea un archivo JSON local que sirva como API simulada, llamado doctors.json en la carpeta src/data.
 Luego se modifica DoctorList para obtener estos datos utilizando fetch y async/await
+
+# 5. Optimización de Rendimiento y Uso de Profiler 
+- Usa Profiler para identificar posibles problemas de rendimiento y optimiza la renderización de componentes que manejan grandes volúmenes de datos, como la lista
+de doctores o servicios.
+# 6. Comprobación de Tipos con PropTypes 
+- Implementa PropTypes en todos los componentes para verificar los tipos de datos y asegurar que los valores pasados como props son válidos, evitando errores en la aplicación.
