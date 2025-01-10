@@ -1,49 +1,48 @@
 .appointment-form {  
-    margin: 20px;  
-    padding: 20px;  
-    border: 1px solid #ccc;  
-    border-radius: 8px;  
+    width: 100%;                     /* Asegura que el formulario use el ancho disponible */  
+    padding: 10px;                   /* Espaciado interno */  
+    background-color: white;         /* Color de fondo del formulario */  
+    border-radius: 10px;             /* Bordes redondeados */  
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */  
+    margin: 0 auto;                  /* Centra el formulario horizontalmente */  
 }  
 
-.appointment-form h2 {  
-    margin-bottom: 20px;  
+
+div {  
+    margin-bottom: 10px;             /* Espacio entre los campos del formulario */  
 }  
 
-.appointment-form div {  
-    margin-bottom: 15px;  
+label {  
+    margin-bottom: 5px;              /* Espacio entre la etiqueta y el campo */  
+    font-weight: bold;               /* Negrita para las etiquetas */  
+    text-align: left;                /* Alineación a la izquierda */  
 }  
 
-.appointment-form label {  
-    display: block;  
-    margin-bottom: 5px;  
-}  
-
-.appointment-form input,  
-.appointment-form select {  
-    width: 100%;  
-    padding: 8px;  
-    border-radius: 4px;  
-    border: 1px solid #ccc;  
+input, select {  
+    padding: 10px;                   /* Espaciado interno en los campos */  
+    border: 1px solid #919191;          /* Borde de los campos */  
+    border-radius: 5px;              /* Bordes redondeados en los campos */  
+    font-size: 16px;                 /* Tamaño de fuente en los campos */  
 }  
 
 .appointment-form button {  
-    background-color: #535bf2;  
+ 
     color: white;  
-    padding: 10px 15px;  
+    background-color: #007bff;  
     border: none;  
-    border-radius: 5px;  
+    border-radius: 8px;  
     cursor: pointer;  
+    font-size: 16px;  
+    width: 200px; 
+    
 }  
 
 .appointment-form button:hover {  
-    background-color: #747aeb;  
+    background-color: #0056b3;  
 }
 
-.confirmation-message {  
-    margin-top: 20px;  
-    padding: 10px;  
-    border: 1px solid #28a745;  
-    border-radius: 5px;  
-    background-color: #d4edda;  
-    color: #155724;  
+form {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center; 
 }

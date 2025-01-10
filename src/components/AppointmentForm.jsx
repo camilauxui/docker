@@ -21,24 +21,26 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
 
     return (  
         <section id="appointment" className="appointment-form">  
-            <h2>Agendar cita médica</h2>  
+            <h2>Agenda Virtual</h2>  
+            <p> Ingrese los datos del paciente para reservar su cita médica:</p>
+            <br />  
             <form onSubmit={(e) => handleSubmit(e, onSubmit)}>  
-                <> {/* Mejora: Usar un fragmento para evitar un div innecesario */}  
-                    <div>  
-                        <label htmlFor="name">Nombre:</label>  
-                        <input  
-                            type="text"  
-                            id="name"  
-                            name="name"  
-                            value={formData.name}  
-                            onChange={handleChange}  
-                            ref={nameInputRef}  
-                            required  
-                        />  
-                    </div>  
+                <>   
+                <div>  
+                    <label htmlFor="name">Nombre del paciente: </label>  
+                    <input  
+                        type="text"  
+                        id="name"  
+                        name="name"  
+                        value={formData.name}  
+                        onChange={handleChange}  
+                        ref={nameInputRef}  
+                        required  
+                    />  
+                </div>  
     
                     <div>  
-                        <label htmlFor="email">Email:</label>  
+                        <label htmlFor="email">Email del paciente:</label>  
                         <input  
                             type="email"  
                             id="email"  
@@ -50,7 +52,7 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                     </div>  
     
                     <div>  
-                        <label htmlFor="phone">Teléfono:</label>  
+                        <label htmlFor="phone">Teléfono de contacto:</label>  
                         <input  
                             type="tel"  
                             id="phone"  
@@ -62,7 +64,7 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                     </div>  
     
                     <div>  
-                        <label htmlFor="doctor">Doctor:</label>  
+                        <label htmlFor="doctor">Profesional:</label>  
                         <select  
                             id="doctor"  
                             name="doctor"  
@@ -70,10 +72,10 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                             onChange={handleChange}  
                             required  
                         >  
-                            <option value="">Selecciona un doctor</option>  
-                            <option value="Dr. Patricio Martínez">Dr. Patricio Martínez</option>  
-                            <option value="Dra. Matilde Silva">Dra. Matilde Silva</option>  
-                            <option value="Dr. Carlos Andrés Ruiz">Dr. Carlos Andrés Ruiz</option>  
+                            <option value="">Seleccione un médico</option>  
+                            <option value="Dr. Patricio Martínez">Dr. Patricio Martínez - Cardiología</option>  
+                            <option value="Dra. Matilde Silva">Dra. Matilde Silva - Pediatría</option>  
+                            <option value="Dr. Carlos Andrés Ruiz">Dr. Carlos Andrés Ruiz - Neurología</option>  
                         </select>  
                     </div>  
     
@@ -90,7 +92,7 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                     </div>  
     
                     <div>  
-                        <label htmlFor="time">Hora:</label>  
+                        <label htmlFor="time">Hora de la consulta médica:</label>  
                         <input  
                             type="time"  
                             id="time"  
@@ -100,7 +102,7 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                             required  
                         />  
                     </div>  
-                </> {/* Cierre del fragmento */}  
+                </>  
     
                 <button type="submit">Agendar Cita</button>  
             </form>  
@@ -113,7 +115,7 @@ const AppointmentForm = ({ formData, errorMessage, confirmationMessage, handleCh
                 </div>  
             )}  
         </section>  
-    );
+    );  
 };  
 
 // Usar el HOC con los datos iniciales  

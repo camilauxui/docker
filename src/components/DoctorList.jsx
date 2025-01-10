@@ -26,7 +26,7 @@ const DoctorList = () => {
     // Función para registrar las medidas del Profiler  
     const onRender = (id, phase, actualDuration, baseDuration) => {  
         console.log(`Rendered ${id} during ${phase} phase. Actual duration: ${actualDuration}ms, Base duration: ${baseDuration}ms`);  
-    };  
+    };;  
 
     return (  
         <Profiler id="DoctorList" onRender={onRender}>  

@@ -1,0 +1,29 @@
+
+footer {  
+    background-color: #2d323b; /* Fondo oscuro */  
+    color: #fff; /* Color del texto */  
+    padding: 10px; /* Espaciado interno */  
+  }  
+  
+  footer a {  
+    color: #06a8d9; /* Color de los enlaces */  
+    text-decoration: none; /* Sin subrayado */  
+    margin: 10px; /* Margen para los enlaces */  
+  }  
+  
+  footer .container {  
+    display: flex; /* Usar flexbox para la distribución */  
+    justify-content: space-between; /* Espacio entre elementos */  
+    align-items: center; /* Centrar verticalmente */  
+  }  
+  
+  footer nav ul, footer .social ul {  
+    list-style: none; /* Sin estilo de lista */  
+    padding: 0; /* Sin padding */  
+    margin: 0; /* Sin margen */  
+  }  
+  
+  .footer-logo {  
+    max-width: 80px; /* Ancho máximo para el logo */  
+    height: auto; /* Mantener proporción del logo */  
+  }

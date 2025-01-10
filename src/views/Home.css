@@ -5,45 +5,37 @@
     background-color: #eaeff8;
 }
 
-/* Título principal */
-h1 {
-    text-align: center;
-    color: #023770;
-}
-
-/* Contenedor de los botones de navegación */
 .button-container {
     display: flex;
     justify-content: center; /* Alineación horizontal */
     gap: 20px; /* Espacio entre los botones */
-    margin-bottom: 30px;
+    margin-bottom: 20px;   
 }
 
-/* Estilos para cada botón */
+/* Estilos para botón */
 .banner-button {
     background-color: #1882f3; 
     color: white;
     border: none;
-    padding: 15px 30px;
+    padding: 10px 30px;
     font-size: 18px;
-    font-weight: bold;
-    border-radius: 8px;
+    font-weight: normal;
+    border-radius: 20px;
     cursor: pointer;
-    width: 250px; /* Ancho del banner */
+    width: 300px; 
     text-align: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(99, 184, 2, 0.562);
     transition: all 0.3s ease;
 }
 
-/* Efecto hover */
 .banner-button:hover {
     background-color: #0959b4; 
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 6px rgba(43, 80, 1, 0.822);
 }
 
 /* Estilos de las secciones */
 section {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 /* Estilos para las listas */
@@ -53,14 +45,17 @@ ul {
 }
 
 ul li {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-/* Sección sobre el centro médico */
-.about-center {
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-radius: 8px;
+/* Sección Info del centro médico */  
+.about-center {  
+    background-color: #ffffff;  
+    border-radius: 50px;  
+    text-align: start;  
+    width: 80%; /* Establece el ancho al 90% */  
+    margin: 0 auto; /* Centra la sección horizontalmente */  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* (Opcional) Sombra para darle dimensión */  
 }
 
 /* Botón "Subir" */
@@ -70,12 +65,12 @@ ul li {
     right: 20px;
     background-color: #007bff;
     color: white;
-    padding: 15px 20px;
+    padding: 20px 20px;
     border: none;
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(99, 184, 2, 0.596);
     transition: all 0.3s ease;
 }
 
@@ -94,16 +89,41 @@ ul li {
 
     /* Ajustar el tamaño de los botones para pantallas más pequeñas */
     .banner-button {
-        width: 80%; /* Hacer los botones más anchos en móviles */
-        padding: 12px 0; /* Ajustar el padding */
+        width: 90%; /* Hacer los botones más anchos en móviles */
+        
     }
 
     /* Botón "Subir" en móviles */
     .scroll-to-top {
         bottom: 20px;
-        right: 20px;
         font-size: 18px; /* Hacer el texto un poco más pequeño */
-        padding: 12px 18px;
+        padding: 12px 20px;
     }
 }
 
+.banner {  
+    width: 100%;   
+    height: auto; 
+    display: block; /* Elimina el espacio debajo de la imagen */  
+}
+
+.about-center {  
+    background-color: #ffffff;  
+    border-radius: 50px;  
+    text-align: left; /* Líneas de texto alineadas a la izquierda */  
+    width: 90%;   
+    max-width: 1200px;  
+    margin: 0 auto; /* Centra la sección */  
+    padding: 20px;   
+}  
+
+.about-content {  
+    margin: 0 auto; /* Centra el bloque dentro de about-center */  
+    max-width: 800px; /* Limita el ancho máximo del contenido */  
+}  
+
+.about-image {  
+    width: 50px; /* Ajusta la imagen */  
+    height: auto;  
+    
+}  

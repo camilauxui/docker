@@ -20,10 +20,11 @@ const ServiceList = ({ services = [] }) => {
 
     return (  
         <section id="services" className="section-services">  
-            <h2>Servicios Médicos</h2>  
-            <p>  
+            <br />  
+            <h1>Centro Médico</h1>  
+            <h3>  
                 Conoce todos los servicios disponibles para garantizar una atención de calidad:  
-            </p>  
+            </h3>  
             <br /><br />  
             <div className="services-grid">  
                 {services.map((service) => (  
@@ -44,7 +45,7 @@ const ServiceList = ({ services = [] }) => {
                 {selectedService && (  
                     <>  
                         <h2>{selectedService.title}</h2>  
-                        <img src={selectedService.image} alt={selectedService.title} className="responsive-img" />  
+                        <img src={selectedService.image} alt={selectedService.title} className="modal-image" />  
                         <p>{selectedService.description}</p>  
                     </>  
                 )}  
