@@ -1,5 +1,8 @@
-// DoctorProvider.jsx  
 import React, { createContext, useContext, useState } from 'react';  
+import doc1 from '../../assets/doc1.jpg';  
+import doc2 from '../../assets/doc2.jpg';  
+import dra1 from '../../assets/dra1.jpg';  
+import dra2 from '../../assets/dra2.jpg'; 
 
 export const DoctorContext = createContext();  
 
@@ -15,9 +18,15 @@ export const DoctorProvider = ({ children }) => {
             specialty: 'Cardiología',  
             experience: '20 años',  
             availability: 'Lunes a Viernes',  
-            contact: 'juan.perez@hospital.com',  
-            schedule: '8:00 AM - 5:00 PM',  
-            image: 'juan-perez.jpg'  
+            contact: {  
+                telefono: '555-1234',  
+                email: 'juan.perez@hospital.com',  
+            },  
+            schedule: {  
+                lunes: '8:00 AM - 2:00 PM',  
+                martes: '10:00 AM - 5:00 PM',  
+            },  
+            image: doc1, // Usando la imagen importada  
         },  
         {  
             id: 2,  
@@ -25,9 +34,15 @@ export const DoctorProvider = ({ children }) => {
             specialty: 'Pediatría',  
             experience: '15 años',  
             availability: 'Lunes a Sábado',  
-            contact: 'maria.rodriguez@hospital.com',  
-            schedule: '8:00 AM - 2:00 PM',  
-            image: 'maria-rodriguez.jpg'  
+            contact: {  
+                telefono: '555-5678',  
+                email: 'maria.rodriguez@hospital.com',  
+            },  
+            schedule: {  
+                lunes: '9:00 AM - 1:00 PM',  
+                viernes: '8:00 AM - 12:00 PM',  
+            },  
+            image: dra1, // Usando la imagen importada  
         },  
         {  
             id: 3,  
@@ -35,10 +50,32 @@ export const DoctorProvider = ({ children }) => {
             specialty: 'Medicina General',  
             experience: '12 años',  
             availability: 'Lunes a Viernes',  
-            contact: 'pedro.gonzalez@hospital.com',  
-            schedule: '8:00 AM - 5:00 PM',  
-            image: 'pedro-gonzalez.jpg'  
-        }  
+            contact: {  
+                telefono: '555-8901',  
+                email: 'pedro.gonzalez@hospital.com',  
+            },  
+            schedule: {  
+                lunes: '8:00 AM - 4:00 PM',  
+                martes: '11:00 AM - 3:00 PM',  
+            },  
+            image: doc2, // Usando la imagen importada  
+        },  
+        {  
+            id: 4,  
+            name: 'Dr. Jorge Peña',  
+            specialty: 'Dentista',  
+            experience: '12 años',  
+            availability: 'Lunes a Viernes',  
+            contact: {  
+                telefono: '555-1234',  
+                email: 'jpena@hospital.com',  
+            },  
+            schedule: {  
+                lunes: '8:00 AM - 2:00 PM',  
+                martes: '10:00 AM - 5:00 PM',  
+            },  
+            image: dra2, // Usando la imagen importada  
+        },  
     ]);  
 
     return (  

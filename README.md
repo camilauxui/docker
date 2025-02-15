@@ -9,7 +9,7 @@ Instrucciones de uso:
 Iniciar sesión:
 Haz clic en el botón "Iniciar Sesión", ingresa:
 
-Nombre de usuario: administrador
+Nombre de usuario: usuario
 Contraseña: secret123
 Acceso a la ruta protegida:
 Después de iniciar sesión, la ruta /appointments estará disponible.

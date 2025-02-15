@@ -1,14 +1,13 @@
-// Navbar.jsx  
-import React, { useState } from 'react';  
-import { Link, useNavigate } from 'react-router-dom';  
-import { useAuth } from './hooks/AuthHooks';  
-import { Modal, Form, Button } from 'react-bootstrap';  
+import React, { useState } from "react";  
+import { Link, useNavigate } from "react-router-dom";  
+import { useAuth } from "./hooks/AuthHooks"; // Ruta corregida  
+import { Modal, Form, Button } from "react-bootstrap";  
 
 function Navbar() {  
     const [showLogin, setShowLogin] = useState(false);  
-    const { user, login, logout } = useAuth();  
-    const [username, setUsername] = useState('');  
-    const [password, setPassword] = useState('');  
+    const { user, login, logout } = useAuth(); // Consume el contexto de autenticación  
+    const [username, setUsername] = useState("");  
+    const [password, setPassword] = useState("");  
     const navigate = useNavigate();  
 
     const handleLogin = (e) => {  
@@ -21,12 +20,11 @@ function Navbar() {
 
     const toggleLoginModal = () => setShowLogin(!showLogin);  
 
-    // Función para manejar el clic en "Agendar Cita"  
     const handleAppointmentClick = () => {  
         if (!user) {  
             toggleLoginModal();  
         } else {  
-            navigate('/appointments');  
+            navigate("/appointments");  
         }  
     };  
 
@@ -37,7 +35,7 @@ function Navbar() {
                     <img  
                         src="src/assets/medical-center.png"  
                         alt="Logotipo del Hospital"  
-                        style={{ height: '40px' }}  
+                        style={{ height: "40px" }}  
                     />  
                 </Link>  
                 <button  
@@ -64,22 +62,20 @@ function Navbar() {
                             </Link>  
                         </li>  
                         <li className="nav-item">  
-                            <Link   
-                                className="nav-link text-white"   
-                                to="/appointments"  
+                            <span  
+                                className="nav-link text-white"  
                                 onClick={handleAppointmentClick}  
+                                style={{ cursor: "pointer" }}  
                             >  
                                 Agendar Cita  
-                            </Link>  
+                            </span>  
                         </li>  
                     </ul>  
                 </div>  
                 <div className="d-flex align-items-center">  
-                    {user && (  
+                    {user ? (  
                         <>  
-                            <span className="text-white me-2">  
-                                Hola, {user.name}  
-                            </span>  
+                            <span className="text-white me-2">Hola, {user.name}</span>  
                             <button  
                                 className="btn btn-primary ms-2"  
                                 onClick={logout}  
@@ -88,12 +84,8 @@ function Navbar() {
                                 Cerrar Sesión  
                             </button>  
                         </>  
-                    )}  
-                    {!user && (  
-                        <Button  
-                            variant="primary"  
-                            onClick={toggleLoginModal}  
-                        >  
+                    ) : (  
+                        <Button variant="primary" onClick={toggleLoginModal}>  
                             Iniciar Sesión  
                         </Button>  
                     )}  

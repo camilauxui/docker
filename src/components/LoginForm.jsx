@@ -1,13 +1,11 @@
-// LoginForm.jsx  
-import React, { useState } from 'react';  
-import { useAuth } from './AuthContext';  
-import { Modal, Form, Button } from 'react-bootstrap';  
+import { useNavigate } from "react-router-dom";  
 
 const LoginForm = () => {  
-    const [username, setUsername] = useState('');  
-    const [password, setPassword] = useState('');  
+    const { login } = useAuth();  
+    const navigate = useNavigate(); // Hook de navegación  
+    const [username, setUsername] = useState("");  
+    const [password, setPassword] = useState("");  
     const [show, setShow] = useState(false);  
-    const { login, isAuthenticated } = useAuth();  
 
     const handleLogin = async (e) => {  
         e.preventDefault();  
@@ -15,8 +13,9 @@ const LoginForm = () => {
 
         if (loginSuccess) {  
             setShow(false);  
-            setUsername('');  
-            setPassword('');  
+            setUsername("");  
+            setPassword("");  
+            navigate("/appointments"); // Redirige al usuario a la página de citas  
         }  
     };  
 
@@ -24,6 +23,7 @@ const LoginForm = () => {
 
     return (  
         <>  
+
             <Button variant="outline-primary" onClick={toggleModal}>  
                 Iniciar Sesión  
             </Button>  

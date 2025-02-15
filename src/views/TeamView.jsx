@@ -1,15 +1,14 @@
-// TeamView.jsx  
-import React from 'react';  
-import DoctorList from '../components/DoctorList';  
-import '../components/DoctorCard.css';  
+import React from "react";  
+import DoctorList from "../components/DoctorList";  
 
 const TeamView = () => {  
     return (  
-        <>  
-            <h1>Equipo Médico</h1>  
-            <br />  
-            <DoctorList />  
-        </>  
+        <div className="team-view-container">  
+            <h1 className="team-view-title text-center">Equipo Médico</h1>  
+            <div className="team-view-content">  
+                <DoctorList />  
+            </div>  
+        </div>  
     );  
 };  
 

@@ -1,26 +1,23 @@
-// AuthContext.jsx  
-import React, { createContext, useState } from 'react';  
+import React, { createContext, useContext, useState } from "react";  
 
-export const AuthContext = createContext();  
+export const AuthContext = createContext(); // Crear el contexto  
 
-export const AuthProvider = ({ children }) => {  
+// Hook personalizado para usar el contexto (exportación nombrada)  
+export const useAuth = () => {  
+    return useContext(AuthContext);  
+};  
+
+// Proveedor del contexto (exportación predeterminada)  
+const AuthProvider = ({ children }) => {  
     const [isAuthenticated, setIsAuthenticated] = useState(false);  
     const [user, setUser] = useState(null);  
 
     const login = async (username, password) => {  
-        try {  
-            // Simula un proceso de autenticación  
-            if (username === 'usuario' && password === 'secret123') {  
-                setIsAuthenticated(true);  
-                setUser({ username: 'usuario', name: 'usuario' });  
-                return true; // Indica que el login fue exitoso  
-            } else {  
-                setIsAuthenticated(false);  
-                setUser(null);  
-                return false; // Indica que el login falló  
-            }  
-        } catch (error) {  
-            console.error('Error en el login:', error);  
+        if (username === "usuario" && password === "secret123") {  
+            setIsAuthenticated(true);  
+            setUser({ username: "usuario", name: "Camila Peña" });  
+            return true;  
+        } else {  
             setIsAuthenticated(false);  
             setUser(null);  
             return false;  
@@ -39,4 +36,4 @@ export const AuthProvider = ({ children }) => {
     );  
 };  
 
-export default AuthProvider;
+export default AuthProvider; // Exportación predeterminada
