@@ -1,28 +1,42 @@
-import React, { createContext, useState, useContext } from 'react';  
+// AuthContext.jsx  
+import React, { createContext, useState } from 'react';  
 
-// Crear el contexto de autenticación  
-const AuthContext = createContext();  
+export const AuthContext = createContext();  
 
-// Proveedor del contexto  
 export const AuthProvider = ({ children }) => {  
     const [isAuthenticated, setIsAuthenticated] = useState(false);  
+    const [user, setUser] = useState(null);  
 
-    // Función para iniciar sesión  
-    const login = () => {  
-        setIsAuthenticated(true);  
+    const login = async (username, password) => {  
+        try {  
+            // Simula un proceso de autenticación  
+            if (username === 'administrador' && password === 'secret123') {  
+                setIsAuthenticated(true);  
+                setUser({ username: 'administrador', name: 'Administrador' });  
+                return true; // Indica que el login fue exitoso  
+            } else {  
+                setIsAuthenticated(false);  
+                setUser(null);  
+                return false; // Indica que el login falló  
+            }  
+        } catch (error) {  
+            console.error('Error en el login:', error);  
+            setIsAuthenticated(false);  
+            setUser(null);  
+            return false;  
+        }  
     };  
 
-    // Función para cerrar sesión  
     const logout = () => {  
         setIsAuthenticated(false);  
+        setUser(null);  
     };  
 
     return (  
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>  
+        <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>  
             {children}  
         </AuthContext.Provider>  
     );  
 };  
 
-// Hook para usar el contexto de autenticación  
-export const useAuth = () => useContext(AuthContext);
+export default AuthProvider;

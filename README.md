@@ -5,3 +5,11 @@ Contexto: En este proyecto, se van a aplicar medidas de seguridad avanzadas en l
 
 # 1. Protección de Rutas con React Router DOM
 Para restringir el acceso a ciertas rutas en la aplicación, se crea el componente ProtectedRoute que envuelve las rutas que queremos proteger (recibe como prop la ruta que queremos proteger). Este componente verifica si el usuario está autenticado antes de permitirle acceder a la ruta protegida. Si el usuario no está autenticado, lo redirige a una página de inicio de sesión.
+Instrucciones de uso:
+Iniciar sesión:
+Haz clic en el botón "Iniciar Sesión", ingresa:
+
+Nombre de usuario: administrador
+Contraseña: secret123
+Acceso a la ruta protegida:
+Después de iniciar sesión, la ruta /appointments estará disponible.
