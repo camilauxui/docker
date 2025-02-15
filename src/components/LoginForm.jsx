@@ -1,3 +1,4 @@
+// LoginForm.jsx  
 import React, { useState } from 'react';  
 import { useAuth } from './AuthContext';  
 import { Modal, Form, Button } from 'react-bootstrap';  
@@ -14,8 +15,8 @@ const LoginForm = () => {
 
         if (loginSuccess) {  
             setShow(false);  
-            setUsername(''); // Limpiar campos  
-            setPassword(''); // Limpiar campos  
+            setUsername('');  
+            setPassword('');  
         }  
     };  
 

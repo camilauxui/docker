@@ -1,22 +1,16 @@
-import React from 'react';   
+// TeamView.jsx  
+import React from 'react';  
 import DoctorList from '../components/DoctorList';  
-import '../components/DoctorCard.css'; 
-import { Profiler } from 'react';
+import '../components/DoctorCard.css';  
 
 const TeamView = () => {  
-    const onRender = (id, phase, actualDuration, baseDuration) => {  
-        console.log(`Rendered ${id} during ${phase} phase. Actual duration: ${actualDuration}ms, Base duration: ${baseDuration}ms`);  
-    };  
-
     return (  
         <>  
             <h1>Equipo Médico</h1>  
-            <br />
-            <Profiler id="DoctorList" onRender={onRender}>  
-                <DoctorList />  
-            </Profiler>  
+            <br />  
+            <DoctorList />  
         </>  
     );  
 };  
 
-export default TeamView;  
+export default TeamView;

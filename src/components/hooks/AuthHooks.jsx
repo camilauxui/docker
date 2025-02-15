@@ -10,9 +10,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);  
 
     const login = (username, password) => {  
-        if (username === 'administrador' && password === 'secret123') {  
+        if (username === 'usuario' && password === 'secret123') {  
             setIsAuthenticated(true);  
-            setUser({ username: 'administrador', name: 'Administrador' });  
+            setUser({ username: 'usuario', name: 'Usuario' });  
         }  
     };  
 

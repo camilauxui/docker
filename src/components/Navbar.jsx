@@ -1,5 +1,6 @@
+// Navbar.jsx  
 import React, { useState } from 'react';  
-import { Link } from 'react-router-dom';  
+import { Link, useNavigate } from 'react-router-dom';  
 import { useAuth } from './hooks/AuthHooks';  
 import { Modal, Form, Button } from 'react-bootstrap';  
 
@@ -8,23 +9,26 @@ function Navbar() {
     const { user, login, logout } = useAuth();  
     const [username, setUsername] = useState('');  
     const [password, setPassword] = useState('');  
+    const navigate = useNavigate();  
 
     const handleLogin = (e) => {  
         e.preventDefault();  
         login(username, password);  
-        // Verificar si el login fue exitoso  
         if (user) {  
             setShowLogin(false);  
         }  
-        // Si el estado no se actualiza inmediatamente, usa un timeout  
-        setTimeout(() => {  
-            if (user) {  
-                setShowLogin(false);  
-            }  
-        }, 500);  
-    };
+    };  
 
     const toggleLoginModal = () => setShowLogin(!showLogin);  
+
+    // Función para manejar el clic en "Agendar Cita"  
+    const handleAppointmentClick = () => {  
+        if (!user) {  
+            toggleLoginModal();  
+        } else {  
+            navigate('/appointments');  
+        }  
+    };  
 
     return (  
         <nav className="navbar navbar-expand-lg navbar-light bg-secondary">  
@@ -55,12 +59,16 @@ function Navbar() {
                             </Link>  
                         </li>  
                         <li className="nav-item">  
-                            <Link className="nav-link text-white" to="/TeamView">  
+                            <Link className="nav-link text-white" to="/team">  
                                 Equipo Médico  
                             </Link>  
                         </li>  
                         <li className="nav-item">  
-                            <Link className="nav-link text-white" to="/Appointments">  
+                            <Link   
+                                className="nav-link text-white"   
+                                to="/appointments"  
+                                onClick={handleAppointmentClick}  
+                            >  
                                 Agendar Cita  
                             </Link>  
                         </li>  
@@ -100,7 +108,7 @@ function Navbar() {
                 <Modal.Body>  
                     <Form onSubmit={handleLogin}>  
                         <Form.Group className="mb-3">  
-                            <Form.Label>Nombre de usuario</Form.Label>  
+                            <Form.Label>Nombre:</Form.Label>  
                             <Form.Control  
                                 type="text"  
                                 value={username}  
@@ -109,7 +117,7 @@ function Navbar() {
                             />  
                         </Form.Group>  
                         <Form.Group className="mb-3">  
-                            <Form.Label>Contraseña</Form.Label>  
+                            <Form.Label>Contraseña:</Form.Label>  
                             <Form.Control  
                                 type="password"  
                                 value={password}  

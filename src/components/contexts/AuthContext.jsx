@@ -10,9 +10,9 @@ export const AuthProvider = ({ children }) => {
     const login = async (username, password) => {  
         try {  
             // Simula un proceso de autenticación  
-            if (username === 'administrador' && password === 'secret123') {  
+            if (username === 'usuario' && password === 'secret123') {  
                 setIsAuthenticated(true);  
-                setUser({ username: 'administrador', name: 'Administrador' });  
+                setUser({ username: 'usuario', name: 'usuario' });  
                 return true; // Indica que el login fue exitoso  
             } else {  
                 setIsAuthenticated(false);  
