@@ -1,76 +1,24 @@
-import React, { useRef, useEffect, useState } from "react";  
+import React from "react";  
+import useAppointmentForm from "./hooks/useAppointmentForm";
 import { useAuth } from "./contexts/AuthContext";  
-import "./AppointmentForm.css";  
-
-const doctors = [  
-    { id: 1, name: "Dr. Alejandro Varas", specialty: "Cardiología" },  
-    { id: 2, name: "Dra. María Rodríguez", specialty: "Pediatría" },  
-    { id: 3, name: "Dr. Pedro González", specialty: "Medicina General" },  
-    { id: 4, name: "Dra. Javiera Mora", specialty: "Dentista" },  
-];  
+import './AppointmentForm.css';
 
 const AppointmentForm = () => {  
-    const nameInputRef = useRef(null);  
+    const {  
+        nameInputRef,  
+        formError,  
+        confirmation,  
+        formData,  
+        doctors,  
+        loading,  
+        handleChange,  
+        handleSubmit,  
+    } = useAppointmentForm();  
     const { user } = useAuth();  
-    const [formError, setFormError] = useState(""); // Estado para errores del formulario  
-    const [confirmation, setConfirmation] = useState(""); // Estado para mensaje de confirmación  
-    const [formData, setFormData] = useState({  
-        name: "",  
-        email: "",  
-        phone: "",  
-        doctor: "",  
-        date: "",  
-        time: "",  
-    }); // Estado local para los datos del formulario  
 
-    useEffect(() => {  
-        nameInputRef.current && nameInputRef.current.focus();  
-    }, []);  
-
-    const validateForm = (data) => {  
-        const today = new Date().toISOString().split("T")[0];  
-        if (data.date < today) {  
-            return "La fecha seleccionada no puede ser en el pasado.";  
-        }  
-        return null; // Sin errores  
-    };  
-
-    const handleChange = (e) => {  
-        const { name, value } = e.target;  
-        setFormData((prevData) => ({  
-            ...prevData,  
-            [name]: value,  
-        }));  
-    };  
-
-    const handleSubmit = (e) => {  
-        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario  
-
-        const validationError = validateForm(formData);  
-        if (validationError) {  
-            setFormError(validationError);  
-            return;  
-        }  
-
-        // Procesar la cita agendada  
-        setFormError("");  
-        setConfirmation({  
-            name: formData.name,  
-            doctor: formData.doctor,  
-            date: formData.date,  
-            time: formData.time,  
-        });  
-
-        // Resetear el formulario después de mostrar el mensaje de confirmación  
-        setFormData({  
-            name: "",  
-            email: "",  
-            phone: "",  
-            doctor: "",  
-            date: "",  
-            time: "",  
-        });  
-    };  
+    if (loading) {  
+        return <p>Cargando Agenda Virual...API simulada...</p>;  
+    }  
 
     return (  
         <section id="appointment" className="appointment-form">  
@@ -81,6 +29,7 @@ const AppointmentForm = () => {
             <br />  
 
             <form onSubmit={handleSubmit}>  
+                {/* Campos del formulario */}  
                 <div>  
                     <label htmlFor="name">Nombre del paciente:</label>  
                     <input  
