@@ -5,7 +5,7 @@ import DoctorProvider from "./components/contexts/DoctorContext";
 import ProtectedRoute from "./components/ProtectedRoute";  
 import Home from "./views/Home";  
 import TeamView from "./views/TeamView";  
-import AppointmentView from "./views/AppointmentView";  
+import AppointmentForm from "./components/AppointmentForm";
 import Footer from "./components/Footer";  
 import Navbar from "./components/Navbar";  
 import "./App.css";  
@@ -28,7 +28,7 @@ const App = () => {
                             path="/appointments"  
                             element={  
                                 <ProtectedRoute>  
-                                    <AppointmentView />  
+                                    <AppointmentForm />  
                                 </ProtectedRoute>  
                             }  
                         />  

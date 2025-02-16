@@ -14,13 +14,13 @@ export const DoctorProvider = ({ children }) => {
     const [doctors, setDoctors] = useState([  
         {  
             id: 1,  
-            name: 'Dr. Juan Pérez',  
+            name: 'Dr. Alejandro Varas',  
             specialty: 'Cardiología',  
             experience: '20 años',  
             availability: 'Lunes a Viernes',  
             contact: {  
                 telefono: '555-1234',  
-                email: 'juan.perez@hospital.com',  
+                email: 'avaras@hospital.com',  
             },  
             schedule: {  
                 lunes: '8:00 AM - 2:00 PM',  
@@ -30,7 +30,7 @@ export const DoctorProvider = ({ children }) => {
         },  
         {  
             id: 2,  
-            name: 'Dr. María Rodríguez',  
+            name: 'Dra. María Rodríguez',  
             specialty: 'Pediatría',  
             experience: '15 años',  
             availability: 'Lunes a Sábado',  
@@ -62,13 +62,13 @@ export const DoctorProvider = ({ children }) => {
         },  
         {  
             id: 4,  
-            name: 'Dr. Jorge Peña',  
+            name: 'Dra. Javiera Mora',  
             specialty: 'Dentista',  
             experience: '12 años',  
             availability: 'Lunes a Viernes',  
             contact: {  
                 telefono: '555-1234',  
-                email: 'jpena@hospital.com',  
+                email: 'jmora@hospital.com',  
             },  
             schedule: {  
                 lunes: '8:00 AM - 2:00 PM',  
