@@ -11,11 +11,12 @@ Instrucciones de uso:
 Iniciar sesión:
 Haz clic en el botón "Iniciar Sesión", ingresa:
 
-Nombre de usuario: usuario
-Contraseña: secret123
+## Nombre de usuario: usuario
+## Contraseña: secret123
 
-Ruta protegida: Agendar Cita
-Después de iniciar sesión, Agendar Cita estará disponible.
+- Ruta protegida: Agendar Cita
+
+- Después de iniciar sesión, Agendar Cita estará disponible.
 
 # 3. Consumo de APIs Protegido con API Key y JWT
 Para un consumo protegido de APIs, utilicé API Key para verificar la autenticidad del cliente que envía la solicitud y JWT (JSON Web Token) para autenticar usuarios, asegurando que solo clientes autorizados con un token válido puedan acceder a los endpoints.
