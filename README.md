@@ -14,22 +14,32 @@ Haz clic en el botón "Iniciar Sesión", ingresa:
 ## Nombre de usuario: usuario
 ## Contraseña: secret123
 
-- Ruta protegida: Agendar Cita
+### Ruta protegida: Agendar Cita
 
-- Después de iniciar sesión, Agendar Cita estará disponible.
+- Después de iniciar sesión, "Agendar Cita" estará disponible.
 
 # 3. Consumo de APIs Protegido con API Key y JWT
 Para un consumo protegido de APIs, utilicé API Key para verificar la autenticidad del cliente que envía la solicitud y JWT (JSON Web Token) para autenticar usuarios, asegurando que solo clientes autorizados con un token válido puedan acceder a los endpoints.
-Pasos para ejecutar:
 
-Inicia tu servidor introduciendo el comando:
-node server.js  
-Agrega el API Key en el encabezado de la solicitud HTTP:
+#### Pasos para ejecutar:
+
+- Inicia tu servidor introduciendo el comando:
+
+- node server.js  
+- Abre tu navegador y accede a la URL http://localhost:3000
+
+
+- Agrega el API Key en el encabezado de la solicitud HTTP:
+
 {  
     "x-api-key": "tu-api-key-aquí"  
 }  
-Usa una herramienta como Postman o cURL para enviar solicitudes a los endpoints protegidos.
-Genera un JWT (tras autenticar al usuario) y envíalo como un encabezado Authorization en forma de Bearer token:
+
+
+- Usa una herramienta como Postman o cURL para enviar solicitudes a los endpoints protegidos.
+
+- Genera un JWT (tras autenticar al usuario) y envíalo como un encabezado Authorization en forma de Bearer token:
+
 {  
     "Authorization": "Bearer <jwt-token-generado>"  
 }  
@@ -40,14 +50,17 @@ Para prevenir Clickjacking, configuré encabezados HTTP X-Frame-Options en el se
 
 Pasos para verificar:
 
-Asegúrate de que el servidor tenga configurado el encabezado X-Frame-Options en el middleware o configuración:
-res.setHeader("X-Frame-Options", "DENY");  
-Ejecuta el servidor (node server.js) e intenta incrustar el sitio en un iframe desde otro dominio.
-El navegador debería bloquear la carga del sitio y evitar la vulnerabilidad de Clickjacking.
+Revisar que el servidor tenga configurado el encabezado X-Frame-Options en el middleware o configuración:
+
+- res.setHeader("X-Frame-Options", "DENY");  
+
+- Ejecuta el servidor (node server.js) e intenta incrustar el sitio en un iframe desde otro dominio.
+- El navegador debería bloquear la carga del sitio y evitar la vulnerabilidad de Clickjacking.
 
 
 # 5. Encriptación de Datos en el Front-End
 Usa CryptoJS para encriptar datos sensibles antes de enviarlos al backend.
+- Instala la biblioteca CryptoJS
 
 import CryptoJS from "crypto-js";  
 
