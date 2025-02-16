@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "crypto-js": "^4.2.0",
     "express": "^4.21.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.9",
@@ -28,5 +30,10 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
     "vite": "^6.0.1"
-  }
+  },
+  "description": "**Contexto:**\r Contexto: En este proyecto, se van a aplicar medidas de seguridad avanzadas en la web del hospital desarrollada en ReactJS. Se integrará protección contra ataques comunes, se asegurarán las rutas de la aplicación y protegerán el consumo de APIs utilizando API Key y JWT. Además, se implementará seguridad por roles y autenticación de usuarios para restringir el acceso a áreas específicas de la aplicación.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -1,4 +1,8 @@
+import { useState } from "react";  
 import { useNavigate } from "react-router-dom";  
+import CryptoJS from "crypto-js"; // Importar crypto-js  
+import { Button, Modal, Form } from "react-bootstrap";  
+import { useAuth } from "../contexts/AuthContext";  
 
 const LoginForm = () => {  
     const { login } = useAuth();  
@@ -9,7 +13,16 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {  
         e.preventDefault();  
-        const loginSuccess = await login(username, password);  
+
+        // ENCRIPTAR CONTRASEÑA usando CryptoJS  
+        const secretKey = "clave_secreta"; // ¡Cambia esta clave a algo seguro y guárdala solo en el backend!  
+        const encryptedPassword = CryptoJS.AES.encrypt(password, secretKey).toString();  
+
+        console.log("Contraseña original:", password); // Solo para pruebas  
+        console.log("Contraseña encriptada:", encryptedPassword); // Contraseña encriptada  
+
+        // Llamar a la función de login con la contraseña encriptada  
+        const loginSuccess = await login(username, encryptedPassword);  
 
         if (loginSuccess) {  
             setShow(false);  
@@ -23,7 +36,6 @@ const LoginForm = () => {
 
     return (  
         <>  
-
             <Button variant="outline-primary" onClick={toggleModal}>  
                 Iniciar Sesión  
             </Button>  
