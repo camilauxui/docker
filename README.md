@@ -38,8 +38,11 @@ const handleChange = (e) => {
 ###  El estado *formData* en *AppointmentForm* almacena temporalmente los datos ingresados por el usuario hasta que:
 
 ✅ Se valida la información.
+
 ✅Se envía el formulario.
+
 ✅ Se restablece el formulario después de que se muestra el mensaje de confirmación.
+
 ✅ El estado *confirmation* almacena temporalmente los datos de la cita agendada para mostrarlos en la interfaz.
 
 ## *Manejo del estado de autenticación*
@@ -63,12 +66,13 @@ El componente *LoginForm* está utilizando useState para manejar:
 ### Cambios realizados:
 Simulación de una API con *simulateFetchDoctors*:
 
-✅Simula una llamada a la API con un retraso de 2 segundos usando setTimeout.
+✅ Simula una llamada a la API con un retraso de 2 segundos usando setTimeout.
 
-✅Uso de *useEffect* para cargar los doctores dinámicamente:
- - Se utiliza *useEffect* para llamar a la función *simulateFetchDoctors* 
+✅ Uso de *useEffect* para cargar los doctores dinámicamente:
+
+✅ Se utiliza *useEffect* para llamar a la función *simulateFetchDoctors* 
  
- - Se actualiza el estado doctors con los datos simulados.
+✅ Se actualiza el estado doctors con los datos simulados.
 
 ### *Indicador de carga (loading):*
 Se muestra un mensaje de "Cargando Agenda Virtual..." mientras se obtienen los datos de los doctores.
@@ -102,9 +106,7 @@ Muestra mensajes de error o confirmación según sea necesario.
 
 # 4. Manejo de Errores en la Aplicación
 
-### Hook Personalizado: `useAppointmentForm`  
-
-El hook `useAppointmentForm` encapsula la lógica necesaria para manejar un formulario de registro de citas médicas, incluyendo la validación de datos, la gestión de errores y la simulación de una llamada a la API para obtener datos de doctores.  
+El hook `useAppointmentForm` encapsula la lógica necesaria para manejar el formulario de Agendar Cita, incluyendo la validación de datos, la gestión de errores y la simulación de una llamada a la API para obtener datos de doctores.  
 
 #### Funcionalidades Principales:  
 ✅ **Manejo de Errores en Peticiones a la API:**  
