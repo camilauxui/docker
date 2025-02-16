@@ -53,14 +53,18 @@ En el componente *AuthProvider*, se está utilizando *useStateP para manejar:
 El componente *LoginForm* está utilizando useState para manejar:
 
 ✅ El estado del nombre de usuario (username).
+
 ✅ El estado de la contraseña (password).
+
 ✅ El estado del modal (show): Este estado controla si el modal de inicio de sesión está visible o no.
 
 # 2. Uso de useEffect para la Gestión de Efectos Secundarios
 
 ### Cambios realizados:
 Simulación de una API con *simulateFetchDoctors*:
+
 ✅Simula una llamada a la API con un retraso de 2 segundos usando setTimeout.
+
 ✅Uso de *useEffect* para cargar los doctores dinámicamente:
  - Se utiliza *useEffect* para llamar a la función *simulateFetchDoctors* 
  
@@ -103,15 +107,15 @@ Muestra mensajes de error o confirmación según sea necesario.
 El hook `useAppointmentForm` encapsula la lógica necesaria para manejar un formulario de registro de citas médicas, incluyendo la validación de datos, la gestión de errores y la simulación de una llamada a la API para obtener datos de doctores.  
 
 #### Funcionalidades Principales:  
-1. **Manejo de Errores en Peticiones a la API:**  
+✅ **Manejo de Errores en Peticiones a la API:**  
    - Simula una llamada a la API para obtener la lista de doctores y utiliza un bloque `try...catch` para capturar errores.  
    - Utiliza el estado `loading` para indicar al usuario que los datos están cargando.  
 
-2. **Validación de Formularios:**  
+✅ **Validación de Formularios:**  
    - Valida que la fecha seleccionada no sea en el pasado.  
    - Los errores de validación se almacenan en el estado `formError` y se muestran al usuario mediante mensaje de advertencia.  
 
-3. **Confirmación de Registro:**  
+✅ **Confirmación de Registro:**  
    - Tras una validación exitosa, los datos del formulario se limpian y se almacena una confirmación en el estado `confirmation`.  
 
 #### Ejemplo de Manejo de Errores:  
@@ -122,13 +126,13 @@ El hook `useAppointmentForm` encapsula la lógica necesaria para manejar un form
 
 El hook *useAppointmentForm* sigue correctamente las reglas de los Hooks en React:
 
-1. **Llamada de Hooks al Nivel Superior:**  
+✅ **Llamada de Hooks al Nivel Superior:**  
    Todos los Hooks (`useState`, `useRef`, `useEffect`, `useCallback`) están declarados al nivel superior de la función, fuera de bucles y condicionales, como exige React.  
 
-2. **Uso Correcto de `useEffect`:**  
+✅ **Uso Correcto de `useEffect`:**  
    Los efectos secundarios, como la carga de médicos simulada o la asignación del foco al input de nombre, están correctamente implementados con las dependencias necesarias.  
 
-3. **Uso Correcto de `useCallback`:**  
+✅ **Uso Correcto de `useCallback`:**  
    Las funciones como `handleSubmit` (envío de formulario) y `validateForm` (validación de datos) están optimizadas mediante `useCallback`, evitando renders innecesarios.  
 
 Al seguir estas prácticas, el hook garantiza un comportamiento predecible y eficiente, respetando las reglas y mejores prácticas de ReactJS.  
