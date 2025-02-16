@@ -11,6 +11,8 @@ import Navbar from "./components/Navbar";
 import "./App.css";  
 import "bootstrap/dist/css/bootstrap.min.css";  
 import "bootstrap/dist/js/bootstrap.bundle.min";  
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";  
+import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const App = () => {  
     return (  

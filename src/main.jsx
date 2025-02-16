@@ -4,7 +4,12 @@ import App from './App';
 import AuthProvider from './components/contexts/AuthContext'; // Importación sin llaves  
 import DoctorProvider from './components/contexts/DoctorContext';  
 import './index.css';  
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importaciones de estilos  
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import "@fortawesome/fontawesome-svg-core/styles.css"; // Importa los estilos de Font Awesome  
+import { config } from "@fortawesome/fontawesome-svg-core";   
+config.autoAddCss = false; // Desactiva la carga automática de CSS
+
+
 
 const container = document.getElementById('root'); // Selecciona el contenedor del DOM  
 const root = createRoot(container); // Crea una instancia de root  
