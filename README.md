@@ -13,15 +13,31 @@ El objetivo es que la web del hospital funcione de manera fluida, segura y con u
 - Muestra los datos obtenidos en la interfaz React de manera dinámica.
 - Maneja correctamente los errores de las peticiones y muestra mensajes claros al usuario si ocurre un problema.
 
-Pasos realizados:
-✅1. Instalar Axios: npm install axios
+## Pasos realizados:
 
-✅2.Instalar JSON Server:npm install -g json-server  
+✅1. Instalar Axios:   npm install axios
+
+✅2.Instalar JSON Server:  npm install -g json-server  
 
 Para crear una API sencilla usando los datos de los médicos
 
 ✅ Se crea el archivo db.json
-Ejecuta el siguiente comando en tu terminal: json-server --watch db.json --port 3001
 
-Endpoints:
+✅ Ejecuta el siguiente comando en tu terminal: json-server --watch db.json --port 3001
+
+### Endpoints:
+
 http://localhost:3001/doctors
+
+✅ Ejecuta en un nuevo terminal:   npm run dev
+
+Local:   http://localhost:5173/
+
+## LOGIN
+### Nombre de usuario: usuario
+
+### Contraseña: secret123
+
+Ruta protegida: Agendar Cita
+
+Después de iniciar sesión, "Agendar Cita" estará disponible.

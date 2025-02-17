@@ -15,10 +15,15 @@ const AppointmentForm = () => {
         handleChange,  
         handleSubmit,  
     } = useAppointmentForm();  
+
     const { user } = useAuth();  
 
     if (loading) {  
         return <p>Cargando Agenda Virtual...API simulada...</p>;  
+    }  
+
+    if (apiError) {  
+        return <p>Error: {apiError}</p>;  
     }  
 
     return (  
@@ -68,13 +73,16 @@ const AppointmentForm = () => {
                 </div>  
 
                 <div>  
-                    <label htmlFor="doctor">Profesional:</label>  
-                    <select id="doctor" name="doctor" value={formData.doctor} onChange={handleChange} required>  
-                        <option value="">Seleccione un médico</option>  
-                        {doctors.map((doctor) => (  
-                            <option key={doctor.id} value={doctor.name}>  
-                                {doctor.name} - {doctor.specialty}  
-                            </option>  
+                    <label htmlFor="doctor">Doctor:</label>  
+                    <select  
+                        id="doctor"  
+                        name="doctor"  
+                        value={formData.doctor}  
+                        onChange={handleChange}  
+                    >  
+                        <option value="xxx">Selecciona un doctor</option>  
+                        {doctors.map(doctor => (  
+                            <option key={doctor.id} value={doctor.name}>{doctor.name}</option>  
                         ))}  
                     </select>  
                 </div>  
@@ -105,24 +113,22 @@ const AppointmentForm = () => {
 
                 <button type="submit">Agendar Cita</button>  
 
-                {apiError && <p style={{ color: 'red' }}>{apiError}</p>} {/* Muestra el error de la API */}  
-                {formError && <p style={{ color: 'red' }}>{formError}</p>}  
-                {confirmation && <p style={{ color: 'green' }}>{confirmation}</p>}  
+                {/* Mostrar errores */}  
+                {formError && <div className="error-message" style={{ color: 'red' }}>{formError}</div>}  
+                {apiError && <p style={{ color: 'red' }}>{apiError}</p>}  
+                
+                {confirmation && (  
+                    <div className="confirmation-message">  
+                        <h3>Su hora médica ha sido agendada correctamente.</h3>  
+                        <ul>  
+                            <li><strong>Nombre del paciente:</strong> {confirmation.name}</li>  
+                            <li><strong>Doctor:</strong> {confirmation.doctor}</li>  
+                            <li><strong>Fecha:</strong> {confirmation.date}</li>  
+                            <li><strong>Hora:</strong> {confirmation.time}</li>  
+                        </ul>  
+                    </div>  
+                )}  
             </form>  
-
-            {formError && <div className="error-message">{formError}</div>}  
-
-            {confirmation && (  
-                <div className="confirmation-message">  
-                    <h3>Su hora médica ha sido agendada correctamente.</h3>  
-                    <ul>  
-                        <li><strong>Nombre del paciente:</strong> {confirmation.name}</li>  
-                        <li><strong>Doctor:</strong> {confirmation.doctor}</li>  
-                        <li><strong>Fecha:</strong> {confirmation.date}</li>  
-                        <li><strong>Hora:</strong> {confirmation.time}</li>  
-                    </ul>  
-                </div>  
-            )}  
         </section>  
     );  
 };  

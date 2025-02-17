@@ -1,68 +1,79 @@
-{  
-  "doctors": [  
-    {  
-      "id": 1,  
-      "name": "Dr. Alejandro Varas",  
-      "specialty": "Cardiología",  
-      "experience": "20 años",  
-      "availability": "Lunes a Viernes",  
-      "contact": {  
-        "telefono": "555-1234",  
-        "email": "avaras@hospital.com"  
-      },  
-      "schedule": {  
-        "lunes": "8:00 AM - 2:00 PM",  
-        "martes": "10:00 AM - 5:00 PM"  
-      },  
-      "image": "doc1.jpg"  
-    },  
-    {  
-      "id": 2,  
-      "name": "Dra. María Rodríguez",  
-      "specialty": "Pediatría",  
-      "experience": "15 años",  
-      "availability": "Lunes a Sábado",  
-      "contact": {  
-        "telefono": "555-5678",  
-        "email": "maria.rodriguez@hospital.com"  
-      },  
-      "schedule": {  
-        "lunes": "9:00 AM - 1:00 PM",  
-        "viernes": "8:00 AM - 12:00 PM"  
-      },  
-      "image": "dra1.jpg"  
-    },  
-    {  
-      "id": 3,  
-      "name": "Dr. Pedro González",  
-      "specialty": "Medicina General",  
-      "experience": "12 años",  
-      "availability": "Lunes a Viernes",  
-      "contact": {  
-        "telefono": "555-8901",  
-        "email": "pedro.gonzalez@hospital.com"  
-      },  
-      "schedule": {  
-        "lunes": "8:00 AM - 4:00 PM",  
-        "martes": "11:00 AM - 3:00 PM"  
-      },  
-      "image": "doc2.jpg"  
-    },  
-    {  
-      "id": 4,  
-      "name": "Dra. Javiera Mora",  
-      "specialty": "Dentista",  
-      "experience": "12 años",  
-      "availability": "Lunes a Viernes",  
-      "contact": {  
-        "telefono": "555-1234",  
-        "email": "jmora@hospital.com"  
-      },  
-      "schedule": {  
-        "lunes": "8:00 AM - 2:00 PM",  
-        "martes": "10:00 AM - 5:00 PM"  
-      },  
-      "image": "dra2.jpg"  
-    }  
-  ]  
+{
+  "doctors": [
+    {
+      "id": "1",
+      "name": "Dr. Alejandro Varas",
+      "specialty": "Cardiología",
+      "experience": "20 años",
+      "availability": "Lunes a Viernes",
+      "contact": {
+        "telefono": "555-1234",
+        "email": "avaras@hospital.com"
+      },
+      "schedule": {
+        "lunes": "8:00 AM - 2:00 PM",
+        "martes": "10:00 AM - 5:00 PM"
+      },
+      "image": "doc1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Dra. María Rodríguez",
+      "specialty": "Pediatría",
+      "experience": "15 años",
+      "availability": "Lunes a Sábado",
+      "contact": {
+        "telefono": "555-5678",
+        "email": "maria.rodriguez@hospital.com"
+      },
+      "schedule": {
+        "lunes": "9:00 AM - 1:00 PM",
+        "viernes": "8:00 AM - 12:00 PM"
+      },
+      "image": "dra1.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Dr. Pedro González",
+      "specialty": "Medicina General",
+      "experience": "12 años",
+      "availability": "Lunes a Viernes",
+      "contact": {
+        "telefono": "555-8901",
+        "email": "pedro.gonzalez@hospital.com"
+      },
+      "schedule": {
+        "lunes": "8:00 AM - 4:00 PM",
+        "martes": "11:00 AM - 3:00 PM"
+      },
+      "image": "doc2.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Dra. Javiera Mora",
+      "specialty": "Dentista",
+      "experience": "12 años",
+      "availability": "Lunes a Viernes",
+      "contact": {
+        "telefono": "555-1234",
+        "email": "jmora@hospital.com"
+      },
+      "schedule": {
+        "lunes": "8:00 AM - 2:00 PM",
+        "martes": "10:00 AM - 5:00 PM"
+      },
+      "image": "dra2.jpg"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "4e2a",
+      "name": "rrrrr",
+      "email": "rr@rr.cl",
+      "phone": "44444",
+      "doctor": "Dr. Pedro González",
+      "date": "2025-02-21",
+      "time": "06:24"
+    }
+  ]
 }
