@@ -15,7 +15,9 @@ El objetivo es que la web del hospital funcione de manera fluida, segura y con u
 
 Pasos realizados:
 ✅1. Instalar Axios: npm install axios
+
 ✅2.Instalar JSON Server:npm install -g json-server  
+
 Para crear una API sencilla usando los datos de los médicos
 
 ✅ Se crea el archivo db.json
