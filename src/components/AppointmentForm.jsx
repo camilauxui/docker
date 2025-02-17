@@ -1,7 +1,7 @@
 import React from "react";  
-import useAppointmentForm from "./hooks/useAppointmentForm";
+import useAppointmentForm from "./hooks/useAppointmentForm";  
 import { useAuth } from "./contexts/AuthContext";  
-import './AppointmentForm.css';
+import './AppointmentForm.css';  
 
 const AppointmentForm = () => {  
     const {  
@@ -11,13 +11,14 @@ const AppointmentForm = () => {
         formData,  
         doctors,  
         loading,  
+        apiError,  
         handleChange,  
         handleSubmit,  
     } = useAppointmentForm();  
     const { user } = useAuth();  
 
     if (loading) {  
-        return <p>Cargando Agenda Virual...API simulada...</p>;  
+        return <p>Cargando Agenda Virtual...API simulada...</p>;  
     }  
 
     return (  
@@ -29,7 +30,6 @@ const AppointmentForm = () => {
             <br />  
 
             <form onSubmit={handleSubmit}>  
-                {/* Campos del formulario */}  
                 <div>  
                     <label htmlFor="name">Nombre del paciente:</label>  
                     <input  
@@ -69,13 +69,7 @@ const AppointmentForm = () => {
 
                 <div>  
                     <label htmlFor="doctor">Profesional:</label>  
-                    <select  
-                        id="doctor"  
-                        name="doctor"  
-                        value={formData.doctor}  
-                        onChange={handleChange}  
-                        required  
-                    >  
+                    <select id="doctor" name="doctor" value={formData.doctor} onChange={handleChange} required>  
                         <option value="">Seleccione un médico</option>  
                         {doctors.map((doctor) => (  
                             <option key={doctor.id} value={doctor.name}>  
@@ -110,6 +104,10 @@ const AppointmentForm = () => {
                 </div>  
 
                 <button type="submit">Agendar Cita</button>  
+
+                {apiError && <p style={{ color: 'red' }}>{apiError}</p>} {/* Muestra el error de la API */}  
+                {formError && <p style={{ color: 'red' }}>{formError}</p>}  
+                {confirmation && <p style={{ color: 'green' }}>{confirmation}</p>}  
             </form>  
 
             {formError && <div className="error-message">{formError}</div>}  

@@ -12,3 +12,14 @@ El objetivo es que la web del hospital funcione de manera fluida, segura y con u
 - Gestiona los datos de pacientes, citas y doctores mediante solicitudes GET,POST, PUT, y DELETE.
 - Muestra los datos obtenidos en la interfaz React de manera dinámica.
 - Maneja correctamente los errores de las peticiones y muestra mensajes claros al usuario si ocurre un problema.
+
+Pasos realizados:
+✅1. Instalar Axios: npm install axios
+✅2.Instalar JSON Server:npm install -g json-server  
+Para crear una API sencilla usando los datos de los médicos
+
+✅ Se crea el archivo db.json
+Ejecuta el siguiente comando en tu terminal: json-server --watch db.json --port 3001
+
+Endpoints:
+http://localhost:3001/doctors

@@ -1,4 +1,6 @@
+// src/components/hooks/useAppointmentForm.js  
 import { useRef, useEffect, useState, useCallback } from "react";  
+import { fetchDoctors } from '../../services/apiService'; // Asegúrate de apuntar correctamente al archivo  
 
 const useAppointmentForm = () => {  
     const nameInputRef = useRef(null);  
@@ -14,40 +16,25 @@ const useAppointmentForm = () => {
     });  
     const [doctors, setDoctors] = useState([]);  
     const [loading, setLoading] = useState(true);  
-
-    // Simulación de una API para obtener los doctores  
-    const simulateFetchDoctors = () => {  
-        return new Promise((resolve) => {  
-            setTimeout(() => {  
-                resolve([  
-                    { id: 1, name: "Dr. Alejandro Varas", specialty: "Cardiología" },  
-                    { id: 2, name: "Dra. María Rodríguez", specialty: "Pediatría" },  
-                    { id: 3, name: "Dr. Pedro González", specialty: "Medicina General" },  
-                    { id: 4, name: "Dra. Javiera Mora", specialty: "Dentista" },  
-                ]);  
-            }, 2000);  
-        });  
-    };  
+    const [apiError, setApiError] = useState(""); // Estado para el error  
 
     useEffect(() => {  
-        const fetchDoctors = async () => {  
+        const fetchDoctorsData = async () => {  
             try {  
                 setLoading(true);  
-                const data = await simulateFetchDoctors();  
+                const data = await fetchDoctors();  
                 setDoctors(data);  
             } catch (error) {  
                 console.error("Error al cargar los doctores:", error);  
+                setApiError("No se pudieron cargar los doctores. Inténtalo de nuevo más tarde.");  
             } finally {  
                 setLoading(false);  
             }  
         };  
 
-        fetchDoctors();  
-    }, []);  
-
-    useEffect(() => {  
-        nameInputRef.current && nameInputRef.current.focus();  
-    }, []);  
+        fetchDoctorsData();  
+    }, []);   
+   
 
     const validateForm = useCallback((data) => {  
         const today = new Date().toISOString().split("T")[0];  
@@ -65,7 +52,7 @@ const useAppointmentForm = () => {
         }));  
     }, []);  
 
-    const handleSubmit = useCallback((e) => {  
+    const handleSubmit = useCallback(async (e) => {  
         e.preventDefault();  
 
         const validationError = validateForm(formData);  
@@ -75,21 +62,30 @@ const useAppointmentForm = () => {
         }  
 
         setFormError("");  
-        setConfirmation({  
-            name: formData.name,  
-            doctor: formData.doctor,  
-            date: formData.date,  
-            time: formData.time,  
-        });  
 
-        setFormData({  
-            name: "",  
-            email: "",  
-            phone: "",  
-            doctor: "",  
-            date: "",  
-            time: "",  
-        });  
+        try {  
+            const appointmentData = {  
+                name: formData.name,  
+                email: formData.email,  
+                phone: formData.phone,  
+                doctor: formData.doctor,  
+                date: formData.date,  
+                time: formData.time,  
+            };  
+            await createAppointment(appointmentData); // Llama a la función para crear la cita  
+            setConfirmation("Cita creada con éxito."); // Mensaje de confirmación  
+            setFormData({  
+                name: "",  
+                email: "",  
+                phone: "",  
+                doctor: "",  
+                date: "",  
+                time: "",  
+            });  
+        } catch (error) {  
+            console.error("Error al crear la cita:", error);  
+            setApiError("No se pudo crear la cita. Inténtalo de nuevo más tarde."); // Manejo de errores  
+        }  
     }, [formData, validateForm]);  
 
     return {  
@@ -99,9 +95,10 @@ const useAppointmentForm = () => {
         formData,  
         doctors,  
         loading,  
+        apiError,  
         handleChange,  
         handleSubmit,  
     };  
 };  
 
-export default useAppointmentForm;
+export default useAppointmentForm;  
