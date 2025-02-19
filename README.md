@@ -25,19 +25,40 @@ Para crear una API sencilla usando los datos de los médicos
 
 ✅ Ejecuta el siguiente comando en tu terminal: json-server --watch db.json --port 3001
 
-### Endpoints:
-
 http://localhost:3001/doctors
 
-✅ Ejecuta en un nuevo terminal:   npm run dev
+✅ Luego ejecuta en un nuevo terminal:   npm run dev
 
 Local:   http://localhost:5173/
 
-## LOGIN
-### Nombre de usuario: usuario
-
-### Contraseña: secret123
-
+## Datos para iniciar sesión y poder agendar cita mèdica
 Ruta protegida: Agendar Cita
 
-Después de iniciar sesión, "Agendar Cita" estará disponible.
+#### Nombre de usuario: usuario
+
+#### Contraseña: secret123
+
+✅ Después de iniciar sesión, "Agendar Cita" estará disponible.
+
+✅ En el formulario se carga de  manera dinàmica la lista de doctores que recibe desde la API
+
+## Operaciones CRUD:
+
+Se usa Axios para interactuar con la base de datos del hospital
+
+#### GET: 
+La función fetchDoctors está configurada para realizar una solicitud GET y devolver la lista de doctores. 
+
+ 
+#### POST: 
+La función createAppointment utiliza apiRequest para realizar una solicitud POST, lo cual está bien implementado.
+
+
+#### PUT: 
+La función updateAppointment también está correctamente configurada para actualizar citas.
+
+
+#### DELETE: 
+La función deleteAppointment permite eliminar una cita, lo cual es esencial para la gestión de citas.
+
+
