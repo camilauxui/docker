@@ -64,6 +64,7 @@
       },
       "image": "dra2.jpg"
     }
+    
   ],
   "appointments": [
     {
@@ -83,6 +84,15 @@
       "doctor": "Dra. Javiera Mora",
       "date": "2025-02-22",
       "time": "13:13"
+    },
+    {
+      "id": "ce9b",
+      "name": "Mati",
+      "email": "edfdsfsf@grthr.cl",
+      "phone": "4654647",
+      "doctor": "Dra. María Rodríguez",
+      "date": "2025-02-21",
+      "time": "01:47"
     }
   ]
 }

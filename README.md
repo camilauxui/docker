@@ -61,4 +61,11 @@ La función updateAppointment también está correctamente configurada para actu
 #### DELETE: 
 La función deleteAppointment permite eliminar una cita, lo cual es esencial para la gestión de citas.
 
+# 2. Integración de TypeScript en Componentes Clave
+Para mejorar la calidad del código y facilitar la depuración, se ha implementado TypeScript
+## Pasos realizados:
+Instalar TypeScript y las definiciones de tipos necesarias:
 
+npm install typescript @types/react @types/react-dom @types/react-router-dom
+
+cambiar la extensiòn a .tsx

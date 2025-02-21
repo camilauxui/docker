@@ -1,17 +1,17 @@
 .doctor-card {  
     border: 1px solid #ccc;  
-    border-radius: 18px;    
-    margin: 10px;  
-    background-color: #f9f9f9;  
-    padding: 2rem;   
+    border-radius: 18px;  
+    margin: 10px;  /* Reduce el margen para que quepan 4 */  
+    background-color: #d2edfa;  
+    padding: 2rem;  
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);  
     color: black;  
-    flex: 1 1 calc(33.333% - 32px);  /* cada tarjeta toma 1/3 del ancho del contenedor, ajustando por márgenes */  
-}  
-
-.doctor-image {   
-    object-fit: cover;   
-    width: 90px;   
-    border-radius: 80px;   
-    border: 2px solid #2472bc;   
-}
+    /* Elimina flex y max-width de aquí */  
+  }  
+  
+  .doctor-image {  
+    object-fit: cover;  
+    width: 90px;  
+    border-radius: 80px;  
+    border: 2px solid #2472bc;  
+  }
