@@ -1,7 +1,7 @@
 {  
   "compilerOptions": {  
     "target": "es5", // O "esnext" si quieres usar características más modernas de JavaScript  
-    "lib": ["dom", "esnext"], // Importante: Incluye "dom" para el DOM del navegador  
+    "lib": ["dom", "es6", "es2017", "es2015", "esnext"],  
     "jsx": "react", // O "react-jsx" si estás usando React 17+ con el nuevo JSX transform  
     "module": "esnext", // O "commonjs" si estás usando CommonJS  
     "moduleResolution": "node", // Importante  

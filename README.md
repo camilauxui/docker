@@ -75,4 +75,49 @@ Instalar TypeScript y las definiciones de tipos necesarias:
 
 npm install typescript @types/react @types/react-dom @types/react-router-dom
 
-cambiar la extensiòn a .tsx
+✅ cambiar la extensiòn y  adaptar  còdigo a .tsx
+
+Proyecto:
+
+EP2/  
+├── package.json  
+├── db.json  
+├── index.html  
+├── package-lock.json  
+├── server.js  
+├── tsconfig.json  
+├── vite.config.js  
+└── src/  
+    ├── assets/  (imágenes)  
+    ├── components/  
+    │   ├── contexts/  
+    │   │   ├── AuthContext.tsx  
+    │   │   └── DoctorContext.tsx  
+    │   ├── AppointmentForm.tsx  
+    │   ├── DoctorCard.tsx  
+    │   ├── DoctorList.tsx  
+    │   ├── ServiceList.tsx   
+    │   ├── ServiceData.tsx 
+    │   ├── withForm.tsx      
+    │   ├── LoginForm.tsx
+    │   ├── Footer.tsx            
+    │   ├── Navbar.tsx           
+    │   ├── ProtectedRoute.tsx 
+    │   └── hooks/  
+    │       ├── AuthHooks.tsx  
+    │       └── useAppointmentForm.tsx  
+    ├── services/  
+    │   ├── apiService.ts   
+    │   └── DataService.jsx   
+    ├── types/  
+    │   ├── images.d.ts  
+    │   └── interfaces.d.ts  
+    ├── views/  
+    │   ├── Home.tsx       
+    │   └── TeamView.tsx   
+    ├── App.tsx  
+    ├── main.tsx 
+    ├── App.css  
+    └── public/  
+        └── data/  
+            └── doctors.json

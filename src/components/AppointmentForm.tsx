@@ -2,7 +2,7 @@ import React from "react";
 import useAppointmentForm from "./hooks/useAppointmentForm";  
 import { useAuth } from "./contexts/AuthContext";  
 import './AppointmentForm.css';  
-import { Confirmation, Doctor, FormData } from '../types/interfaces'; 
+import { Confirmation, Doctor, AppointmentFormValues } from '../types/interfaces'; 
 
 const AppointmentForm: React.FC = () => {  
     const {  
