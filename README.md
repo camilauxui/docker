@@ -23,15 +23,20 @@ Para crear una API sencilla usando los datos de los médicos
 
 ✅ Se crea el archivo db.json
 
-✅ Ejecuta el siguiente comando en tu terminal: json-server --watch db.json --port 3001
+✅ Ejecuta el siguiente comando en tu terminal para iniciar la bbdd:
+
+ json-server --watch db.json --port 3001
 
 http://localhost:3001/doctors
 
-✅ Luego ejecuta en un nuevo terminal:   npm run dev
+✅ Luego ejecuta en un nuevo terminal para levantar el sitio:   
+
+npm run dev
 
 Local:   http://localhost:5173/
 
 ## Datos para iniciar sesión y poder agendar cita mèdica
+
 Ruta protegida: Agendar Cita
 
 #### Nombre de usuario: usuario
@@ -41,6 +46,7 @@ Ruta protegida: Agendar Cita
 ✅ Después de iniciar sesión, "Agendar Cita" estará disponible.
 
 ✅ En el formulario se carga de  manera dinàmica la lista de doctores que recibe desde la API
+
 
 ## Operaciones CRUD:
 
@@ -60,6 +66,7 @@ La función updateAppointment también está correctamente configurada para actu
 
 #### DELETE: 
 La función deleteAppointment permite eliminar una cita, lo cual es esencial para la gestión de citas.
+
 
 # 2. Integración de TypeScript en Componentes Clave
 Para mejorar la calidad del código y facilitar la depuración, se ha implementado TypeScript

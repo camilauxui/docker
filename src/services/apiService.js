@@ -18,7 +18,7 @@ const apiRequest = async (method, url, data = null) => {
 
 export const fetchDoctors = async () => {  
     try {  
-      const response = await axios.get(`${API_URL}/doctors`); // Asegúrate de que la URL sea correcta  
+      const response = await axios.get(`${API_URL}/doctors`); 
       return response.data || []; // Devuelve los datos directamente  
     } catch (error) {  
       console.error("Error al cargar los doctores:", error);  

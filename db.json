@@ -64,7 +64,6 @@
       },
       "image": "dra2.jpg"
     }
-    
   ],
   "appointments": [
     {
@@ -93,6 +92,15 @@
       "doctor": "Dra. María Rodríguez",
       "date": "2025-02-21",
       "time": "01:47"
+    },
+    {
+      "id": "bb98",
+      "name": "Celeste",
+      "email": "cele@gmail.com",
+      "phone": "2223344",
+      "doctor": "Dr. Pedro González",
+      "date": "2025-02-24",
+      "time": "02:35"
     }
   ]
 }
