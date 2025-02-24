@@ -119,7 +119,7 @@ EP2/
             └── doctors.json
 
 
-# Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
+### Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
 Pasos realizados
 Descargar las dependencias: 
 
@@ -144,23 +144,32 @@ Este código define un servicio para hacer peticiones a la API, agregando el tok
 ### Resumen de los componentes clave y su interacción:
 
 ✅ LoginForm.tsx: Maneja el formulario de inicio de sesión, envía las credenciales al backend, recibe el JWT y lo guarda en el contexto de autenticación.
+
 ✅ AuthContext.tsx: Proporciona el contexto de autenticación, almacena el token JWT, gestiona el estado de inicio de sesión, y proporciona las funciones login y logout. También sincroniza el token entre el estado del contexto y localStorage.
+
 ✅ ProtectedRoute.tsx: Protege las rutas, verifica si el usuario está autenticado y redirige a los usuarios no autenticados a la página de inicio de sesión.
+
 ✅ apiService.ts: Encapsula la lógica para hacer peticiones a la API, añade el header Authorization a las peticiones protegidas, y maneja los errores de autenticación.
+
 ✅ Backend (API): Recibe las credenciales, verifica las credenciales en la base de datos, genera el JWT, recibe las peticiones con el JWT, verifica el JWT y devuelve los datos solicitados.
 
 ______________________________________________
 
-# ✅ USUARIOS LOGIN
+### ✅ USUARIOS LOGIN
 Puedes usar cualquiera de estos usuarios para iniciar sesión.
 
 
- username: usuario1
+ ✅ username: usuario1
+
  password: password1
+
      name: Usuario Test
+     
+ *************************** 
   
-  
-username: admin
+✅ username: admin
+
 password: password2
+
     name: Administrador
 ______________________________________________
