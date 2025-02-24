@@ -155,7 +155,7 @@ Este código define un servicio para hacer peticiones a la API, agregando el tok
 
 ______________________________________________
 
-### ✅ USUARIOS LOGIN
+### ✅ USUARIOS PARA LOGIN
 Puedes usar cualquiera de estos usuarios para iniciar sesión.
 
 
@@ -163,13 +163,13 @@ Puedes usar cualquiera de estos usuarios para iniciar sesión.
 
  password: password1
 
-     name: Usuario Test
-     
+ name: Usuario Test
+
  *************************** 
   
 ✅ username: admin
 
 password: password2
 
-    name: Administrador
+name: Administrador
 ______________________________________________
