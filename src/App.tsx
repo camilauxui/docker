@@ -1,7 +1,6 @@
 import React from "react";  
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";  
-import AuthProvider from "./components/contexts/AuthContext";  
-import DoctorProvider from "./components/contexts/DoctorContext";  
+import { AuthProvider } from "./components/contexts/AuthContext"; 
 import ProtectedRoute from "./components/ProtectedRoute";  
 import Home from "./views/Home";  
 import TeamView from "./views/TeamView";  
@@ -11,6 +10,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";  
 import "bootstrap/dist/css/bootstrap.min.css";  
 import "bootstrap/dist/js/bootstrap.bundle.min";  
+import { DoctorProvider } from "./components/contexts/DoctorContext";
 
 const App: React.FC = () => {  
     return (  

@@ -126,6 +126,4 @@ export const DoctorProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             {children}  
         </DoctorContext.Provider>  
     );  
-};  
-
-export default DoctorProvider;
+};

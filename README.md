@@ -39,10 +39,6 @@ Local:   http://localhost:5173/
 
 Ruta protegida: Agendar Cita
 
-#### Nombre de usuario: usuario
-
-#### Contraseña: secret123
-
 ✅ Después de iniciar sesión, "Agendar Cita" estará disponible.
 
 ✅ En el formulario se carga de  manera dinàmica la lista de doctores que recibe desde la API
@@ -77,7 +73,7 @@ npm install typescript @types/react @types/react-dom @types/react-router-dom
 
 ✅ cambiar la extensiòn y  adaptar  còdigo a .tsx
 
-Proyecto:
+Proyecto con archivos actualizados:
 
 EP2/  
 ├── package.json  
@@ -121,3 +117,50 @@ EP2/
     └── public/  
         └── data/  
             └── doctors.json
+
+
+# Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
+Pasos realizados
+Descargar las dependencias: 
+
+npm install jsonwebtoken bcryptjs express cors react-router-dom jwt-decode  
+
+- se corrige server.js
+JWT_SECRET = clave_secreta_muy_segura
+Este código crea las rutas /register y /login para registrar y autenticar usuarios. También define el middleware authenticateToken para proteger rutas, y proporciona rutas protegidas para doctores y citas.
+
+- se modifica AuthContext.tsx
+Este código crea un contexto para manejar el estado de autenticación (token, usuario, isLoggedIn, login, logout). 
+Guarda el token en localStorage.
+
+- se modificaLoginForm.tsx
+Este código define un formulario de inicio de sesión que llama a la API /login y guarda el token en el contexto de autenticación.
+
+- Se modifica apiService.ts
+Este código define un servicio para hacer peticiones a la API, agregando el token de autenticación al encabezado Authorization si requireAuth es true.
+
+- Se modifica App.tsx
+
+### Resumen de los componentes clave y su interacción:
+
+✅ LoginForm.tsx: Maneja el formulario de inicio de sesión, envía las credenciales al backend, recibe el JWT y lo guarda en el contexto de autenticación.
+✅ AuthContext.tsx: Proporciona el contexto de autenticación, almacena el token JWT, gestiona el estado de inicio de sesión, y proporciona las funciones login y logout. También sincroniza el token entre el estado del contexto y localStorage.
+✅ ProtectedRoute.tsx: Protege las rutas, verifica si el usuario está autenticado y redirige a los usuarios no autenticados a la página de inicio de sesión.
+✅ apiService.ts: Encapsula la lógica para hacer peticiones a la API, añade el header Authorization a las peticiones protegidas, y maneja los errores de autenticación.
+✅ Backend (API): Recibe las credenciales, verifica las credenciales en la base de datos, genera el JWT, recibe las peticiones con el JWT, verifica el JWT y devuelve los datos solicitados.
+
+______________________________________________
+
+# ✅ USUARIOS LOGIN
+Puedes usar cualquiera de estos usuarios para iniciar sesión.
+
+
+ username: usuario1
+ password: password1
+     name: Usuario Test
+  
+  
+username: admin
+password: password2
+    name: Administrador
+______________________________________________

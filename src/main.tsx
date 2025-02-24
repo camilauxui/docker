@@ -1,8 +1,8 @@
 import React from 'react';  
 import { createRoot } from 'react-dom/client';  
 import App from './App';  
-import AuthProvider from './components/contexts/AuthContext'; // Importación sin llaves  
-import DoctorProvider from './components/contexts/DoctorContext';  
+import { AuthProvider } from './components/contexts/AuthContext'; // Importa AuthProvider (con llaves)  
+import { DoctorProvider } from './components/contexts/DoctorContext';  
 import './index.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Importa los estilos de Font Awesome  
@@ -15,11 +15,11 @@ const container = document.getElementById('root') as HTMLElement; // Selecciona 
 const root = createRoot(container); // Crea una instancia de root  
 
 root.render(  
-  <React.StrictMode>  
-    <AuthProvider> {/* Usamos AuthProvider correctamente */}  
-      <DoctorProvider>  
-        <App />  
-      </DoctorProvider>  
-    </AuthProvider>  
-  </React.StrictMode>  
+    <React.StrictMode>  
+        <AuthProvider> {/* Usamos AuthProvider correctamente */}  
+            <DoctorProvider>  
+                <App />  
+            </DoctorProvider>  
+        </AuthProvider>  
+    </React.StrictMode>  
 );

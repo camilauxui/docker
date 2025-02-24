@@ -1,22 +1,23 @@
-import React from "react";  
-import { Navigate, useLocation } from "react-router-dom";  
-import { useAuth } from "./contexts/AuthContext"; // Usa correctamente el hook definido en AuthContext  
+// src/components/ProtectedRoute.tsx  
+import React from 'react';  
+import { Navigate, useLocation } from 'react-router-dom';  
+import { useAuth } from './contexts/AuthContext';  
 
 interface ProtectedRouteProps {  
-  children: React.ReactNode;  
+    children: React.ReactNode;  
 }  
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {  
-  const { isAuthenticated } = useAuth(); // Obtiene el estado de autenticación del contexto  
-  const location = useLocation(); // Obtiene la ubicación actual del usuario para redirecciones  
+    const { isLoggedIn } = useAuth();  
+    const location = useLocation();  
 
-  if (!isAuthenticated) {  
-    // Redirigir si el usuario no está autenticado  
-    return <Navigate to="/" state={{ from: location.pathname }} />;  
-  }  
+    if (!isLoggedIn) {  
+        // Redirige al usuario a la página de inicio de sesión  
+        // Guarda la ubicación actual para que pueda volver después de iniciar sesión  
+        return <Navigate to="/login" state={{ from: location }} replace />;  
+    }  
 
-  // Renderizar el contenido si el usuario está autenticado  
-  return <>{children}</>; // Fragmento React para retornar children  
+    return <>{children}</>;  
 };  
 
 export default ProtectedRoute;

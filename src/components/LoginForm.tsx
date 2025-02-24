@@ -1,77 +1,60 @@
-import React, { useState } from "react";  
-import { useNavigate } from "react-router-dom";  
-import CryptoJS from "crypto-js"; // Importar crypto-js  
-import { Button, Modal, Form } from "react-bootstrap";  
-import { useAuth } from "./contexts/AuthContext";  
+// src/components/LoginForm.tsx  
+import React, { useState } from 'react';  
+import { useAuth } from './contexts/AuthContext';  
 
 const LoginForm: React.FC = () => {  
-  const { login } = useAuth();  
-  const navigate = useNavigate(); // Hook de navegación  
-  const [username, setUsername] = useState<string>("");  
-  const [password, setPassword] = useState<string>("");  
-  const [show, setShow] = useState<boolean>(false);  
+    const [username, setUsername] = useState('');  
+    const [password, setPassword] = useState('');  
+    const { login } = useAuth();  
+    const [error, setError] = useState('');  
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {  
-    e.preventDefault();  
+    const handleSubmit = async (e: React.FormEvent) => {  
+        e.preventDefault();  
+        setError(''); // Limpiar errores previos  
+        try {  
+            const response = await fetch('http://localhost:3000/login', {  
+                method: 'POST',  
+                headers: {  
+                    'Content-Type': 'application/json',  
+                },  
+                body: JSON.stringify({ username, password }),  
+            });  
 
-    // ENCRIPTAR CONTRASEÑA usando CryptoJS  
-    const secretKey = "clave_secreta"; // ¡Cambia esta clave a algo seguro y guárdala solo en el backend!  
-    const encryptedPassword = CryptoJS.AES.encrypt(password, secretKey).toString();  
+            const data = await response.json();  
 
-    console.log("Contraseña original:", password); // Solo para pruebas  
-    console.log("Contraseña encriptada:", encryptedPassword); // Contraseña encriptada  
+            if (!response.ok) {  
+                throw new Error(data.message || 'Error al iniciar sesión');  
+            }  
+            login(data.token); // Llama a la función login del contexto  
+        } catch (err: any) {  
+            setError(err.message || 'Error al iniciar sesión');  
+        }  
+    };  
 
-    // Llamar a la función de login con la contraseña encriptada  
-    const loginSuccess = await login(username, encryptedPassword);  
-
-    if (loginSuccess) {  
-      setShow(false);  
-      setUsername("");  
-      setPassword("");  
-      navigate("/appointments"); // Redirige al usuario a la página de citas  
-    }  
-  };  
-
-  const toggleModal = () => setShow(!show);  
-
-  return (  
-    <>  
-      <Button variant="outline-primary" onClick={toggleModal}>  
-        Iniciar Sesión  
-      </Button>  
-
-      <Modal show={show} onHide={toggleModal}>  
-        <Modal.Header closeButton>  
-          <Modal.Title>Iniciar Sesión</Modal.Title>  
-        </Modal.Header>  
-        <Modal.Body>  
-          <Form onSubmit={handleLogin}>  
-            <Form.Group className="mb-3">  
-              <Form.Label>Nombre de usuario</Form.Label>  
-              <Form.Control  
-                type="text"  
-                value={username}  
-                onChange={(e) => setUsername((e.target as HTMLInputElement).value)}  
-                required  
-              />  
-            </Form.Group>  
-            <Form.Group className="mb-3">  
-              <Form.Label>Contraseña</Form.Label>  
-              <Form.Control  
-                type="password"  
-                value={password}  
-                onChange={(e) => setPassword((e.target as HTMLInputElement).value)}  
-                required  
-              />  
-            </Form.Group>  
-            <Button type="submit" variant="primary">  
-              Acceder  
-            </Button>  
-          </Form>  
-        </Modal.Body>  
-      </Modal>  
-    </>  
-  );  
+    return (  
+        <form onSubmit={handleSubmit}>  
+            {error && <p style={{ color: 'red' }}>{error}</p>}  
+            <div>  
+                <label htmlFor="username">Usuario:</label>  
+                <input  
+                    type="text"  
+                    id="username"  
+                    value={username}  
+                    onChange={(e) => setUsername(e.target.value)}  
+                />  
+            </div>  
+            <div>  
+                <label htmlFor="password">Contraseña:</label>  
+                <input  
+                    type="password"  
+                    id="password"  
+                    value={password}  
+                    onChange={(e) => setPassword(e.target.value)}  
+                />  
+            </div>  
+            <button type="submit">Iniciar sesión</button>  
+        </form>  
+    );  
 };  
 
 export default LoginForm;

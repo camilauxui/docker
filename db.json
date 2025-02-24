@@ -101,6 +101,38 @@
       "doctor": "Dr. Pedro González",
       "date": "2025-02-24",
       "time": "02:35"
+    },
+    {
+      "id": "ad29",
+      "doctorId": "1",
+      "patientName": "e",
+      "email": "e@r.cl",
+      "phone": "r",
+      "date": "2025-03-07",
+      "time": "07:32"
+    },
+    {
+      "id": "b129",
+      "doctorId": "2",
+      "patientName": "Usuario Test",
+      "email": "test@gmail.com",
+      "phone": "7776655",
+      "date": "2025-02-24",
+      "time": "04:20"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "usuario1",
+      "password": "password1",
+      "name": "Usuario Test"
+    },
+    {
+      "id": 2,
+      "username": "admin",
+      "password": "password2",
+      "name": "Administrador"
     }
   ]
 }

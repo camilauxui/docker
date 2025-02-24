@@ -1,60 +1,78 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";  
+import React, { createContext, useState, useEffect, useContext } from 'react';  
 
-// Definir la interfaz para el contexto  
-export interface AuthContextType {  
-  isAuthenticated: boolean;  
-  user: { username: string; name: string } | null; // Definir los tipos para el usuario  
-  login: (username: string, password: string) => Promise<boolean>;  
-  logout: () => void;  
+export interface AuthContextProps { // Exporta la interfaz  
+    token: string | null;  
+    setToken: (token: string | null) => void;  
+    isLoggedIn: boolean;  
+    login: (token: string) => void;  
+    logout: () => void;  
+    user: any; // Puedes definir un tipo User si tienes la información del usuario  
 }  
 
-// Crear el contexto con un valor inicial indefinido  
-export const AuthContext = createContext<AuthContextType | undefined>(undefined); // Exportación con `export const`  
+const AuthContext = createContext<AuthContextProps>({  
+    token: null,  
+    setToken: () => { },  
+    isLoggedIn: false,  
+    login: () => { },  
+    logout: () => { },  
+    user: null,  
+});  
 
-// Hook personalizado para usar el contexto  
-export const useAuth = (): AuthContextType => {  
-  const context = useContext(AuthContext);  
-  if (!context) {  
-    throw new Error("useAuth must be used within an AuthProvider");  
-  }  
-  return context;  
+interface AuthProviderProps {  
+    children: React.ReactNode;  
+}  
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {  
+    const [token, setTokenState] = useState<string | null>(localStorage.getItem('token') || null);  
+    const [user, setUser] = useState<any>(null); // Estado para la información del usuario  
+    const isLoggedIn = !!token;  
+
+    useEffect(() => {  
+        if (token) {  
+            localStorage.setItem('token', token);  
+            // Aquí podrías decodificar el token y guardar la info del usuario en el estado `user`  
+            try {  
+                const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decodifica el token (no usar en producción sin validación)  
+                setUser(decodedToken);  
+            } catch (error) {  
+                console.error("Error al decodificar el token:", error);  
+                setUser(null);  
+            }  
+
+        } else {  
+            localStorage.removeItem('token');  
+            setUser(null);  
+        }  
+    }, [token]);  
+
+    const setToken = (newToken: string | null) => {  
+        setTokenState(newToken);  
+    };  
+
+    const login = (token: string) => {  
+        setTokenState(token);  
+    };  
+
+    const logout = () => {  
+        setTokenState(null);  
+    };  
+
+    const value: AuthContextProps = {  
+        token,  
+        setToken,  
+        isLoggedIn,  
+        login,  
+        logout,  
+        user,  
+    };  
+
+    return (  
+        <AuthContext.Provider value={value}>  
+            {children}  
+        </AuthContext.Provider>  
+    );  
 };  
 
-// Proveedor del contexto  
-const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {  
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);  
-  const [user, setUser] = useState<{ username: string; name: string } | null>(null);  
+export const useAuth = () => useContext(AuthContext);  
 
-  const login = async (username: string, password: string): Promise<boolean> => {  
-    try {  
-      // **EN UNA APLICACIÓN REAL, AQUÍ HARÍAS UNA LLAMADA A UNA API**  
-      // Simulación de una respuesta exitosa de la API  
-      if (username === "usuario" && password === "secret123") {  
-        setIsAuthenticated(true);  
-        setUser({ username: "usuario", name: "Camila Peña" });  
-        return true;  
-      } else {  
-        setIsAuthenticated(false);  
-        setUser(null);  
-        return false;  
-      }  
-    } catch (error) {  
-      console.error("Error durante el inicio de sesión:", error);  
-      return false; // O lanza el error para que el componente lo maneje  
-    }  
-  };  
-
-  const logout = (): void => {  
-    setIsAuthenticated(false);  
-    setUser(null);  
-    // **EN UNA APLICACIÓN REAL, AQUÍ ELIMINARÍAS EL TOKEN DEL LOCALSTORAGE O COOKIES**  
-  };  
-
-  return (  
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>  
-      {children}  
-    </AuthContext.Provider>  
-  );  
-};  
-
-export default AuthProvider;
+export default AuthContext; // Exporta AuthContext
