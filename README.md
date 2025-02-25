@@ -42,6 +42,26 @@ Ruta protegida: Agendar Cita
 ✅ Después de iniciar sesión, "Agendar Cita" estará disponible.
 
 ✅ En el formulario se carga de  manera dinàmica la lista de doctores que recibe desde la API
+______________________________________________
+
+### ✅ USUARIOS PARA LOGIN
+Puedes usar cualquiera de estos usuarios para iniciar sesión.
+
+
+ ✅ username: usuario1
+
+ password: password1
+
+ name: Usuario Test
+
+ *************************** 
+  
+✅ username: admin
+
+password: password2
+
+name: Administrador
+______________________________________________
 
 
 ## Operaciones CRUD:
@@ -153,26 +173,7 @@ Este código define un servicio para hacer peticiones a la API, agregando el tok
 
 ✅ Backend (API): Recibe las credenciales, verifica las credenciales en la base de datos, genera el JWT, recibe las peticiones con el JWT, verifica el JWT y devuelve los datos solicitados.
 
-______________________________________________
 
-### ✅ USUARIOS PARA LOGIN
-Puedes usar cualquiera de estos usuarios para iniciar sesión.
-
-
- ✅ username: usuario1
-
- password: password1
-
- name: Usuario Test
-
- *************************** 
-  
-✅ username: admin
-
-password: password2
-
-name: Administrador
-______________________________________________
 
 ## Asegura la validación de formularios para evitar XSS y otros ataques comunes.
 #### Integra encriptación para proteger la información confidencial antes de enviarla al servidor.
