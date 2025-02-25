@@ -119,7 +119,7 @@ EP2/
             └── doctors.json
 
 
-### Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
+# 3. Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
 Pasos realizados
 Descargar las dependencias: 
 
@@ -173,3 +173,25 @@ password: password2
 
 name: Administrador
 ______________________________________________
+
+## Asegura la validación de formularios para evitar XSS y otros ataques comunes.
+#### Integra encriptación para proteger la información confidencial antes de enviarla al servidor.
+
+✅ Beneficios Implementados:
+
+#### Prevención de ataques XSS, SQL Injection y entrada de datos inválidos.
+Sanidad y limpieza de datos antes de enviarlos al servidor.
+
+#### Confidencialidad de datos sensibles:
+
+✅ Las contraseñas no se envían en texto plano.
+
+✅ La información personal como correos electrónicos y números de teléfono se encripta para evitar exposición ante posibles ataques.
+
+✅ Validaciones robustas y protección de datos antes del envío al servidor garantizan una experiencia más segura para los usuarios.
+
+# 4. Optimización con Hooks y Manejo de Errores
+
+✅ La aplicación utiliza Hooks como useState para manejar el estado local dentro de los componentes, como entradas de formularios, estado de carga, confirmaciones y mensajes de error.
+
+✅ Se emplea useEffect para gestionar efectos secundarios, como la recuperación de datos desde una API externa (por ejemplo, la lista de doctores), y para ejecutar lógica al montar componentes.

@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from "react";  
-import { fetchDoctors, createAppointment } from '../../services/apiService';  
-import { Confirmation, Doctor, AppointmentFormValues, AppointmentData } from '../../types/interfaces';  
+import { fetchDoctors, createAppointment } from "../../services/apiService";  
+import { Confirmation, Doctor, AppointmentFormValues, AppointmentData } from "../../types/interfaces";  
+import CryptoJS from "crypto-js";  
 
 const useAppointmentForm = () => {  
     const nameInputRef = useRef<HTMLInputElement>(null);  
-    const [formError, setFormError] = useState<string | null>(null);  
-    const [confirmation, setConfirmation] = useState<Confirmation | null>(null);  
+
     const [formData, setFormData] = useState<AppointmentFormValues>({  
         name: "",  
         email: "",  
@@ -14,6 +14,9 @@ const useAppointmentForm = () => {
         date: "",  
         time: "",  
     });  
+
+    const [formError, setFormError] = useState<string | null>(null);  
+    const [confirmation, setConfirmation] = useState<Confirmation | null>(null);  
     const [doctors, setDoctors] = useState<Doctor[]>([]);  
     const [loading, setLoading] = useState(true);  
     const [apiError, setApiError] = useState<string | null>(null);  
@@ -24,7 +27,6 @@ const useAppointmentForm = () => {
                 setLoading(true);  
                 setApiError(null);  
                 const data = await fetchDoctors();  
-                console.log("Datos de doctores recibidos:", data);  
                 setDoctors(data || []);  
             } catch (error) {  
                 console.error("Error al cargar los doctores:", error);  
@@ -41,11 +43,21 @@ const useAppointmentForm = () => {
         const today = new Date().toISOString().split("T")[0];  
 
         if (!data.name || !data.email || !data.phone || !data.doctor || !data.date || !data.time) {  
-            return "Complete todos los campos";  
+            return "Complete todos los campos.";  
         }  
 
         if (data.date < today) {  
             return "La fecha seleccionada no puede ser en el pasado.";  
+        }  
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+        if (!emailRegex.test(data.email)) {  
+            return "Ingrese un correo electrónico válido.";  
+        }  
+
+        const phoneRegex = /^[0-9]{8,15}$/;  
+        if (!phoneRegex.test(data.phone)) {  
+            return "Ingrese un número de teléfono válido.";  
         }  
 
         return null;  
@@ -53,7 +65,7 @@ const useAppointmentForm = () => {
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {  
         const { name, value } = e.target;  
-        setFormData(prevFormData => ({  
+        setFormData((prevFormData) => ({  
             ...prevFormData,  
             [name]: value,  
         }));  
@@ -71,20 +83,21 @@ const useAppointmentForm = () => {
         setFormError(null);  
 
         try {  
-            // **Buscar el doctorId a partir del nombre del doctor**  
-            const doctorId = doctors.find(d => d.name === formData.doctor)?.id;  
+            const doctorId = doctors.find((d) => d.name === formData.doctor)?.id;  
 
-            if (doctorId === undefined) {  // Comprobar si doctorId es undefined  
+            if (doctorId === undefined) {  
                 setApiError("Doctor no encontrado.");  
                 return;  
             }  
 
-            // **Crear el objeto AppointmentData**  
+            const encryptedEmail = CryptoJS.AES.encrypt(formData.email, "your-secret-key").toString();  
+            const encryptedPhone = CryptoJS.AES.encrypt(formData.phone, "your-secret-key").toString();  
+
             const appointmentData: AppointmentData = {  
                 doctorId: doctorId,  
                 patientName: formData.name,  
-                email: formData.email,  
-                phone: formData.phone,  
+                email: encryptedEmail,  
+                phone: encryptedPhone,  
                 date: formData.date,  
                 time: formData.time,  
             };  
@@ -112,7 +125,7 @@ const useAppointmentForm = () => {
             setApiError("No se pudo crear la cita. Inténtalo de nuevo más tarde.");  
             setConfirmation(null);  
         }  
-    }, [formData, validateForm, createAppointment, doctors]);  
+    }, [formData, validateForm, doctors]);  
 
     return {  
         nameInputRef,  
