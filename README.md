@@ -139,27 +139,29 @@ EP2/
             └── doctors.json
 
 
-# 3. Mejoras de seguridad, implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
-Pasos realizados
+# 3. Mejoras de seguridad
+### implementar la protección de la API con JWT, considerando que la base de datos (db.json) es simulada:
+
+#### Pasos realizados
 Descargar las dependencias: 
 
 npm install jsonwebtoken bcryptjs express cors react-router-dom jwt-decode  
 
-- se corrige server.js
+✅ se corrige server.js
 JWT_SECRET = clave_secreta_muy_segura
 Este código crea las rutas /register y /login para registrar y autenticar usuarios. También define el middleware authenticateToken para proteger rutas, y proporciona rutas protegidas para doctores y citas.
 
-- se modifica AuthContext.tsx
+✅ se modifica AuthContext.tsx
 Este código crea un contexto para manejar el estado de autenticación (token, usuario, isLoggedIn, login, logout). 
 Guarda el token en localStorage.
 
-- se modificaLoginForm.tsx
+✅ se modificaLoginForm.tsx
 Este código define un formulario de inicio de sesión que llama a la API /login y guarda el token en el contexto de autenticación.
 
-- Se modifica apiService.ts
+✅ Se modifica apiService.ts
 Este código define un servicio para hacer peticiones a la API, agregando el token de autenticación al encabezado Authorization si requireAuth es true.
 
-- Se modifica App.tsx
+✅ Se modifica App.tsx
 
 ### Resumen de los componentes clave y su interacción:
 
