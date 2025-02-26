@@ -1,3 +1,4 @@
+### M6EP1 (en desarrollo) 
 # Implementación Inicial de PWA en la Web del Hospital
 
 **Contexto:**
@@ -11,8 +12,11 @@ usuario, haciendo la aplicación instalable y accesible offline.
  Crea un archivo de manifiesto para la aplicación web del hospital que incluya los
 siguientes elementos:
 ✅- Nombre de la aplicación.
+
 ✅- Iconos en varias resoluciones para diferentes dispositivos.
+
 ✅- Color de fondo y color del tema.
+
 ✅- Modo de pantalla (fullscreen o standalone).
 
 
