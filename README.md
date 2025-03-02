@@ -1,4 +1,5 @@
-### M6EP1 (en desarrollo) 
+### M6EP1
+
 # Implementación Inicial de PWA en la Web del Hospital
 
 **Contexto:**
@@ -25,3 +26,11 @@ siguientes elementos:
 - Esté registrado y activado correctamente.
 - Se realice precaching de los archivos principales (HTML, CSS, JavaScript).
 - La aplicación pueda funcionar en modo offline gracias al Service Worker.
+
+# 3. Pruebas de Funcionamiento Offline y Validación con Lighthouse
+Verifica que la aplicación funcione en modo offline utilizando Lighthouse para evaluar
+el rendimiento de la PWA:
+- Ejecuta Lighthouse para generar un informe que evalúe si la aplicación cumple
+con los criterios de PWA (instalabilidad, funcionamiento offline y rendimiento).
+- Asegúrate de que el informe refleje una implementación básica funcional de
+PWA.
