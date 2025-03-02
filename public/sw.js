@@ -15,7 +15,6 @@ self.addEventListener('install', (event) => {
                 '/banner_desk.jpg',
                 '/urgencia_icono.jpg',
                 '/especialidades_icono.jpg', 
-
                 '/team',  
             ]);  
         })  
