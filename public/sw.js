@@ -8,13 +8,14 @@ self.addEventListener('install', (event) => {
                 '/main.js',  
                 '/icon-192.png',  
                 '/icon-512.png',  
-                '/doc1.jpg',
-                '/doc2.jpg',
-                '/dra1.jpg', 
-                '/dra2.jpg', 
+                '/doc1.jpg',  
+                '/doc2.jpg',  
+                '/dra1.jpg',   
+                '/dra2.jpg',   
                 '/banner_desk.jpg',
-                '/urgencia_icono.jpg',
-                '/especialidades_icono.jpg', 
+                '/banner_mobile.webp',   
+                '/urgencia_icono.jpg',  
+                '/especialidades_icono.jpg',   
                 '/team',  
             ]);  
         })  
@@ -46,7 +47,7 @@ self.addEventListener('fetch', (event) => {
                 return cachedResponse;  
             }  
 
-            // Realiza la solicitud de red  
+            // Si no hay respuesta en caché, realiza la solicitud de red  
             return fetch(event.request).then((response) => {  
                 // Solo almacenar en caché si la respuesta es válida  
                 if (response && response.status === 200 && response.type === 'basic') {  
@@ -60,8 +61,6 @@ self.addEventListener('fetch', (event) => {
                 return response;  
             }).catch((error) => {  
                 console.error('Fetching failed:', error);  
-                // Aquí podrías devolver una página offline si lo deseas  
-                // return caches.match('/offline.html'); // Ejemplo de manejo de error  
             });  
         })  
     );  
