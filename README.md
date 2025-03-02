@@ -20,3 +20,8 @@ siguientes elementos:
 ✅- Modo de pantalla (fullscreen o standalone).
 
 
+#  2. Registro de un Service Worker Básico 
+- Registra un Service Worker para la aplicación del hospital, asegurando que:
+- Esté registrado y activado correctamente.
+- Se realice precaching de los archivos principales (HTML, CSS, JavaScript).
+- La aplicación pueda funcionar en modo offline gracias al Service Worker.
