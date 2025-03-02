@@ -34,3 +34,24 @@ el rendimiento de la PWA:
 con los criterios de PWA (instalabilidad, funcionamiento offline y rendimiento).
 - Asegúrate de que el informe refleje una implementación básica funcional de
 PWA.
+_________________________________________________________________________________
+
+✅ USUARIOS PARA LOGIN
+Puedes usar cualquiera de estos usuarios para iniciar sesión.
+
+✅ username: usuario1
+
+password: password1
+
+name: Usuario Test
+
+✅ username: admin
+
+password: password2
+
+name: Administrador
+
+
+
+
+![Captura instalador](http://localhost:5173/src/assets/image.png)  
