@@ -1,15 +1,20 @@
+// src/views/Home.tsx  
 import React, { useRef, useState, useEffect } from 'react';  
 import ServiceList from '../components/ServiceList';  
 import servicesData from '../components/ServicesData';  
 import './Home.css';  
 import { Link } from 'react-router-dom';  
 import { Modal } from 'react-bootstrap';  
+import translations from '../translations';   
+import { useLanguage } from '../components/contexts/LanguageContext';   
 
 const Home: React.FC = () => {  
   const serviceSectionRef = useRef<HTMLElement>(null);  
   const aboutSectionRef = useRef<HTMLElement>(null);  
   const [showScrollToTopButton, setShowScrollToTopButton] = useState<boolean>(false);  
-  const [showAppointmentModal, setShowAppointmentModal] = useState<boolean>(false); // Estado para el modal de cita  
+  const [showAppointmentModal, setShowAppointmentModal] = useState<boolean>(false);  
+  const { language, changeLanguage } = useLanguage(); // Ahora incluye changeLanguage  
+  const t = translations[language] || translations['es']; // Carga el idioma desde las traducciones  
 
   const scrollToSection = (ref: React.RefObject<HTMLElement>) => {  
     if (ref.current) {  
@@ -38,16 +43,15 @@ const Home: React.FC = () => {
 
   return (  
     <div className="home">  
-      {/* Banner con imágenes responsivas */}  
       <picture>  
         <source media="(max-width: 768px)" srcSet="src/assets/banner_mobile.webp" />  
-        <img src="src/assets/banner_desk.jpg" alt="Banner del Centro Médico" className="banner" />  
+        <img src="src/assets/banner_desk.jpg" alt={t.home.title} className="banner" />  
       </picture>  
       <br />  
       {/* Botones de navegación */}  
       <nav className="button-container">  
-        <button className="banner-button" onClick={() => scrollToSection(serviceSectionRef)}>Nuestros Servicios</button>  
-        <button className="banner-button" onClick={() => scrollToSection(aboutSectionRef)}>Sobre Nosotros</button>  
+        <button className="banner-button" onClick={() => scrollToSection(serviceSectionRef)}>{t.home.services}</button>  
+        <button className="banner-button" onClick={() => scrollToSection(aboutSectionRef)}>{t.home.about}</button>  
       </nav>  
 
       <section ref={serviceSectionRef}>  
@@ -58,42 +62,36 @@ const Home: React.FC = () => {
       <br />  
 
       <section className="about-center" ref={aboutSectionRef}>  
-        {/* Sobre Nosotros*/}  
         <div className="about-content">  
           <img src="src/assets/logo_footer.webp" alt="Descripción de la imagen" className="about-image" />  
-          <h2>Sobre Nosotros</h2>  
-          <p>  
-            En el Centro Médico nos dedicamos a ofrecer atención de salud integral, con un enfoque humano y ético.  
-            <br />Nuestro objetivo es mejorar la calidad de vida de nuestros pacientes mediante servicios médicos de excelencia.  
-          </p>  
+          <h2>{t.home.title}</h2>  
+          <p>{t.home.subtitle}</p>  
         </div>  
         <br />  
         <div className="about-content">  
-          <h3>¿Por Qué Elegirnos?</h3>  
+          <h3>{t.home.whyChooseUs}</h3>  
           <ul>  
-            <li><strong>Experiencia:</strong> Médicos capacitados y comprometidos.</li>  
-            <li><strong>Tecnología avanzada:</strong> Equipos modernos para diagnósticos precisos.</li>  
-            <li><strong>Atención personalizada:</strong> Adaptado a las necesidades de cada paciente.</li>  
-            <li><strong>Accesibilidad:</strong> Horarios flexibles y opciones de pago convenientes.</li>  
+            {t.home.whyChooseUsList.map((item, index) => (  
+              <li key={index}>{item}</li>  
+            ))}  
           </ul>  
         </div>  
 
         <br />  
         <div className="about-content">  
-          <h3>Servicios de nuestro Centro Médico</h3>  
+          <h3>{t.home.services}</h3>  
           <ul>  
-            <li><strong>Consultas médicas generales:</strong> Diagnóstico y tratamientos comunes.</li>  
-            <li><strong>Especialidades médicas:</strong> Cardiología, ginecología, pediatría, entre otras.</li>  
-            <li><strong>Exámenes de laboratorio:</strong> Pruebas diagnósticas precisas y rápidas.</li>  
-            <li><strong>Imágenes diagnósticas:</strong> Radiografías, ecografías, resonancias magnéticas.</li>  
+            {t.home.servicesList.map((item, index) => (  
+              <li key={index}>{item}</li>  
+            ))}  
           </ul>  
         </div>  
 
         <br />  
         <div className="about-content">  
-          <h3>Dónde Encontrarnos</h3>  
+          <h3>{t.home.location}</h3>  
           <ul>  
-            <li>Estamos ubicados en Avenida Calle Falsa #123, Valdivia.</li>  
+            <li>{t.home.locationText}</li>  
             <li>  
               Cuida tu salud con nosotros{' '}  
               <Link  
@@ -119,16 +117,22 @@ const Home: React.FC = () => {
         centered  
       >  
         <Modal.Header closeButton>  
-          <Modal.Title>Reservar Cita</Modal.Title>  
+          <Modal.Title>{t.home.location}</Modal.Title>  
         </Modal.Header>  
         <Modal.Body>  
-          <p>Debes iniciar sesión para reservar una cita médica.</p>  
+          <p>{t.home.loginRequired}</p> {/* Cambiado a una propiedad de traducción existente */}  
         </Modal.Body>  
       </Modal>  
 
       {showScrollToTopButton && (  
         <button className="scroll-to-top" onClick={scrollToTop}>Subir</button>  
       )}  
+
+      {/* Botones para cambiar idioma */}  
+      <div className="language-switcher">  
+        <button onClick={() => changeLanguage('es')}>Español</button>  
+        <button onClick={() => changeLanguage('en')}>English</button>  
+      </div>  
     </div>  
   );  
 };  

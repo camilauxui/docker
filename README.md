@@ -1,6 +1,4 @@
-### M6EP2 Almacenamiento y Análisis de PWA en la Web del Hospital
-
-# Implementación Inicial de PWA en la Web del Hospital
+# M6EP2 Almacenamiento y Análisis de PWA en la Web del Hospital
 
 **Contexto:**
 En este ejercicio práctico se van a utilizar opciones de almacenamiento web dentro de la web del hospital convertida en PWA, utilizando
@@ -27,7 +25,18 @@ name: Administrador
 
 
 # 1. Implementación de Almacenamiento Web 
-- Configura un sistema de almacenamiento para la PWA del hospital usando LocalStorage o SessionStorage
-- Almacena datos de usuario o información importante para que persista incluso después de recargar la página.
-- Asegúrate de que el almacenamiento se realice de manera eficiente y que los datos almacenados puedan ser recuperados correctamente.
-Tip: Considera almacenar preferencias del usuario, configuración de la sesión, o cualquier dato que deba ser accesible en diferentes sesiones.
+✅ Configura un sistema de almacenamiento para la PWA del hospital usando LocalStorage o SessionStorage.
+
+Para poder implementar este requerimiento se crea una versiòn en inglès de la web, asegurando que el idioma se pueda cambiar y almacenar en el localStorage.
+
+**Ajustes realizados:**
+
+Creación del LanguageContext: Para gestionar el estado del idioma a través de toda la aplicación.
+
+Modificación de App.tsx: Para envolver la aplicación en el LanguageProvider.
+
+Actualización de Navbar.tsx: Para usar el contexto de idioma, lo que permite que el menú de navegación y el contenido cambien juntos.
+
+Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido de la página de inicio se traduzca correctamente según el idioma seleccionado.
+
+✅  De esta manera el idioma seleccionado persiste después de recargar la página.

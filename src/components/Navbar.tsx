@@ -1,44 +1,49 @@
+// src/components/Navbar.tsx  
 import React, { useState } from "react";  
 import { Link, useNavigate } from "react-router-dom";  
-import { useAuth } from "../components/contexts/AuthContext"; 
+import { useAuth } from "../components/contexts/AuthContext";   
 import { Modal, Form, Button } from "react-bootstrap";  
-import { post } from "../services/apiService"; // Importa la función post de apiService  
+import { post } from "../services/apiService";  
+import translations from '../translations';   
+import { useLanguage } from '../components/contexts/LanguageContext';   
 
 const Navbar: React.FC = () => {  
     const [showLogin, setShowLogin] = useState<boolean>(false);  
-    const { user, login, logout } = useAuth(); // Consume el contexto de autenticación  
+    const { user, login, logout } = useAuth();  
     const [username, setUsername] = useState<string>("");  
     const [password, setPassword] = useState<string>("");  
     const navigate = useNavigate();  
     const [loginError, setLoginError] = useState<string | null>(null);  
+    const { language, changeLanguage } = useLanguage(); // Agregado cambio de idioma desde el contexto  
+    const t = translations[language] || translations['es']; // Se asegura un idioma predeterminado (español)  
 
+    // Manejo del inicio de sesión  
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {  
         e.preventDefault();  
-        setLoginError(null); // Limpiar errores anteriores  
+        setLoginError(null);  
 
         try {  
-            // **Llamar a la API para autenticar al usuario**  
-            const response = await post<{ token: string }>('/auth/login', { // Reemplaza '/auth/login' con el endpoint correcto de tu API  
+            const response = await post<{ token: string }>('/auth/login', {  
                 username: username,  
                 password: password,  
             });  
 
-            // **Si la autenticación es exitosa, guardar el token en el contexto**  
             if (response && response.token) {  
-                login(response.token); // Llama a la función login del contexto con el token  
+                login(response.token);  
                 setShowLogin(false);  
             } else {  
-                // **Manejar el caso en que la API no devuelve un token**  
-                setLoginError("Credenciales inválidas.");  
+                setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
             }  
         } catch (error: any) {  
             console.error("Error al iniciar sesión:", error);  
-            setLoginError("Error al iniciar sesión. Inténtalo de nuevo.");  
+            setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
         }  
     };  
 
+    // Mostrar u ocultar el modal de inicio de sesión  
     const toggleLoginModal = () => setShowLogin(!showLogin);  
 
+    // Lógica para manejar el clic en "Agendar cita"  
     const handleAppointmentClick = () => {  
         if (!user) {  
             toggleLoginModal();  
@@ -50,6 +55,7 @@ const Navbar: React.FC = () => {
     return (  
         <nav className="navbar navbar-expand-lg navbar-light bg-secondary">  
             <div className="container-fluid">  
+                {/* Logotipo */}  
                 <Link className="navbar-brand" to="/">  
                     <img  
                         src="src/assets/medical-center.png"  
@@ -57,6 +63,8 @@ const Navbar: React.FC = () => {
                         style={{ height: "40px" }}  
                     />  
                 </Link>  
+
+                {/* Botón para el menú responsive */}  
                 <button  
                     className="navbar-toggler"  
                     type="button"  
@@ -68,16 +76,18 @@ const Navbar: React.FC = () => {
                 >  
                     <span className="navbar-toggler-icon"></span>  
                 </button>  
+
+                {/* Menú principal */}  
                 <div className="collapse navbar-collapse" id="navbarNav">  
                     <ul className="navbar-nav me-auto">  
                         <li className="nav-item">  
                             <Link className="nav-link text-white" to="/">  
-                                Home  
+                                {t.home?.title || "Inicio"} {/* Traducción de "Inicio" */}  
                             </Link>  
                         </li>  
                         <li className="nav-item">  
                             <Link className="nav-link text-white" to="/team">  
-                                Equipo Médico  
+                                {t.navbar?.team || "Equipo"} {/* Traducción de "Equipo" */}  
                             </Link>  
                         </li>  
                         <li className="nav-item">  
@@ -86,59 +96,66 @@ const Navbar: React.FC = () => {
                                 onClick={handleAppointmentClick}  
                                 style={{ cursor: "pointer" }}  
                             >  
-                                Agendar Cita  
+                                {t.navbar?.scheduleAppointment || "Agendar cita"} {/* Traducción de "Agendar cita" */}  
                             </span>  
                         </li>  
                     </ul>  
                 </div>  
+
+                {/* Sección de botones de idioma y autenticación */}  
                 <div className="d-flex align-items-center">  
+                    {/* Botones para cambiar idioma */}  
+                    <Button variant="link" onClick={() => changeLanguage('es')} className="text-white">Español</Button>  
+                    <Button variant="link" onClick={() => changeLanguage('en')} className="text-white">English</Button>  
+
+                    {/* Botones de usuario */}  
                     {user ? (  
                         <>  
-                            <span className="text-white me-2">Hola, {user.name}</span>  
+                            <span className="text-white me-2">{t.navbar?.welcome?.replace("{name}", user.name) || `Bienvenido, ${user.name}`}</span>  
                             <button  
                                 className="btn btn-primary ms-2"  
                                 onClick={logout}  
                                 type="button"  
                             >  
-                                Cerrar Sesión  
+                                {t.navbar?.logout || "Cerrar sesión"} {/* Traducción de "Cerrar sesión" */}  
                             </button>  
                         </>  
                     ) : (  
                         <Button variant="primary" onClick={toggleLoginModal}>  
-                            Iniciar Sesión  
+                            {t.navbar?.login || "Iniciar sesión"} {/* Traducción de "Iniciar sesión" */}  
                         </Button>  
                     )}  
                 </div>  
             </div>  
 
-            {/* Modal para Login */}  
+            {/* Modal para el inicio de sesión */}  
             <Modal show={showLogin} onHide={toggleLoginModal}>  
                 <Modal.Header closeButton>  
-                    <Modal.Title>Iniciar Sesión</Modal.Title>  
+                    <Modal.Title>{t.navbar?.loginTitle || "Iniciar sesión"}</Modal.Title>  
                 </Modal.Header>  
                 <Modal.Body>  
                     <Form onSubmit={handleLogin}>  
                         <Form.Group className="mb-3">  
-                            <Form.Label>Nombre:</Form.Label>  
+                            <Form.Label>{t.navbar?.username || "Nombre de usuario"}</Form.Label>  
                             <Form.Control  
                                 type="text"  
                                 value={username}  
-                                onChange={(e) => setUsername((e.target as HTMLInputElement).value)}  
+                                onChange={(e) => setUsername(e.target.value)}  
                                 required  
                             />  
                         </Form.Group>  
                         <Form.Group className="mb-3">  
-                            <Form.Label>Contraseña:</Form.Label>  
+                            <Form.Label>{t.navbar?.password || "Contraseña"}</Form.Label>  
                             <Form.Control  
                                 type="password"  
                                 value={password}  
-                                onChange={(e) => setPassword((e.target as HTMLInputElement).value)}  
+                                onChange={(e) => setPassword(e.target.value)}  
                                 required  
                             />  
                         </Form.Group>  
-                        {loginError && <div className="text-danger">{loginError}</div>} {/* Mostrar mensaje de error */}  
+                        {loginError && <div className="text-danger">{loginError}</div>}  
                         <Button type="submit" variant="primary">  
-                            Acceder  
+                            {t.navbar?.access || "Acceder"} {/* Traducción de "Acceder" */}  
                         </Button>  
                     </Form>  
                 </Modal.Body>  
