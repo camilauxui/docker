@@ -1,40 +1,12 @@
-### M6EP1
+### M6EP2 Almacenamiento y Análisis de PWA en la Web del Hospital
 
 # Implementación Inicial de PWA en la Web del Hospital
 
 **Contexto:**
-En este ejercicio práctico, los estudiantes integrarán características básicas de una PWA
-(Progressive Web Application) en el proyecto de la web del hospital. El objetivo es configurar
-el archivo de manifiesto y registrar un Service Worker para mejorar la experiencia del
-usuario, haciendo la aplicación instalable y accesible offline.
+En este ejercicio práctico se van a utilizar opciones de almacenamiento web dentro de la web del hospital convertida en PWA, utilizando
+LocalStorage, SessionStorage o IndexedDB. Además, se ejecutarán pruebas con Lighthouse para validar el rendimiento y estado de la PWA.
 
-# 1. Creación del Manifiesto
-
- Crea un archivo de manifiesto para la aplicación web del hospital que incluya los
-siguientes elementos:
-✅- Nombre de la aplicación.
-
-✅- Iconos en varias resoluciones para diferentes dispositivos.
-
-✅- Color de fondo y color del tema.
-
-✅- Modo de pantalla (fullscreen o standalone).
-
-
-#  2. Registro de un Service Worker Básico 
-- Registra un Service Worker para la aplicación del hospital, asegurando que:
-- Esté registrado y activado correctamente.
-- Se realice precaching de los archivos principales (HTML, CSS, JavaScript).
-- La aplicación pueda funcionar en modo offline gracias al Service Worker.
-
-# 3. Pruebas de Funcionamiento Offline y Validación con Lighthouse
-Verifica que la aplicación funcione en modo offline utilizando Lighthouse para evaluar
-el rendimiento de la PWA:
-- Ejecuta Lighthouse para generar un informe que evalúe si la aplicación cumple
-con los criterios de PWA (instalabilidad, funcionamiento offline y rendimiento).
-- Asegúrate de que el informe refleje una implementación básica funcional de
-PWA.
-_________________________________________________________________________________
+___________________________________________________________________________
 
 ✅ USUARIOS PARA LOGIN
 Puedes usar cualquiera de estos usuarios para iniciar sesión.
@@ -44,6 +16,7 @@ Puedes usar cualquiera de estos usuarios para iniciar sesión.
 password: password1
 
 name: Usuario Test
+_______________________
 
 ✅ username: admin
 
@@ -53,5 +26,8 @@ name: Administrador
 
 
 
-
-![Captura instalador](http://localhost:5173/src/assets/image.png)  
+# 1. Implementación de Almacenamiento Web 
+- Configura un sistema de almacenamiento para la PWA del hospital usando LocalStorage o SessionStorage
+- Almacena datos de usuario o información importante para que persista incluso después de recargar la página.
+- Asegúrate de que el almacenamiento se realice de manera eficiente y que los datos almacenados puedan ser recuperados correctamente.
+Tip: Considera almacenar preferencias del usuario, configuración de la sesión, o cualquier dato que deba ser accesible en diferentes sesiones.
