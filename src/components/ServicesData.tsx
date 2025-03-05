@@ -1,6 +1,5 @@
-import consultaIcono from '/src/assets/consulta_icono.png';  
-import urgenciaIcono from '/src/assets/urgencia_icono.png';  
-import especialidadesIcono from '/src/assets/especialidades_icono.png';  
+import translations from '../translations';  
+import { useLanguage } from '../components/contexts/LanguageContext';  
 
 interface ServiceData {  
   id: number;  
@@ -9,10 +8,27 @@ interface ServiceData {
   image: string;  
 }  
 
-const servicesData: ServiceData[] = [  
-  { id: 1, title: "Consultas", description: "Nuestro equipo de profesionales capacitados está disponible para proporcionar atención médica rápida y efectiva.", image: consultaIcono },  
-  { id: 2, title: "Urgencias", description: "Nuestra unidad de urgencias está diseñada para atender situaciones médicas críticas.", image: urgenciaIcono },  
-  { id: 3, title: "Especialidades", description: "Contamos con un equipo de especialistas en diferentes áreas incluyendo cardiología, pediatría, entre otros.", image: especialidadesIcono }  
-];  
-
-export default servicesData;
+export const getServicesData = (language: string): ServiceData[] => {  
+    const t = translations[language] || translations['es'];  
+    
+    return [  
+        {  
+            id: 1,  
+            title: t.home.servicesList[0],  
+            description: t.home.serviceDetails[0],  
+            image: '/src/assets/consulta_icono.png'  
+        },  
+        {  
+            id: 2,  
+            title: t.home.servicesList[1],  
+            description: t.home.serviceDetails[1],  
+            image: '/src/assets/urgencia_icono.png'  
+        },  
+        {  
+            id: 3,  
+            title: t.home.servicesList[2],  
+            description: t.home.serviceDetails[2],  
+            image: '/src/assets/especialidades_icono.png'  
+        }  
+    ];  
+};

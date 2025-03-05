@@ -15,7 +15,12 @@ const translations = {
                 "Nuestro equipo de profesionales capacitados está disponible para proporcionar atención médica rápida y efectiva.",  
                 "Nuestra unidad de urgencias está diseñada para atender situaciones médicas críticas.",  
                 "Contamos con un equipo de especialistas en diferentes áreas incluyendo cardiología, pediatría, entre otros."  
-            ]  
+            ],  
+            loginRequired: "Por favor, inicia sesión para agendar una cita.",  
+            scheduleAppointment: "Agendar cita",  
+            scrollToTop: "Subir",  
+            spanish: "Español",  
+            english: "Inglés"  
         },  
         navbar: {  
             loginError: "Error al iniciar sesión",  
@@ -26,8 +31,8 @@ const translations = {
             username: "Nombre de usuario",  
             password: "Contraseña",  
             loginTitle: "Iniciar Sesión",  
-            team: "Equipo",         // Añadido para traducción  
-            scheduleAppointment: "Agendar cita" // Añadido para traducción  
+            team: "Equipo",  
+            scheduleAppointment: "Agendar cita"  
         }  
     },  
     en: {  
@@ -46,7 +51,12 @@ const translations = {
                 "Our team of qualified professionals is available to provide fast and effective medical care.",  
                 "Our emergency unit is designed to handle critical medical situations.",  
                 "We have a team of specialists in various areas including cardiology, pediatrics, among others."  
-            ]  
+            ],  
+            loginRequired: "Please log in to schedule an appointment.",  
+            scheduleAppointment: "Schedule Appointment",  
+            scrollToTop: "Go Up",  
+            spanish: "Spanish",  
+            english: "English"  
         },  
         navbar: {  
             loginError: "Login error",  
@@ -57,8 +67,8 @@ const translations = {
             username: "Username",  
             password: "Password",  
             loginTitle: "Login",  
-            team: "Team",           // Añadido para traducción  
-            scheduleAppointment: "Schedule Appointment" // Añadido para traducción  
+            team: "Team",  
+            scheduleAppointment: "Schedule Appointment"  
         }  
     }  
 };  
