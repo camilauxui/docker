@@ -43,7 +43,7 @@ Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido
 
 ✅El componente ProtectedRoute estará obteniendo el estado de autenticación actualizado del AuthContext, al guardar el token en localStorage, el usuario permanecerá autenticado incluso después de recargar la página.
 
-# 2.Implementación de IndexedDB (2 puntos)
+# 2.Implementación de IndexedDB 
 - Implementa una base de datos con IndexedDB o una biblioteca como PouchDB para manejar datos más complejos o a mayor escala:
 
 - Almacena en IndexedDB datos relevantes como información de citas, doctores o pacientes del hospital.
