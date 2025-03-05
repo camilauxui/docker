@@ -1,8 +1,10 @@
 // useAppointmentForm.tsx  
 import { useRef, useEffect, useState, useCallback } from "react";  
-import { fetchDoctors, createAppointment } from "../../services/apiService";  
-import { Confirmation, Doctor, AppointmentFormValues, AppointmentData } from "../../types/interfaces";  
+import { fetchDoctors } from "../../services/apiService";  
+import { Confirmation, Doctor, AppointmentFormValues } from "../../types/interfaces";  
 import CryptoJS from "crypto-js";  
+import { addAppointment, getAppointments, Appointment } from "../../db"; // Importa Appointment desde db.ts  
+
 
 const useAppointmentForm = () => {  
     const nameInputRef = useRef<HTMLInputElement>(null);  
@@ -42,6 +44,20 @@ const useAppointmentForm = () => {
         };  
 
         fetchDoctorsData();  
+
+         // Cargar las citas desde IndexedDB al montar el componente  
+        const loadAppointments = async () => {  
+            try {  
+                const appointmentsFromDb = await getAppointments();  
+                console.log("Citas cargadas desde IndexedDB:", appointmentsFromDb);  
+                // Aquí puedes hacer algo con las citas cargadas, como mostrarlas en la interfaz  
+            } catch (error) {  
+                console.error("Error al cargar las citas desde IndexedDB:", error);  
+                setApiError("Error al cargar las citas desde IndexedDB.");  
+            }  
+        };  
+
+        loadAppointments();  
     }, []);  
 
     const validateForm = useCallback((data: AppointmentFormValues) => {  
@@ -78,45 +94,48 @@ const useAppointmentForm = () => {
 
     const handleSubmit = useCallback(async (e: React.FormEvent) => {  
         e.preventDefault();  
-
+    
         const validationError = validateForm(formData);  
         if (validationError) {  
             setFormError(validationError);  
             return;  
         }  
-
+    
         setFormError(null);  
-
+    
         try {  
             const doctorId = doctors.find((d) => d.name === formData.doctor)?.id;  
-
+    
             if (doctorId === undefined) {  
                 setApiError("Doctor no encontrado.");  
                 return;  
             }  
-
+    
+            // Encriptación (asegúrate de que CryptoJS esté instalado: npm install crypto-js)  
             const encryptedEmail = CryptoJS.AES.encrypt(formData.email, "your-secret-key").toString();  
             const encryptedPhone = CryptoJS.AES.encrypt(formData.phone, "your-secret-key").toString();  
-
-            const appointmentData: AppointmentData = {  
-                doctorId: doctorId,  
-                patientName: formData.name,  
+    
+            // Crea un objeto Appointment compatible con IndexedDB  
+            const appointmentData: Appointment = {  
+                name: formData.name,  
                 email: encryptedEmail,  
                 phone: encryptedPhone,  
-                date: formData.date,  
-                time: formData.time,  
-            };  
-
-            await createAppointment(appointmentData);  
-
-            const confirmationData: Confirmation = {  
-                name: formData.name,  
                 doctor: formData.doctor,  
                 date: formData.date,  
                 time: formData.time,  
             };  
-            setConfirmation(confirmationData);  
-
+    
+            console.log("Datos de la cita a guardar:", appointmentData); // Añade este log  
+            await addAppointment(appointmentData);  
+            console.log("Cita guardada correctamente."); // Añade este log  
+    
+            setConfirmation({  
+                name: formData.name,  
+                doctor: formData.doctor,  
+                date: formData.date,  
+                time: formData.time,  
+            });  
+    
             setFormData({  
                 name: "",  
                 email: "",  
@@ -125,12 +144,16 @@ const useAppointmentForm = () => {
                 date: "",  
                 time: "",  
             });  
+    
+            if (nameInputRef.current) {  
+                nameInputRef.current.focus();  
+            }  
         } catch (error: any) {  
             console.error("Error al crear la cita:", error);  
             setApiError("No se pudo crear la cita. Inténtalo de nuevo más tarde.");  
             setConfirmation(null);  
         }  
-    }, [formData, validateForm, doctors]);  
+    }, [formData, validateForm, doctors, addAppointment]);
 
     return {  
         nameInputRef,  

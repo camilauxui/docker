@@ -1,5 +1,3 @@
-// types/interfaces.ts  
-
 export interface Doctor {  
   id: number;  
   name: string;  
@@ -11,15 +9,6 @@ export interface AppointmentFormValues {
   email: string;  
   phone: string;  
   doctor: string;  
-  date: string;  
-  time: string;  
-}  
-
-export interface AppointmentData {  
-  doctorId: number;  
-  patientName: string;  
-  email: string;  
-  phone: string;  
   date: string;  
   time: string;  
 }  

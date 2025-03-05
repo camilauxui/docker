@@ -40,3 +40,14 @@ Actualización de Navbar.tsx: Para usar el contexto de idioma, lo que permite qu
 Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido de la página de inicio se traduzca correctamente según el idioma seleccionado.
 
 ✅  De esta manera el idioma seleccionado persiste después de recargar la página.
+
+✅El componente ProtectedRoute estará obteniendo el estado de autenticación actualizado del AuthContext, al guardar el token en localStorage, el usuario permanecerá autenticado incluso después de recargar la página.
+
+# 2.Implementación de IndexedDB (2 puntos)
+- Implementa una base de datos con IndexedDB o una biblioteca como PouchDB para manejar datos más complejos o a mayor escala:
+
+- Almacena en IndexedDB datos relevantes como información de citas, doctores o pacientes del hospital.
+
+- Asegúrate de que los datos sean almacenados y recuperados correctamente de IndexedDB.
+
+<img src="assets/IndexedDB.png" width="300">
