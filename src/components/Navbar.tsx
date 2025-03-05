@@ -1,11 +1,17 @@
-// src/components/Navbar.tsx  
 import React, { useState } from "react";  
 import { Link, useNavigate } from "react-router-dom";  
-import { useAuth } from "../components/contexts/AuthContext";   
+import { useAuth } from "../components/contexts/AuthContext";  
 import { Modal, Form, Button } from "react-bootstrap";  
 import { post } from "../services/apiService";  
-import translations from '../translations';   
-import { useLanguage } from '../components/contexts/LanguageContext';   
+import translations from "../translations";  
+import { useLanguage } from "../components/contexts/LanguageContext";  
+import * as jwt_decode from 'jwt-decode'; // Importación correcta  
+
+interface DecodedToken { // Define la interfaz  
+    userId: string;  
+    username: string;  
+    name: string;  
+}  
 
 const Navbar: React.FC = () => {  
     const [showLogin, setShowLogin] = useState<boolean>(false);  
@@ -14,22 +20,21 @@ const Navbar: React.FC = () => {
     const [password, setPassword] = useState<string>("");  
     const navigate = useNavigate();  
     const [loginError, setLoginError] = useState<string | null>(null);  
-    const { language, changeLanguage } = useLanguage(); // Agregado cambio de idioma desde el contexto  
-    const t = translations[language] || translations['es']; // Se asegura un idioma predeterminado (español)  
+    const { language, changeLanguage } = useLanguage();  
+    const t = translations[language] || translations["es"];  
 
-    // Manejo del inicio de sesión  
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {  
         e.preventDefault();  
         setLoginError(null);  
-
+    
         try {  
-            const response = await post<{ token: string }>('/auth/login', {  
-                username: username,  
-                password: password,  
+            const response = await post<{ token: string }>("/login", {  
+                username,  
+                password,  
             });  
-
+    
             if (response && response.token) {  
-                login(response.token);  
+                login(response.token); // Pasa el token a la función login del contexto  
                 setShowLogin(false);  
             } else {  
                 setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
@@ -38,12 +43,10 @@ const Navbar: React.FC = () => {
             console.error("Error al iniciar sesión:", error);  
             setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
         }  
-    };  
+    };
 
-    // Mostrar u ocultar el modal de inicio de sesión  
     const toggleLoginModal = () => setShowLogin(!showLogin);  
 
-    // Lógica para manejar el clic en "Agendar cita"  
     const handleAppointmentClick = () => {  
         if (!user) {  
             toggleLoginModal();  
@@ -82,12 +85,12 @@ const Navbar: React.FC = () => {
                     <ul className="navbar-nav me-auto">  
                         <li className="nav-item">  
                             <Link className="nav-link text-white" to="/">  
-                                {t.home?.title || "Inicio"} {/* Traducción de "Inicio" */}  
+                                {t.home?.title || "Inicio"}  
                             </Link>  
                         </li>  
                         <li className="nav-item">  
                             <Link className="nav-link text-white" to="/team">  
-                                {t.navbar?.team || "Equipo"} {/* Traducción de "Equipo" */}  
+                                {t.navbar?.team || "Equipo"}  
                             </Link>  
                         </li>  
                         <li className="nav-item">  
@@ -96,7 +99,7 @@ const Navbar: React.FC = () => {
                                 onClick={handleAppointmentClick}  
                                 style={{ cursor: "pointer" }}  
                             >  
-                                {t.navbar?.scheduleAppointment || "Agendar cita"} {/* Traducción de "Agendar cita" */}  
+                                {t.navbar?.scheduleAppointment || "Agendar cita"}  
                             </span>  
                         </li>  
                     </ul>  
@@ -105,24 +108,39 @@ const Navbar: React.FC = () => {
                 {/* Sección de botones de idioma y autenticación */}  
                 <div className="d-flex align-items-center">  
                     {/* Botones para cambiar idioma */}  
-                    <Button variant="link" onClick={() => changeLanguage('es')} className="text-white">Español</Button>  
-                    <Button variant="link" onClick={() => changeLanguage('en')} className="text-white">English</Button>  
+                    <Button  
+                        variant="link"  
+                        onClick={() => changeLanguage("es")}  
+                        className="text-white"  
+                    >  
+                        Español  
+                    </Button>  
+                    <Button  
+                        variant="link"  
+                        onClick={() => changeLanguage("en")}  
+                        className="text-white"  
+                    >  
+                        English  
+                    </Button>  
 
                     {/* Botones de usuario */}  
                     {user ? (  
                         <>  
-                            <span className="text-white me-2">{t.navbar?.welcome?.replace("{name}", user.name) || `Bienvenido, ${user.name}`}</span>  
+                            <span className="text-white me-2">  
+                                {t.navbar?.welcome?.replace("{name}", user.name) ||  
+                                    `Bienvenido, ${user.name}`}  
+                            </span>  
                             <button  
                                 className="btn btn-primary ms-2"  
                                 onClick={logout}  
                                 type="button"  
                             >  
-                                {t.navbar?.logout || "Cerrar sesión"} {/* Traducción de "Cerrar sesión" */}  
+                                {t.navbar?.logout || "Cerrar sesión"}  
                             </button>  
                         </>  
                     ) : (  
                         <Button variant="primary" onClick={toggleLoginModal}>  
-                            {t.navbar?.login || "Iniciar sesión"} {/* Traducción de "Iniciar sesión" */}  
+                            {t.navbar?.login || "Iniciar sesión"}  
                         </Button>  
                     )}  
                 </div>  
@@ -136,7 +154,9 @@ const Navbar: React.FC = () => {
                 <Modal.Body>  
                     <Form onSubmit={handleLogin}>  
                         <Form.Group className="mb-3">  
-                            <Form.Label>{t.navbar?.username || "Nombre de usuario"}</Form.Label>  
+                            <Form.Label>  
+                                {t.navbar?.username || "Nombre de usuario"}  
+                            </Form.Label>  
                             <Form.Control  
                                 type="text"  
                                 value={username}  
@@ -153,9 +173,11 @@ const Navbar: React.FC = () => {
                                 required  
                             />  
                         </Form.Group>  
-                        {loginError && <div className="text-danger">{loginError}</div>}  
+                        {loginError && (  
+                            <div className="text-danger">{loginError}</div>  
+                        )}  
                         <Button type="submit" variant="primary">  
-                            {t.navbar?.access || "Acceder"} {/* Traducción de "Acceder" */}  
+                            {t.navbar?.access || "Acceder"}  
                         </Button>  
                     </Form>  
                 </Modal.Body>  

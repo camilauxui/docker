@@ -1,9 +1,11 @@
-// server.js  
-const express = require('express');  
-const jwt = require('jsonwebtoken');  
-const bcrypt = require('bcryptjs');  
-const cors = require('cors');  
-const fs = require('fs');  
+import express from 'express';  
+import jwt from 'jsonwebtoken';  
+import bcrypt from 'bcryptjs';  
+import cors from 'cors';  
+import fs from 'fs';  
+import dotenv from 'dotenv'; // Importa dotenv  
+
+dotenv.config(); // Carga las variables de entorno desde .env  
 
 const app = express();  
 const port = 3000;  
@@ -11,10 +13,10 @@ const port = 3000;
 app.use(cors());  
 app.use(express.json());  
 
-// Clave secreta para JWT (¡MUY IMPORTANTE: usar variable de entorno en producción!)  
-const JWT_SECRET = 'clave_secreta_muy_segura';  
+// Clave secreta para JWT (¡IMPORTANTE: usar variable de entorno en producción!)  
+const JWT_SECRET = process.env.JWT_SECRET || 'clave_secreta_muy_segura'; // Usa la variable de entorno o un valor por defecto  
 
-// Función para leer y escribir en db.json  
+// Función para leer y escribir en db.json (¡CONSIDERA USAR UNA BASE DE DATOS REAL!)  
 const readDB = () => {  
     try {  
         const data = fs.readFileSync('db.json', 'utf8');  
@@ -35,21 +37,21 @@ const writeDB = (data) => {
 
 // Rutas de autenticación  
 app.post('/register', async (req, res) => {  
-    const { username, password } = req.body;  
+    const { username, password, name } = req.body;  
 
-    if (!username || !password) {  
-        return res.status(400).json({ message: 'Se requieren usuario y contraseña' });  
+    if (!username || !password || !name) {  
+        return res.status(400).json({ message: 'Se requieren usuario, contraseña y nombre' });  
     }  
 
     const db = readDB();  
-    const existingUser = db.users?.find(user => user.username === username);  
+    const existingUser = db.users.find(user => user.username === username);  
     if (existingUser) {  
         return res.status(400).json({ message: 'El usuario ya existe' });  
     }  
 
     const hashedPassword = await bcrypt.hash(password, 10);  
-    const newUser = { id: db.users ? db.users.length + 1 : 1, username, password: hashedPassword }; // Manejo del caso en que db.users no exista  
-    db.users = db.users ? [...db.users, newUser] : [newUser]; // Manejo del caso en que db.users no exista  
+    const newUser = { id: db.users.length + 1, username, password: hashedPassword, name }; // Usa la contraseña hasheada  
+    db.users.push(newUser);  
 
     writeDB(db);  
 
@@ -59,19 +61,23 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {  
     const { username, password } = req.body;  
 
+    if (!username || !password) {  
+        return res.status(400).json({ message: 'Se requieren usuario y contraseña' });  
+    }  
+
     const db = readDB();  
-    const user = db.users?.find(user => user.username === username);  
+    const user = db.users.find(user => user.username === username);  
 
     if (!user) {  
         return res.status(401).json({ message: 'Credenciales inválidas' });  
     }  
 
-    const passwordMatch = await bcrypt.compare(password, user.password);  
+    const passwordMatch = await bcrypt.compare(password, user.password); //Compara la contraseña que viene con la encriptada  
     if (!passwordMatch) {  
         return res.status(401).json({ message: 'Credenciales inválidas' });  
     }  
 
-    const token = jwt.sign({ userId: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });  
+    const token = jwt.sign({ userId: user.id, username: user.username, name: user.name }, JWT_SECRET, { expiresIn: '1h' });  
     res.json({ token });  
 });  
 
@@ -86,7 +92,6 @@ const authenticateToken = (req, res, next) => {
 
     jwt.verify(token, JWT_SECRET, (err, user) => {  
         if (err) {  
-            console.log(err);  
             return res.status(403).json({ message: 'Token inválido' });  
         }  
         req.user = user;  
@@ -94,22 +99,21 @@ const authenticateToken = (req, res, next) => {
     });  
 };  
 
-// ruta protegida (para obtener la lista de doctores)  
+// Ruta protegida: obtener lista de doctores  
 app.get('/doctors', authenticateToken, (req, res) => {  
     const db = readDB();  
-    res.json(db.doctors); // Devuelve la lista de doctores  
+    res.json(db.doctors);  
 });  
 
-// ruta protegida (para crear una nueva cita)  
+// Ruta protegida: crear una nueva cita  
 app.post('/appointments', authenticateToken, (req, res) => {  
     const db = readDB();  
-    const newAppointment = { ...req.body, id: Math.random().toString(36).substring(2, 8) };  // Simula la creación de una ID  
-    db.appointments = db.appointments ? [...db.appointments, newAppointment] : [newAppointment];  
+    const newAppointment = { ...req.body, id: Math.random().toString(36).substring(2, 8) };  
+    db.appointments.push(newAppointment);  
 
     writeDB(db);  
     res.status(201).json(newAppointment);  
 });  
-
 
 app.listen(port, () => {  
     console.log(`Servidor escuchando en el puerto ${port}`);  

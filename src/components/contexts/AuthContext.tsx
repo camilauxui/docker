@@ -1,78 +1,85 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';  
+// src/components/contexts/AuthContext.tsx  
+import React, { createContext, useState, useContext, useEffect } from 'react';  
+import { jwtDecode } from 'jwt-decode'; // Importa jwtDecode  
 
-export interface AuthContextProps { // Exporta la interfaz  
-    token: string | null;  
-    setToken: (token: string | null) => void;  
-    isLoggedIn: boolean;  
-    login: (token: string) => void;  
-    logout: () => void;  
-    user: any; // Puedes definir un tipo User si tienes la información del usuario  
+interface AuthContextProps {  
+  user: any | null;  
+  login: (token: string) => void;  
+  logout: () => void;  
+  isLoggedIn: boolean;  
 }  
 
 const AuthContext = createContext<AuthContextProps>({  
-    token: null,  
-    setToken: () => { },  
-    isLoggedIn: false,  
-    login: () => { },  
-    logout: () => { },  
-    user: null,  
+  user: null,  
+  login: () => {},  
+  logout: () => {},  
+  isLoggedIn: false,  
 });  
 
 interface AuthProviderProps {  
-    children: React.ReactNode;  
+  children: React.ReactNode;  
 }  
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {  
-    const [token, setTokenState] = useState<string | null>(localStorage.getItem('token') || null);  
-    const [user, setUser] = useState<any>(null); // Estado para la información del usuario  
-    const isLoggedIn = !!token;  
+  const [user, setUser] = useState<any | null>(() => {  
+    // Inicializa el estado 'user' al cargar el componente  
+    const token = localStorage.getItem('token');  
+    if (token) {  
+      try {  
+        const decodedToken = jwtDecode(token);  
+        return decodedToken;  
+      } catch (error) {  
+        console.error("Error al decodificar el token inicial:", error);  
+        return null;  
+      }  
+    }  
+    return null;  
+  });  
 
-    useEffect(() => {  
-        if (token) {  
-            localStorage.setItem('token', token);  
-            // Aquí podrías decodificar el token y guardar la info del usuario en el estado `user`  
-            try {  
-                const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decodifica el token (no usar en producción sin validación)  
-                setUser(decodedToken);  
-            } catch (error) {  
-                console.error("Error al decodificar el token:", error);  
-                setUser(null);  
-            }  
+  const isLoggedIn = !!user; // Deriva el estado 'isLoggedIn' del estado 'user'  
 
-        } else {  
-            localStorage.removeItem('token');  
-            setUser(null);  
-        }  
-    }, [token]);  
+  useEffect(() => {  
+    // Esto se ejecutará cada vez que el estado 'user' cambie  
+    console.log("User state changed:", user);  
+  }, [user]);  
 
-    const setToken = (newToken: string | null) => {  
-        setTokenState(newToken);  
-    };  
+  const login = (token: string) => {  
+    try {  
+      // Decodifica el token para obtener la información del usuario  
+      const decodedToken = jwtDecode(token);  
 
-    const login = (token: string) => {  
-        setTokenState(token);  
-    };  
+      // Guarda el token en localStorage (o en una cookie, según tu preferencia)  
+      localStorage.setItem('token', token);  
 
-    const logout = () => {  
-        setTokenState(null);  
-    };  
+      // Actualiza el estado 'user' con la información del usuario decodificada  
+      setUser(decodedToken);  
+    } catch (error) {  
+      console.error("Error al decodificar el token:", error);  
+    }  
+  };  
 
-    const value: AuthContextProps = {  
-        token,  
-        setToken,  
-        isLoggedIn,  
-        login,  
-        logout,  
-        user,  
-    };  
+  const logout = () => {  
+    // Elimina el token de localStorage  
+    localStorage.removeItem('token');  
 
-    return (  
-        <AuthContext.Provider value={value}>  
-            {children}  
-        </AuthContext.Provider>  
-    );  
+    // Actualiza el estado 'user' a null  
+    setUser(null);  
+  };  
+
+  const value: AuthContextProps = {  
+    user,  
+    login,  
+    logout,  
+    isLoggedIn,  
+  };  
+
+  return (  
+    <AuthContext.Provider value={value}>  
+      {children}  
+    </AuthContext.Provider>  
+  );  
 };  
 
-export const useAuth = () => useContext(AuthContext);  
-
-export default AuthContext; // Exporta AuthContext
+export const useAuth = () => {  
+  return useContext(AuthContext);  
+};

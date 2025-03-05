@@ -1,3 +1,4 @@
+// useAppointmentForm.tsx  
 import { useRef, useEffect, useState, useCallback } from "react";  
 import { fetchDoctors, createAppointment } from "../../services/apiService";  
 import { Confirmation, Doctor, AppointmentFormValues, AppointmentData } from "../../types/interfaces";  
@@ -27,6 +28,10 @@ const useAppointmentForm = () => {
                 setLoading(true);  
                 setApiError(null);  
                 const data = await fetchDoctors();  
+
+                // Inspecciona los datos aquí  
+                console.log("Datos de doctores en useAppointmentForm:", data);  
+
                 setDoctors(data || []);  
             } catch (error) {  
                 console.error("Error al cargar los doctores:", error);  

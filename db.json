@@ -128,17 +128,26 @@
       "phone": "U2FsdGVkX1+wxRLSMBnFiJIUpDaTNuOI5+w1s8zub6M=",
       "date": "2025-02-27",
       "time": "12:00"
+    },
+    {
+      "id": "1058",
+      "doctorId": "3",
+      "patientName": "Camila ",
+      "email": "U2FsdGVkX199aPGua27v+wwELO9L+ViloE5/u6vM8Pf3FZX3DmED5gy/QubEiXYj",
+      "phone": "U2FsdGVkX1+lbb1uLTtOGJ7U02OzOR+EuozNx7SvuAs=",
+      "date": "2025-03-20",
+      "time": "18:00"
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "usuario1",
-      "password": "password1",
+      "password": "$2b$10$Wm18skFaiydLcFyvL/z1deHdUTgxm3C1rWDc9JRHBQfO.bOlWaPHi",
       "name": "Usuario Test"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "admin",
       "password": "password2",
       "name": "Administrador"

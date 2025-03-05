@@ -2,7 +2,7 @@ import React from "react";
 import useAppointmentForm from "./hooks/useAppointmentForm";  
 import { useAuth } from "./contexts/AuthContext";  
 import './AppointmentForm.css';  
-import { Confirmation, Doctor, AppointmentFormValues } from '../types/interfaces'; 
+import { Doctor } from '../types/interfaces';  
 
 const AppointmentForm: React.FC = () => {  
     const {  
@@ -81,7 +81,7 @@ const AppointmentForm: React.FC = () => {
                         value={formData.doctor}  
                         onChange={handleChange}  
                     >  
-                        <option value="xxx">Selecciona un doctor</option>  
+                        <option value="">Selecciona un doctor</option>  
                         {doctors.map((doctor: Doctor) => (  
                             <option key={doctor.id} value={doctor.name}>{doctor.name}</option>  
                         ))}  
@@ -114,7 +114,6 @@ const AppointmentForm: React.FC = () => {
 
                 <button type="submit">Agendar Cita</button>  
 
-                {/* Mostrar errores */}  
                 {formError && <div className="error-message" style={{ color: 'red' }}>{formError}</div>}  
                 {apiError && <p style={{ color: 'red' }}>{apiError}</p>}  
 
