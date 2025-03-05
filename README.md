@@ -50,4 +50,4 @@ Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido
 
 - Asegúrate de que los datos sean almacenados y recuperados correctamente de IndexedDB.
 
-<img src="assets/IndexedDB.png" width="300">
+<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/IdexedDB.png" width="300">
