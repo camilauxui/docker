@@ -16,7 +16,7 @@ app.use(express.json());
 // Clave secreta para JWT (¡IMPORTANTE: usar variable de entorno en producción!)  
 const JWT_SECRET = process.env.JWT_SECRET || 'clave_secreta_muy_segura'; // Usa la variable de entorno o un valor por defecto  
 
-// Función para leer y escribir en db.json (¡CONSIDERA USAR UNA BASE DE DATOS REAL!)  
+// Función para leer y escribir en db.json 
 const readDB = () => {  
     try {  
         const data = fs.readFileSync('db.json', 'utf8');  

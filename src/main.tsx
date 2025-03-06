@@ -1,25 +1,36 @@
-import React from 'react';  
+import React, { useEffect } from 'react'; // Importa useEffect  
 import { createRoot } from 'react-dom/client';  
 import App from './App';  
-import { AuthProvider } from './components/contexts/AuthContext'; // Importa AuthProvider (con llaves)  
+import { AuthProvider } from './components/contexts/AuthContext';  
 import { DoctorProvider } from './components/contexts/DoctorContext';  
 import './index.css';  
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import "@fortawesome/fontawesome-svg-core/styles.css"; // Importa los estilos de Font Awesome  
+import "@fortawesome/fontawesome-svg-core/styles.css";  
 import { config } from "@fortawesome/fontawesome-svg-core";  
-config.autoAddCss = false; // Desactiva la carga automática de CSS  
+config.autoAddCss = false;  
 
-
-
-const container = document.getElementById('root') as HTMLElement; // Selecciona el contenedor del DOM  
-const root = createRoot(container); // Crea una instancia de root  
+const container = document.getElementById('root') as HTMLElement;  
+const root = createRoot(container);  
 
 root.render(  
-    <React.StrictMode>  
-        <AuthProvider> {/* Usamos AuthProvider correctamente */}  
-            <DoctorProvider>  
-                <App />  
-            </DoctorProvider>  
-        </AuthProvider>  
-    </React.StrictMode>  
-);
+  <React.StrictMode>  
+    <AuthProvider>  
+      <DoctorProvider>  
+        <App />  
+      </DoctorProvider>  
+    </AuthProvider>  
+  </React.StrictMode>  
+);  
+
+// Registro del Service Worker  
+if ('serviceWorker' in navigator) {  
+  window.addEventListener('load', () => { // Registro después de que la página se cargue completamente  
+    navigator.serviceWorker.register('/sw.js') // Ajusta la ruta si es necesario  
+      .then(registration => {  
+        console.log('Service Worker registrado con éxito:', registration);  
+      })  
+      .catch(error => {  
+        console.error('Error al registrar el Service Worker:', error);  
+      });  
+  });  
+}

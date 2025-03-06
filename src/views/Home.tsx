@@ -43,7 +43,7 @@ const Home = () => {
     return (  
         <div className="home">  
             <picture>  
-                <source media="(max-width: 768px)" srcSet="src/assets/banner_mobile.webp" />  
+                <source media="(max-width: 768px)" srcSet="src/assets/banner_mobile.jpg" />  
                 <img src="src/assets/banner_desk.jpg" alt={t.home.title} className="banner" />  
             </picture>  
             <br />  

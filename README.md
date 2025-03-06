@@ -48,6 +48,22 @@ Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido
 
 - Almacena en IndexedDB datos relevantes como información de citas, doctores o pacientes del hospital.
 
-- Asegúrate de que los datos sean almacenados y recuperados correctamente de IndexedDB.
+- Los datos son almacenados y recuperados en IndexedDB.
 
-<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/IdexedDB.png" width="300">
+<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/IdexedDB.png" width="400">
+
+
+# 3. Despliegue y Configuración del Service Worker Personalizado 
+- Personaliza y despliega un Service Worker que gestione los archivos de caché y soporte el almacenamiento offline:
+- Asegúrate de que el Service Worker funcione adecuadamente para manejar la caché de los archivos y el almacenamiento en LocalStorage o IndexedDB.
+- Verifica que la PWA esté desplegada correctamente y sea accesible offline.
+
+** Cambios realizados:**
+
+Para habilitar el acceso offline, se registra el Service Worker (en el archivo `sw.js`) y en el archivo principal (`src/main.tsx`) después de que la página se cargue. 
+
+Esto permite que la aplicación funcione sin conexión a internet, utilizando los archivos almacenados en la caché.
+
+# 4. Pruebas de Rendimiento con Lighthouse
+
+<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/lighthouse.png" width="800">

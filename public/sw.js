@@ -13,7 +13,7 @@ self.addEventListener('install', (event) => {
                 '/dra1.jpg',   
                 '/dra2.jpg',   
                 '/banner_desk.jpg',
-                '/banner_mobile.webp',   
+                '/banner_mobile.jpg',   
                 '/urgencia_icono.jpg',  
                 '/especialidades_icono.jpg',   
                 '/team',  
