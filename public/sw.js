@@ -12,56 +12,38 @@ self.addEventListener('install', (event) => {
                 '/doc2.jpg',  
                 '/dra1.jpg',   
                 '/dra2.jpg',   
-                '/banner_desk.jpg',
+                '/banner_desk.jpg',  
                 '/banner_mobile.jpg',   
                 '/urgencia_icono.jpg',  
                 '/especialidades_icono.jpg',   
-                '/team',  
+                '/team'  
             ]);  
         })  
     );  
-});  
-
-self.addEventListener('activate', (event) => {  
-    // Elimina cachés antiguas si es necesario  
-    const cacheWhitelist = ['my-cache'];  
-    event.waitUntil(  
-        caches.keys().then((cacheNames) => {  
-            return Promise.all(  
-                cacheNames.map((cacheName) => {  
-                    // Elimina cachés que no están en la lista blanca  
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {  
-                        return caches.delete(cacheName);  
-                    }  
-                })  
-            );  
-        })  
-    );  
+    self.skipWaiting(); // Activa el nuevo Service Worker inmediatamente  
 });  
 
 self.addEventListener('fetch', (event) => {  
+    const url = new URL(event.request.url);  
+
     event.respondWith(  
-        caches.match(event.request).then((cachedResponse) => {  
-            // Si hay una respuesta en caché, devuélvela  
-            if (cachedResponse) {  
-                return cachedResponse;  
-            }  
-
-            // Si no hay respuesta en caché, realiza la solicitud de red  
-            return fetch(event.request).then((response) => {  
-                // Solo almacenar en caché si la respuesta es válida  
-                if (response && response.status === 200 && response.type === 'basic') {  
-                    const responseToCache = response.clone();  
-                    caches.open('my-cache').then((cache) => {  
-                        cache.put(event.request, responseToCache);  
-                    });  
+        caches.match(event.request).then(cachedResponse => {  
+            // Devuelve la respuesta caché si existe o realiza una nueva solicitud  
+            return cachedResponse || fetch(event.request).then(response => {  
+                // Verifica la respuesta antes de almacenarla en caché  
+                if (!response || response.status !== 200 || response.type !== 'basic') {  
+                    return response;  
                 }  
-
-                // Devuelve la respuesta original  
+                const responseToCache = response.clone();  
+                caches.open('my-cache').then(cache => {  
+                    cache.put(event.request, responseToCache);  
+                });  
                 return response;  
-            }).catch((error) => {  
-                console.error('Fetching failed:', error);  
             });  
+        }).catch(() => {  
+            // Si hay un error en la red, puedes manejarlo aquí  
+            console.warn('Error al recuperar los recursos y no se encontró caché');  
+            // No retornamos nada en caso de error, por lo que el usuario verá un mensaje de error en la consola  
         })  
     );  
 });

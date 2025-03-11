@@ -43,4 +43,51 @@ name: Administrador
 
 ✅Los usuarios pueden ver el ícono de instalación en el navegador y completar el proceso para instalarlo o desinstalarlo como aplicaciòn.
 
+
 # 2. Integración de Service Worker para Gestión Avanzada de Caché
+- Configurar un Service Worker avanzado:
+- Precaching para los recursos principales de la PWA (HTML, CSS, JS).
+
+**Cambios Realizados:**
+- Archivo sw.js
+
+✅Precaching de Recursos Clave: He reorganizado la sección de precaching para incluir explícitamente los recursos principales claves (por ejemplo, /index.html, /style.css, y /main.js). Esto garantiza que estos archivos fundamentales estén disponibles en el caché desde el principio.
+
+En el archivo original, el evento 'install' estaba duplicado, lo corregì.
+
+- Implementar al menos tres estrategias de almacenamiento en caché 
+
+✅ Estrategia Cache First:
+
+Se implementa para archivos estáticos como HTML, CSS, y JS. Si existe una respuesta en caché, se devuelve, de lo contrario, se realiza una solicitud a la red.
+
+✅ Estrategia Network First:
+
+Se implementa para solicitudes a datos dinámicos, como APIs. Se intenta primero hacer la solicitud a la red. Si tiene éxito, se almacena en caché, y si falla, se busca en la caché.
+
+✅ Estrategia Stale-While-Revalidate:
+
+Se utiliza para imágenes, donde primero se intenta devolver la respuesta en caché si existe, mientras que se realiza una solicitud a la red en segundo plano para actualizar la caché. Esto asegura que se muestra rápidamente el contenido mientras se actualiza.
+
+- Implementar la gestión del ciclo de vida del Service Worker, garantizando la ctualización de la caché cuando se publiquen nuevas versiones de la PWA.
+
+✅ self.clients.claim(): Se añadió esta línea para asegurar de que el nuevo Service Worker controla inmediatamente todas las páginas (clientes) abiertas después de activarse. Esto permite que los usuarios comiencen a usar la nueva caché sin necesidad de refrescar.
+
+Al usar caches.match y fetch, el código ya maneja una estrategia de actualización en cache. Si un recurso está cacheado y el archivo en la red ha cambiado, fetch actualizará automáticamente la caché con la nueva versión.
+
+✅  Detectar una Nueva Versión en el Service Worker: 
+
+Necesitamos verificar cuando se activa un nuevo Service Worker y, si hay uno nuevo, notificar al usuario.
+
+✅ Mostrar Mensaje a los Usuarios: 
+que informe que hay una nueva versión de la PWA disponible y que pueden refrescar para obtenerla.
+
+En el sw.js:
+
+Se añadió self.skipWaiting() para que los nuevos Service Workers activen inmediatamente.
+
+
+En el main.tsx:
+
+Se añadió lógica para escuchar los cambios en el Service Worker y notificar al usuario cuando hay una nueva versión disponible. 
+Se muestra una 
