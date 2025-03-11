@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({  
   plugins: [  
     react(),  
-    VitePWA({  // Agrega la configuración del plugin de PWA  
+    VitePWA({  
       registerType: 'autoUpdate',  
       manifest: {  
         name: "Centro Médico",  
@@ -26,7 +26,9 @@ export default defineConfig({
         start_url: ".",  
         display: "standalone",  
         background_color: "#ffffff",  
-        theme_color: "#007bff"  
+        theme_color: "#007bff",  
+        scope: "./",  // Añadido para definir el ámbito de navegación  
+        orientation: "portrait"  //  Se añade para definir la orientación preferida  
       }  
     })  
   ],  

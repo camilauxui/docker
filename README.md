@@ -29,11 +29,12 @@ name: Administrador
 
 
 # 1. Creación del Manifiesto y Configuración Inicial
-✅ Crear el archivo de manifiesto de la aplicación que permita su instalación en
-dispositivos móviles:
-- Incluir el nombre, iconos adaptativos en varias resoluciones, tema de color y
-modo pantalla (fullscreen/standalone).
+✅ Crear el archivo de manifiesto de la aplicación que permita su instalación en dispositivos móviles:
+- El manifest cumple con lo requerido: Incluir el nombre, iconos adaptativos en varias resoluciones, tema de color modo pantalla (fullscreen/standalone).
 - Asegurar que la aplicación sea reconocida como PWA y se pueda instalar.
 
-**Ajustes realizados:**
+**Ajustes realizados al manifest, archivo vite.config.js:**
 
+✅ Agregado scope: Esta propiedad define el ámbito de la aplicación. En este caso, se establece en "./" para que la aplicación opere dentro del directorio raíz.
+
+✅ Añadido orientation: Se puede especificar la orientación preferida de la aplicación. He utilizado "portrait" porque el diseño funciona mejor en sentido vertical
