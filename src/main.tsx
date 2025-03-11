@@ -25,7 +25,7 @@ root.render(
 // Registro del Service Worker  
 if ('serviceWorker' in navigator) {  
   window.addEventListener('load', () => { // Registro después de que la página se cargue completamente  
-    navigator.serviceWorker.register('/sw.js') // Ajusta la ruta si es necesario  
+    navigator.serviceWorker.register('/sw.js') 
       .then(registration => {  
         console.log('Service Worker registrado con éxito:', registration);  
       })  
