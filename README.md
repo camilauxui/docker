@@ -38,3 +38,9 @@ name: Administrador
 ✅ Agregado scope: Esta propiedad define el ámbito de la aplicación. En este caso, se establece en "./" para que la aplicación opere dentro del directorio raíz.
 
 ✅ Añadido orientation: Se puede especificar la orientación preferida de la aplicación. He utilizado "portrait" porque el diseño funciona mejor en sentido vertical
+
+✅Service Worker: Se está registrando correctamente, lo que permite funcionalidades como el funcionamiento offline y la gestión de caché.
+
+✅Los usuarios pueden ver el ícono de instalación en el navegador y completar el proceso para instalarlo o desinstalarlo como aplicaciòn.
+
+# 2. Integración de Service Worker para Gestión Avanzada de Caché
