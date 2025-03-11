@@ -1,8 +1,12 @@
-# M6EP2 Almacenamiento y Análisis de PWA en la Web del Hospital
+# M6EP3 Implementación Completa de PWA en la Web del Hospital
 
 **Contexto:**
-En este ejercicio práctico se van a utilizar opciones de almacenamiento web dentro de la web del hospital convertida en PWA, utilizando
-LocalStorage, SessionStorage o IndexedDB. Además, se ejecutarán pruebas con Lighthouse para validar el rendimiento y estado de la PWA.
+implementar
+una PWA completa para la web del hospital. El proyecto deberá hacer uso de ReactJS y
+aprovechar al máximo las características de PWA, incluyendo almacenamiento web avanzado,
+estrategias de Service Worker, y análisis de rendimiento y accesibilidad con Lighthouse. A su
+vez, se integrarán nuevas funcionalidades de uso de periféricos del sistema operativo,
+accesos a APIs externas, y una estrategia avanzada de despliegue en un servidor.
 
 ___________________________________________________________________________
 
@@ -24,46 +28,12 @@ name: Administrador
 
 
 
-# 1. Implementación de Almacenamiento Web 
-✅ Configura un sistema de almacenamiento para la PWA del hospital usando LocalStorage o SessionStorage.
-
-Para poder implementar este requerimiento se crea una versiòn en inglès de la web, asegurando que el idioma se pueda cambiar y almacenar en el localStorage.
+# 1. Creación del Manifiesto y Configuración Inicial
+✅ Crear el archivo de manifiesto de la aplicación que permita su instalación en
+dispositivos móviles:
+- Incluir el nombre, iconos adaptativos en varias resoluciones, tema de color y
+modo pantalla (fullscreen/standalone).
+- Asegurar que la aplicación sea reconocida como PWA y se pueda instalar.
 
 **Ajustes realizados:**
 
-Creación del LanguageContext: Para gestionar el estado del idioma a través de toda la aplicación.
-
-Modificación de App.tsx: Para envolver la aplicación en el LanguageProvider.
-
-Actualización de Navbar.tsx: Para usar el contexto de idioma, lo que permite que el menú de navegación y el contenido cambien juntos.
-
-Actualización de Home.tsx: Para que al usar el contexto de idioma, el contenido de la página de inicio se traduzca correctamente según el idioma seleccionado.
-
-✅  De esta manera el idioma seleccionado persiste después de recargar la página.
-
-✅El componente ProtectedRoute estará obteniendo el estado de autenticación actualizado del AuthContext, al guardar el token en localStorage, el usuario permanecerá autenticado incluso después de recargar la página.
-
-# 2.Implementación de IndexedDB 
-- Implementa una base de datos con IndexedDB o una biblioteca como PouchDB para manejar datos más complejos o a mayor escala:
-
-- Almacena en IndexedDB datos relevantes como información de citas, doctores o pacientes del hospital.
-
-- Los datos son almacenados y recuperados en IndexedDB.
-
-<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/IdexedDB.png" width="400">
-
-
-# 3. Despliegue y Configuración del Service Worker Personalizado 
-- Personaliza y despliega un Service Worker que gestione los archivos de caché y soporte el almacenamiento offline:
-- Asegúrate de que el Service Worker funcione adecuadamente para manejar la caché de los archivos y el almacenamiento en LocalStorage o IndexedDB.
-- Verifica que la PWA esté desplegada correctamente y sea accesible offline.
-
-** Cambios realizados:**
-
-Para habilitar el acceso offline, se registra el Service Worker (en el archivo `sw.js`) y en el archivo principal (`src/main.tsx`) después de que la página se cargue. 
-
-Esto permite que la aplicación funcione sin conexión a internet, utilizando los archivos almacenados en la caché.
-
-# 4. Pruebas de Rendimiento con Lighthouse
-
-<img src="https://github.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/blob/M6EP2/src/assets/lighthouse.png" width="800">
