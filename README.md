@@ -125,4 +125,4 @@ export const fetchDoctors = async () => {
 
 
 # Pruebas de Rendimiento y Optimización con Lighthouse
-![alt text](src/assets/report_lighthouse2.png)
+![pruebas con lighthouse](src/assets/report_lighthouse2.png)
