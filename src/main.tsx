@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'; // Importa useEffect y useState  
+import React from 'react';  
 import { createRoot } from 'react-dom/client';  
 import App from './App';  
+import ErrorBoundary from './components/ErrorBoundary'; 
 import { AuthProvider } from './components/contexts/AuthContext';  
 import { DoctorProvider } from './components/contexts/DoctorContext';  
 import './index.css';  
@@ -14,13 +15,15 @@ const root = createRoot(container);
 
 root.render(  
   <React.StrictMode>  
-    <AuthProvider>  
-      <DoctorProvider>  
-        <App />  
-      </DoctorProvider>  
-    </AuthProvider>  
+    <ErrorBoundary>  
+      <AuthProvider>  
+        <DoctorProvider>  
+          <App />  
+        </DoctorProvider>  
+      </AuthProvider>  
+    </ErrorBoundary>  
   </React.StrictMode>  
-);  
+);
 
 // Registro del Service Worker  
 if ('serviceWorker' in navigator) {  

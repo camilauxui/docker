@@ -5,7 +5,8 @@ import { Modal, Form, Button } from "react-bootstrap";
 import { post } from "../services/apiService";  
 import translations from "../translations";  
 import { useLanguage } from "../components/contexts/LanguageContext";  
-import * as jwt_decode from 'jwt-decode'; // Importación correcta  
+import * as jwt_decode from 'jwt-decode';
+import LoginForm from "../components/LoginForm";
 
 interface DecodedToken { // Define la interfaz  
     userId: string;  
@@ -147,41 +148,16 @@ const Navbar: React.FC = () => {
             </div>  
 
             {/* Modal para el inicio de sesión */}  
-            <Modal show={showLogin} onHide={toggleLoginModal}>  
-                <Modal.Header closeButton>  
-                    <Modal.Title>{t.navbar?.loginTitle || "Iniciar sesión"}</Modal.Title>  
-                </Modal.Header>  
-                <Modal.Body>  
-                    <Form onSubmit={handleLogin}>  
-                        <Form.Group className="mb-3">  
-                            <Form.Label>  
-                                {t.navbar?.username || "Nombre de usuario"}  
-                            </Form.Label>  
-                            <Form.Control  
-                                type="text"  
-                                value={username}  
-                                onChange={(e) => setUsername(e.target.value)}  
-                                required  
-                            />  
-                        </Form.Group>  
-                        <Form.Group className="mb-3">  
-                            <Form.Label>{t.navbar?.password || "Contraseña"}</Form.Label>  
-                            <Form.Control  
-                                type="password"  
-                                value={password}  
-                                onChange={(e) => setPassword(e.target.value)}  
-                                required  
-                            />  
-                        </Form.Group>  
-                        {loginError && (  
-                            <div className="text-danger">{loginError}</div>  
-                        )}  
-                        <Button type="submit" variant="primary">  
-                            {t.navbar?.access || "Acceder"}  
-                        </Button>  
-                    </Form>  
-                </Modal.Body>  
-            </Modal>  
+            
+<Modal show={showLogin} onHide={toggleLoginModal}>  
+    <Modal.Header closeButton>  
+        <Modal.Title>{t.navbar?.loginTitle || "Iniciar sesión"}</Modal.Title>  
+    </Modal.Header>  
+    <Modal.Body>  
+        {/* Pasar onClose al LoginForm */}  
+        <LoginForm onClose={toggleLoginModal} />  
+    </Modal.Body>  
+</Modal>
         </nav>  
     );  
 };  
