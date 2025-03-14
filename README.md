@@ -91,3 +91,37 @@ En el main.tsx:
 
 Se añadió lógica para escuchar los cambios en el Service Worker y notificar al usuario cuando hay una nueva versión disponible. 
 Se muestra una 
+
+# Acceso a Periféricos del Sistema Operativo 
+
+- Cámara: Permitir la captura de imágenes 
+✅ En mi App añadi en el popup para en login la captura de imagen que luego aparece en el navbar junto al nombre del usuario como su avatar.
+
+apiService.ts: Se mejoró el manejo de errores y se implementó la función fetchDoctors.
+DoctorContext.tsx: Se configuró para cargar doctores desde la API y manejar errores.
+DoctorList.tsx: Se añadió la lógica para mostrar un mensaje de error si ocurre un problema al cargar los doctores
+
+# 4. Consumo de API Externa para Datos Médicos
+Axios o Fetch API para consumir la API.
+Dentro de apiService.ts, las llamadas a la API se realizan utilizando fetch.
+
+// Función para obtener la lista de doctores  
+export const fetchDoctors = async () => {  
+    const endpoint = '/doctors'; // Endpoint para obtener doctores  
+    return get<any[]>(endpoint, true);  
+};  
+
+## Manejo de Errores en apiService.ts
+
+**El archivo apiService.ts implementa un manejo de errores para las solicitudes a la API.** 
+
+✅ Detección de Errores HTTP: Se verifica el estado de la respuesta. Si no es exitoso (códigos 401 o 403), se muestra una alerta y se elimina el token de sesión.
+
+✅  Análisis de JSON: Se maneja de manera específica cualquier error que ocurra al intentar parsear la respuesta JSON. Se captura el error y se muestra un mensaje al usuario.
+
+✅  Uso de Alertas: se utiliza alert para informar a los usuarios sobre errores de conexión
+
+✅ Registro de Errores: Cada error se registra en la consola para facilitar la depuración y el seguimiento de problemas en la aplicación.
+
+
+# Pruebas de Rendimiento y Optimización con Lighthouse
