@@ -1,50 +1,18 @@
 import React, { useState } from "react";  
 import { Link, useNavigate } from "react-router-dom";  
 import { useAuth } from "../components/contexts/AuthContext";  
-import { Modal, Form, Button } from "react-bootstrap";  
+import { Modal, Button } from "react-bootstrap";  
 import { post } from "../services/apiService";  
 import translations from "../translations";  
 import { useLanguage } from "../components/contexts/LanguageContext";  
-import * as jwt_decode from 'jwt-decode';
-import LoginForm from "../components/LoginForm";
-
-interface DecodedToken { // Define la interfaz  
-    userId: string;  
-    username: string;  
-    name: string;  
-}  
+import LoginForm from "../components/LoginForm";  
 
 const Navbar: React.FC = () => {  
     const [showLogin, setShowLogin] = useState<boolean>(false);  
     const { user, login, logout } = useAuth();  
-    const [username, setUsername] = useState<string>("");  
-    const [password, setPassword] = useState<string>("");  
     const navigate = useNavigate();  
-    const [loginError, setLoginError] = useState<string | null>(null);  
     const { language, changeLanguage } = useLanguage();  
     const t = translations[language] || translations["es"];  
-
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {  
-        e.preventDefault();  
-        setLoginError(null);  
-    
-        try {  
-            const response = await post<{ token: string }>("/login", {  
-                username,  
-                password,  
-            });  
-    
-            if (response && response.token) {  
-                login(response.token); // Pasa el token a la función login del contexto  
-                setShowLogin(false);  
-            } else {  
-                setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
-            }  
-        } catch (error: any) {  
-            console.error("Error al iniciar sesión:", error);  
-            setLoginError(t.navbar?.loginError || "Fallo en el inicio de sesión");  
-        }  
-    };
 
     const toggleLoginModal = () => setShowLogin(!showLogin);  
 
@@ -55,6 +23,9 @@ const Navbar: React.FC = () => {
             navigate("/appointments");  
         }  
     };  
+
+    // Recuperar la imagen capturada del localStorage  
+    const savedImage = localStorage.getItem('capturedImage');  
 
     return (  
         <nav className="navbar navbar-expand-lg navbar-light bg-secondary">  
@@ -131,6 +102,13 @@ const Navbar: React.FC = () => {
                                 {t.navbar?.welcome?.replace("{name}", user.name) ||  
                                     `Bienvenido, ${user.name}`}  
                             </span>  
+                            {savedImage && (  // Mostrar la imagen capturada  
+                                <img  
+                                    src={savedImage}   
+                                    alt="Imagen de perfil"   
+                                    style={{ width: '60px', height: '60px', borderRadius: '50%', marginLeft: '10px' }}  
+                                />  
+                            )}  
                             <button  
                                 className="btn btn-primary ms-2"  
                                 onClick={logout}  
@@ -148,16 +126,15 @@ const Navbar: React.FC = () => {
             </div>  
 
             {/* Modal para el inicio de sesión */}  
-            
-<Modal show={showLogin} onHide={toggleLoginModal}>  
-    <Modal.Header closeButton>  
-        <Modal.Title>{t.navbar?.loginTitle || "Iniciar sesión"}</Modal.Title>  
-    </Modal.Header>  
-    <Modal.Body>  
-        {/* Pasar onClose al LoginForm */}  
-        <LoginForm onClose={toggleLoginModal} />  
-    </Modal.Body>  
-</Modal>
+            <Modal show={showLogin} onHide={toggleLoginModal}>  
+                <Modal.Header closeButton>  
+                    <Modal.Title>{t.navbar?.loginTitle || "Iniciar sesión"}</Modal.Title>  
+                </Modal.Header>  
+                <Modal.Body>  
+                    {/* Pasar onClose al LoginForm */}  
+                    <LoginForm onClose={toggleLoginModal} />  
+                </Modal.Body>  
+            </Modal>  
         </nav>  
     );  
 };  

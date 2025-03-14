@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         e.preventDefault(); // Prevenir la recarga de página  
         setError('');  
         setLoading(true); // Activar el loading mientras se procesa  
-    
+
         // Validar las entradas  
         const validationError = validateInputs();  
         if (validationError) {  
@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
             setLoading(false);  
             return;  
         }  
-    
+
         try {  
             const response = await fetch('http://localhost:3000/login', {  
                 method: 'POST',  
@@ -52,13 +52,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                     password, // Enviar la contraseña sin encriptar  
                 }),  
             });  
-    
+
             const data = await response.json();  
-    
+
             if (!response.ok) {  
                 throw new Error(data.message || 'Error al iniciar sesión');  
             }  
-    
+
             login(data.token); // Llama a la función login del contexto para almacenar el token  
             if (onClose) {  
                 onClose(); // Llamar a la función para cerrar el modal  
@@ -69,7 +69,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
             // Aseguramos que el loading se desactive  
             setLoading(false);  
         }  
-    };
+    };  
 
     const startCamera = async () => {  
         setError('');  
@@ -100,25 +100,26 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         if (videoRef.current && canvasRef.current) {  
             const canvas = canvasRef.current;  
             const context = canvas.getContext('2d');  
-
+    
             if (context) {  
                 const videoWidth = videoRef.current.videoWidth;  
                 const videoHeight = videoRef.current.videoHeight;  
-
+    
                 if (videoWidth && videoHeight) {  
                     canvas.width = videoWidth;  
                     canvas.height = videoHeight;  
-
+    
                     context.drawImage(videoRef.current, 0, 0, videoWidth, videoHeight);  
                     const imageDataUrl = canvas.toDataURL('image/jpeg');  
                     setImage(imageDataUrl); // Guardar la imagen capturada en el estado  
+                    localStorage.setItem('capturedImage', imageDataUrl); // Almacenar la imagen en localStorage  
                     stopCamera(); // Detener la cámara después de tomar la foto  
                 } else {  
                     setError('El video no tiene dimensiones válidas.');  
                 }  
             }  
         }  
-    };  
+    }; 
 
     useEffect(() => {  
         return () => {  
