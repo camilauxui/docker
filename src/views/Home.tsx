@@ -43,8 +43,8 @@ const Home = () => {
     return (  
         <div className="home">  
             <picture>  
-                <source media="(max-width: 768px)" srcSet="src/assets/banner_mobile.jpg" />  
-                <img src="src/assets/banner_desk.jpg" alt={t.home.title} className="banner" />  
+                <source media="(max-width: 768px)" srcSet="https://raw.githubusercontent.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/refs/heads/M6EP3/src/assets/banner_mobile.jpg" />  
+                <img src="https://raw.githubusercontent.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/refs/heads/M6EP3/src/assets/banner_desk.jpg" alt={t.home.title} className="banner" />  
             </picture>  
             <br />  
             <nav className="button-container">  
