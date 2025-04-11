@@ -11,16 +11,16 @@ interface AppointmentFormValues {
 
 const withForm = <P extends object>(  
   WrappedComponent: React.ComponentType<P & {  
-    formData: AppointmentFormValues; // Usar AppointmentFormValues  
+    formData: AppointmentFormValues;   
     errorMessage: string;  
     confirmationMessage: string;  
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;  
-    handleSubmit: (e: React.FormEvent, onSubmitCallback: (data: AppointmentFormValues) => void) => void; // Usar AppointmentFormValues  
+    handleSubmit: (e: React.FormEvent, onSubmitCallback: (data: AppointmentFormValues) => void) => void; 
   }>,  
-  initialFormData: AppointmentFormValues // Usar AppointmentFormValues  
+  initialFormData: AppointmentFormValues s  
 ) => {  
   return (props: P) => {  
-    const [formData, setFormData] = useState<AppointmentFormValues>(initialFormData); // Usar AppointmentFormValues  
+    const [formData, setFormData] = useState<AppointmentFormValues>(initialFormData); 
     const [errorMessage, setErrorMessage] = useState<string>('');  
     const [confirmationMessage, setConfirmationMessage] = useState<string>('');  
 
@@ -29,16 +29,15 @@ const withForm = <P extends object>(
       setFormData({ ...formData, [name]: value });  
     };  
 
-    const handleSubmit = (e: React.FormEvent, onSubmitCallback: (data: AppointmentFormValues) => void) => { // Usar AppointmentFormValues  
+    const handleSubmit = (e: React.FormEvent, onSubmitCallback: (data: AppointmentFormValues) => void) => { 
       e.preventDefault();  
       // Validaciones  
-      if (!/^\d+$/.test((formData as AppointmentFormValues).phone)) { // Usar AppointmentFormValues y hacer un cast  
+      if (!/^\d+$/.test((formData as AppointmentFormValues).phone)) { /
         setErrorMessage('El teléfono debe contener solo números.');  
         return;  
       }  
 
-      if (!/\S+@\S+\.\S+/.test((formData as AppointmentFormValues).email)) { // Usar AppointmentFormValues y hacer un cast  
-        setErrorMessage('El correo electrónico no es válido.');  
+      if (!/\S+@\S+\.\S+/.test((formData as AppointmentFormValues).email)) { /
         return;  
       }  
 
