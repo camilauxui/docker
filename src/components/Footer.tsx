@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           {/* Logo con breve descripción */}  
           <div className="col-12 col-md-4 mb-4">  
             <img  
-              src="src/assets/logo_footer.webp"  
+              src="https://raw.githubusercontent.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/refs/heads/M6EP3/src/assets/logo_footer.webp"  
               alt="Logo Medical Center"  
               className="footer-logo mb-3"  
             />  
