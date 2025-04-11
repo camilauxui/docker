@@ -72,7 +72,7 @@ const Home = () => {
 
             <section className="about-center" ref={aboutSectionRef}>  
                 <div className="about-content">  
-                    <img src="src/assets/logo_footer.webp" alt="Description" className="about-image" />  
+                    <img src="https://raw.githubusercontent.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/refs/heads/M6EP3/src/assets/logo_footer.webp" alt="Description" className="about-image" />  
                     <h2>{t.home.title}</h2> {/* Repites el título si lo necesitas */}  
                     <p>{t.home.subtitle}</p>  
                 </div>  
