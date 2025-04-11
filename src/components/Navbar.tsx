@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
                 {/* Logotipo */}  
                 <Link className="navbar-brand" to="/">  
                     <img  
-                        src="src/assets/medical-center.png"  
+                        src="https://raw.githubusercontent.com/camilauxui/Integrac-Completa-CentroMedico-con-ReactJS/refs/heads/M6EP3/src/assets/medical-center.png"  
                         alt="Logotipo del Hospital"  
                         style={{ height: "40px" }}  
                     />  
