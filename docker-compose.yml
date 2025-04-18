@@ -1,0 +1,16 @@
+version: '3.8'  
+
+services:  
+  react-app:  
+    build:  
+      context: .  
+      dockerfile: Dockerfile  
+    ports:  
+      - "80:80"  
+  
+  json-server:  
+    build:  
+      context: .  
+      dockerfile: Dockerfile.json  
+    ports:  
+      - "3001:3001"

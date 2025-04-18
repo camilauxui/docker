@@ -1,0 +1,17 @@
+# Usar una imagen base de Node  
+FROM node:18  
+
+# Establecer el directorio de trabajo  
+WORKDIR /usr/src/app  
+
+# Copiar el archivo de datos  
+COPY db.json ./  
+
+# Instalar json-server  
+RUN npm install -g json-server  
+
+# Exponer el puerto  
+EXPOSE 3001  
+
+# Comando para ejecutar json-server  
+CMD ["json-server", "--watch", "db.json", "--port", "3001"]
