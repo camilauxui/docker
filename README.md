@@ -102,3 +102,5 @@ docker-compose up --build
 
 Al utilizar Docker y Docker Compose, el proyecto se vuelve mucho más portátil. Cualquiera que tenga Docker configurado en su entorno puede ejecutar el proyecto solo con el archivo docker-compose.yml. No es necesario que instalen manualmente todas las dependencias o configuraciones de la aplicación.
 Esto significa que todos los entornos (desarrollo, producción, etc.) pueden configurarse de forma consistente.
+
+![docker desktop](src/assets/dockerdesk.png)
