@@ -1,13 +1,10 @@
-# M6EP3 Implementación Completa de PWA en la Web del Hospital
+# M8EP2 Implementación de Docker,Testing y CI/CD en el Proyecto Final
 
 **Contexto:**
-implementar
-una PWA completa para la web del hospital. El proyecto deberá hacer uso de ReactJS y
-aprovechar al máximo las características de PWA, incluyendo almacenamiento web avanzado,
-estrategias de Service Worker, y análisis de rendimiento y accesibilidad con Lighthouse. A su
-vez, se integrarán nuevas funcionalidades de uso de periféricos del sistema operativo,
-accesos a APIs externas, y una estrategia avanzada de despliegue en un servidor.
-
+Aplicar los conceptos de DevOps en el proyecto desarrollado a lo largo de la especialización, sitio web de un Centro Mèdico.
+- Integrar Docker para la ejecución del proyecto, implementar pruebas automatizadas en al menos un componente, configurar un
+pipeline de CI/CD con GitHub Actions y gestionar ramas en la nube para mantener un flujo de
+desarrollo ordenado.
 ___________________________________________________________________________
 
 ✅ USUARIOS PARA LOGIN
@@ -26,103 +23,49 @@ password: password2
 
 name: Administrador
 
+__________________________________________________
 
 
-# 1. Creación del Manifiesto y Configuración Inicial
-✅ Crear el archivo de manifiesto de la aplicación que permita su instalación en dispositivos móviles:
-- El manifest cumple con lo requerido: Incluir el nombre, iconos adaptativos en varias resoluciones, tema de color modo pantalla (fullscreen/standalone).
-- Asegurar que la aplicación sea reconocida como PWA y se pueda instalar.
 
-**Ajustes realizados al manifest, archivo vite.config.js:**
-
-✅ Agregado scope: Esta propiedad define el ámbito de la aplicación. En este caso, se establece en "./" para que la aplicación opere dentro del directorio raíz.
-
-✅ Añadido orientation: Se puede especificar la orientación preferida de la aplicación. He utilizado "portrait" porque el diseño funciona mejor en sentido vertical
-
-✅Service Worker: Se está registrando correctamente, lo que permite funcionalidades como el funcionamiento offline y la gestión de caché.
-
-✅Los usuarios pueden ver el ícono de instalación en el navegador y completar el proceso para instalarlo o desinstalarlo como aplicaciòn.
+#  Levantar el proyecto  🚀
+ Ejecuta los siguientes comandos en tu terminal:
 
 
-# 2. Integración de Service Worker para Gestión Avanzada de Caché
-- Configurar un Service Worker avanzado:
-- Precaching para los recursos principales de la PWA (HTML, CSS, JS).
+1. **`json-server --watch db.json --port 3001`**  
+   - Inicia un servidor JSON falso que simula una API REST utilizando el archivo `db.json`.
+   - La opción `--watch` permite que se actualice automáticamente cuando `db.json` cambia.
+   - `--port 3001` especifica que se ejecutará en el puerto 3001.
 
-**Cambios Realizados:**
-- Archivo sw.js
+   - JSON Server started on PORT :3001
+Press CTRL-C to stop
+Watching db.json...
 
-✅Precaching de Recursos Clave: He reorganizado la sección de precaching para incluir explícitamente los recursos principales claves (por ejemplo, /index.html, /style.css, y /main.js). Esto garantiza que estos archivos fundamentales estén disponibles en el caché desde el principio.
+( ˶ˆ ᗜ ˆ˵ )
 
-En el archivo original, el evento 'install' estaba duplicado, lo corregì.
+Index:
+http://localhost:3001/
 
-- Implementar al menos tres estrategias de almacenamiento en caché 
+Static files:
+Serving ./public directory if it exists
 
-✅ Estrategia Cache First:
+Endpoints:
+http://localhost:3001/doctors
+http://localhost:3001/appointments
+http://localhost:3001/users
 
-Se implementa para archivos estáticos como HTML, CSS, y JS. Si existe una respuesta en caché, se devuelve, de lo contrario, se realiza una solicitud a la red.
+2. **`node server.js`**  
+   - Ejecuta un archivo `server.js` con Node.js.
+   - Servidor escuchando en el puerto 3000
 
-✅ Estrategia Network First:
+3. **`npm run dev`**  
+   - Ejecuta el script `dev` que está definido en el archivo `package.json` dentro del proyecto.
+   - Este comando inicia el entorno de desarrollo 
 
-Se implementa para solicitudes a datos dinámicos, como APIs. Se intenta primero hacer la solicitud a la red. Si tiene éxito, se almacena en caché, y si falla, se busca en la caché.
+   -   VITE v6.0.3  ready in 1329 ms
 
-✅ Estrategia Stale-While-Revalidate:
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 
-Se utiliza para imágenes, donde primero se intenta devolver la respuesta en caché si existe, mientras que se realiza una solicitud a la red en segundo plano para actualizar la caché. Esto asegura que se muestra rápidamente el contenido mientras se actualiza.
-
-- Implementar la gestión del ciclo de vida del Service Worker, garantizando la ctualización de la caché cuando se publiquen nuevas versiones de la PWA.
-
-✅ self.clients.claim(): Se añadió esta línea para asegurar de que el nuevo Service Worker controla inmediatamente todas las páginas (clientes) abiertas después de activarse. Esto permite que los usuarios comiencen a usar la nueva caché sin necesidad de refrescar.
-
-Al usar caches.match y fetch, el código ya maneja una estrategia de actualización en cache. Si un recurso está cacheado y el archivo en la red ha cambiado, fetch actualizará automáticamente la caché con la nueva versión.
-
-✅  Detectar una Nueva Versión en el Service Worker: 
-
-Necesitamos verificar cuando se activa un nuevo Service Worker y, si hay uno nuevo, notificar al usuario.
-
-✅ Mostrar Mensaje a los Usuarios: 
-que informe que hay una nueva versión de la PWA disponible y que pueden refrescar para obtenerla.
-
-En el sw.js:
-
-Se añadió self.skipWaiting() para que los nuevos Service Workers activen inmediatamente.
-
-
-En el main.tsx:
-
-Se añadió lógica para escuchar los cambios en el Service Worker y notificar al usuario cuando hay una nueva versión disponible. 
-Se muestra una 
-
-# Acceso a Periféricos del Sistema Operativo 
-
-- Cámara: Permitir la captura de imágenes 
-✅ En mi App añadi en el popup para en login la captura de imagen que luego aparece en el navbar junto al nombre del usuario como su avatar.
-
-apiService.ts: Se mejoró el manejo de errores y se implementó la función fetchDoctors.
-DoctorContext.tsx: Se configuró para cargar doctores desde la API y manejar errores.
-DoctorList.tsx: Se añadió la lógica para mostrar un mensaje de error si ocurre un problema al cargar los doctores
-
-# 4. Consumo de API Externa para Datos Médicos
-Axios o Fetch API para consumir la API.
-Dentro de apiService.ts, las llamadas a la API se realizan utilizando fetch.
-
-// Función para obtener la lista de doctores  
-export const fetchDoctors = async () => {  
-    const endpoint = '/doctors'; // Endpoint para obtener doctores  
-    return get<any[]>(endpoint, true);  
-};  
-
-## Manejo de Errores en apiService.ts
-
-**El archivo apiService.ts implementa un manejo de errores para las solicitudes a la API.** 
-
-✅ Detección de Errores HTTP: Se verifica el estado de la respuesta. Si no es exitoso (códigos 401 o 403), se muestra una alerta y se elimina el token de sesión.
-
-✅  Análisis de JSON: Se maneja de manera específica cualquier error que ocurra al intentar parsear la respuesta JSON. Se captura el error y se muestra un mensaje al usuario.
-
-✅  Uso de Alertas: se utiliza alert para informar a los usuarios sobre errores de conexión
-
-✅ Registro de Errores: Cada error se registra en la consola para facilitar la depuración y el seguimiento de problemas en la aplicación.
-
-
-# Pruebas de Rendimiento y Optimización con Lighthouse
-![pruebas con lighthouse](src/assets/report_lighthouse2.png)
+4. **URL sitio:**
+ http://localhost:5173/
