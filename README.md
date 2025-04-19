@@ -159,11 +159,11 @@ Simula un clic en el botón de cambio de idioma a inglés y verifica que el tít
 
 
 # Configuración de CI/CD con GitHub Actions 
--  Implementar un pipeline en GitHub Actions que incluya:
-- -  Instalación de dependencias.
-- - Ejecución de pruebas automatizadas.
-- - Construcción y verificación del contenedor Docker.
-- - Asegurar que el pipeline se ejecute en cada push o pull request a la rama principal.
+## Implementar un pipeline en GitHub Actions que incluya:
+-  Instalación de dependencias.
+- Ejecución de pruebas automatizadas.
+- Construcción y verificación del contenedor Docker.
+- Asegurar que el pipeline se ejecute en cada push o pull request a la rama principal.
 
 ### Se agrega el archivo ci.yml
 ### Se configura el pipeline en GitHub Actions para que se ejecute en cada push o pull request
