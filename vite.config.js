@@ -27,15 +27,15 @@ export default defineConfig({
         display: "standalone",  
         background_color: "#ffffff",  
         theme_color: "#007bff",  
-        scope: "./",  // Añadido para definir el ámbito de navegación  
-        orientation: "portrait"  //  Se añade para definir la orientación preferida  
+        scope: "./",  
+        orientation: "portrait"  
       }  
     })  
   ],  
   server: {  
     proxy: {  
       '/api': {  
-        target: 'http://localhost:3001',  
+        target: 'http://localhost:3000',  // Asegúrate de que esto apunte a tu backend  
         changeOrigin: true,  
         rewrite: (path) => path.replace(/^\/api/, ''),  
       },  

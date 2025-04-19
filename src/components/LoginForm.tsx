@@ -10,9 +10,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     const [username, setUsername] = useState('');  
     const [password, setPassword] = useState('');  
     const [error, setError] = useState('');  
-    const [loading, setLoading] = useState(false); // Nuevo estado para manejar el loading  
-    const [image, setImage] = useState<string | null>(null); // Estado para almacenar la imagen capturada  
-    const [stream, setStream] = useState<MediaStream | null>(null); // Estado para el stream de la cámara  
+    const [loading, setLoading] = useState(false);  
+    const [image, setImage] = useState<string | null>(null);  
+    const [stream, setStream] = useState<MediaStream | null>(null);  
     const videoRef = useRef<HTMLVideoElement>(null);  
     const canvasRef = useRef<HTMLCanvasElement>(null);  
     const { login } = useAuth();  
@@ -25,15 +25,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         if (sanitizedUsername !== username) {  
             return 'El nombre de usuario contiene caracteres no válidos.';  
         }  
-        return null; // Todo está correcto si no hay errores  
+        return null;  
     };  
 
     const handleLogin = async (e: React.FormEvent) => {  
-        e.preventDefault(); // Prevenir la recarga de página  
+        e.preventDefault();  
         setError('');  
-        setLoading(true); // Activar el loading mientras se procesa  
+        setLoading(true);  
 
-        // Validar las entradas  
         const validationError = validateInputs();  
         if (validationError) {  
             setError(validationError);  
@@ -42,14 +41,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         }  
 
         try {  
-            const response = await fetch('http://localhost:3000/login', {  
+            const response = await fetch('/api/login', {  // Asegúrate de que la ruta está correcta  
                 method: 'POST',  
                 headers: {  
                     'Content-Type': 'application/json',  
                 },  
                 body: JSON.stringify({  
                     username,  
-                    password, // Enviar la contraseña sin encriptar  
+                    password,  
                 }),  
             });  
 
@@ -59,14 +58,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                 throw new Error(data.message || 'Error al iniciar sesión');  
             }  
 
-            login(data.token); // Llama a la función login del contexto para almacenar el token  
+            login(data.token);  
             if (onClose) {  
-                onClose(); // Llamar a la función para cerrar el modal  
+                onClose();  
             }  
         } catch (err: any) {  
             setError(err.message || 'Error al iniciar sesión');  
         } finally {  
-            // Aseguramos que el loading se desactive  
             setLoading(false);  
         }  
     };  
@@ -75,13 +73,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         setError('');  
         try {  
             const stream = await navigator.mediaDevices.getUserMedia({  
-                video: { facingMode: 'user' }, // Usar cámara frontal  
+                video: { facingMode: 'user' },  
                 audio: false,  
             });  
             setStream(stream);  
             if (videoRef.current) {  
                 videoRef.current.srcObject = stream;  
-                videoRef.current.play(); // Reproducir el video  
+                videoRef.current.play();  
             }  
         } catch (err) {  
             console.error(err);  
@@ -91,7 +89,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
 
     const stopCamera = () => {  
         if (stream) {  
-            stream.getTracks().forEach((track) => track.stop()); // Detener todas las pistas del stream  
+            stream.getTracks().forEach((track) => track.stop());  
             setStream(null);  
         }  
     };  
@@ -111,19 +109,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     
                     context.drawImage(videoRef.current, 0, 0, videoWidth, videoHeight);  
                     const imageDataUrl = canvas.toDataURL('image/jpeg');  
-                    setImage(imageDataUrl); // Guardar la imagen capturada en el estado  
-                    localStorage.setItem('capturedImage', imageDataUrl); // Almacenar la imagen en localStorage  
-                    stopCamera(); // Detener la cámara después de tomar la foto  
+                    setImage(imageDataUrl);  
+                    localStorage.setItem('capturedImage', imageDataUrl);  
+                    stopCamera();  
                 } else {  
                     setError('El video no tiene dimensiones válidas.');  
                 }  
             }  
         }  
-    }; 
+    };   
 
     useEffect(() => {  
         return () => {  
-            stopCamera(); // Detener la cámara al desmontar el componente  
+            stopCamera();  
         };  
     }, []);  
 
@@ -148,6 +146,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                     value={password}  
                     onChange={(e) => setPassword(e.target.value)}  
                     style={{ width: '100%', marginBottom: '0.5rem' }}  
+                    autoComplete="current-password" // Añadir atributo de autocompletado  
                 />  
             </div>  
             <div>  
@@ -155,7 +154,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                     type="button"  
                     onClick={startCamera}  
                     style={{ marginBottom: '0.5rem' }}  
-                    disabled={loading} // Deshabilitar si está en loading  
+                    disabled={loading}  
                 >  
                     Activar cámara  
                 </button>  
@@ -166,7 +165,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                         playsInline  
                         style={{  
                             width: '240px',  
-                            height: '180px', // Tamaño más reducido  
+                            height: '180px',  
                             border: '1px solid black',  
                             marginBottom: '0.5rem',  
                         }}  
@@ -176,7 +175,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
                     type="button"  
                     onClick={takePicture}  
                     style={{ marginBottom: '0.5rem' }}  
-                    disabled={loading} // Deshabilitar si está en loading  
+                    disabled={loading}  
                 >  
                     Tomar foto  
                 </button>  

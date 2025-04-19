@@ -104,3 +104,46 @@ Al utilizar Docker y Docker Compose, el proyecto se vuelve mucho más portátil.
 Esto significa que todos los entornos (desarrollo, producción, etc.) pueden configurarse de forma consistente.
 
 ![docker desktop](src/assets/dockerdesk.png)
+
+
+__________________________________________________________
+
+# Iniciar el Proyecto con Docker
+
+docker-compose up --build
+
+
+# 2. Implementación de Pruebas Automatizadas
+- Crear pruebas unitarias o de integración para al menos un componente clave del
+proyecto.
+- Utilizar herramientas de testing apropiadas como Jest, Mocha, PyTest o JUnit.
+- Asegurar que las pruebas se ejecuten correctamente y generen reportes.
+
+# Instalación de dependencias
+Abre tu terminal en el directorio raíz de tu proyecto y ejecuta el siguiente comando para instalar las dependencias necesarias:
+
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom  
+
+En package.json. Añadir:
+
+"scripts": {  
+    "test": "jest"  
+}  
+ ## Agregar Archivos de Prueba
+ Navbar.test.tsx  
+
+## Ejecutar las Pruebas
+
+npm test  
+
+## Instalar Dependencias Adicionales
+Además de las bibliotecas que ya instalaste, necesitarás instalar ts-jest y @types/jest para que Jest pueda manejar archivos TypeScript:
+
+npm install --save-dev ts-jest @types/jest  
+
+Instalar el Entorno de Prueba JSDOM
+Ejecuta el siguiente comando para instalar jest-environment-jsdom como una dependencia de desarrollo:
+
+npm install --save-dev jest-environment-jsdom  
+
+npm install --save-dev @testing-library/jest-dom
