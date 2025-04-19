@@ -175,17 +175,15 @@ cambios.
 - Implementar buenas prácticas en el flujo de trabajo, como pull requests y
 revisiones de código antes de fusionar cambios.
 
-Cambios realizados:
+
 
 # Crear y cambiar a la rama develop  
 git checkout -b develop  
 git push -u origin develop  
 
-# Crear una rama de características a partir de develop  
+# Crear y cambiar a nueva rama 
 git checkout -b feature/nueva-funcionalidad  
 
-
-Para futuros ajustes realizar:
 
 # Hacer cambios, añadir y confirmar  
 git add .  
@@ -194,5 +192,6 @@ git commit -m "Descripción de los cambios"
 # Hacer push de la nueva rama  
 git push -u origin feature/nueva-funcionalidad  
 
-# Crear Pull Request en GitHub y solicitar revisiones  
-# Luego, fusionar cambios según sea necesario  
+ Crear Pull Request en GitHub y solicitar revisiones  
+
+ Luego, fusionar cambios según sea necesario  
