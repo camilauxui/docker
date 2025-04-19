@@ -132,18 +132,17 @@ En package.json. Añadir:
  ## Agregar Archivos de Prueba
  Navbar.test.tsx  
 
-## Ejecutar las Pruebas
+# Ejecutar las Pruebas
 
 npm test  
 
-## Instalar Dependencias Adicionales
-Además de las bibliotecas que ya instalaste, necesitarás instalar ts-jest y @types/jest para que Jest pueda manejar archivos TypeScript:
 
-npm install --save-dev ts-jest @types/jest  
+### Este test verifica el correcto funcionamiento del componente Navbar en la aplicación. Se realizan las siguientes pruebas:
 
-Instalar el Entorno de Prueba JSDOM
-Ejecuta el siguiente comando para instalar jest-environment-jsdom como una dependencia de desarrollo:
+#### Renderizado Inicial: 
+Comprueba que el título "Centro Médico" se muestre correctamente en español cuando se carga el componente.
 
-npm install --save-dev jest-environment-jsdom  
+#### Cambio de Idioma: 
+Simula un clic en el botón de cambio de idioma a inglés y verifica que el título cambie a "Medical Center".
 
-npm install --save-dev @testing-library/jest-dom
+![test](src/assets/test.png)
