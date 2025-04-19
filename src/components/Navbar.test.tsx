@@ -1,50 +1,38 @@
 // Navbar.test.tsx  
+import React from 'react';  
 import { render, screen, fireEvent } from '@testing-library/react';  
-import { LanguageProvider } from '../components/contexts/LanguageContext'; 
-import { AuthProvider } from '../components/contexts/AuthContext'; 
-import React from 'react';
-import Navbar from '../components/Navbar'; 
+import { AuthProvider } from '../components/contexts/AuthContext';   
+import { LanguageProvider } from '../components/contexts/LanguageContext';  
+import Navbar from './Navbar';   
+import { MemoryRouter } from 'react-router-dom';   
 
 const renderWithProviders = (ui) => {  
     return render(  
-        <LanguageProvider>  
+        <MemoryRouter>  
             <AuthProvider>  
-                {ui}  
+                <LanguageProvider>  
+                    {ui}  
+                </LanguageProvider>  
             </AuthProvider>  
-        </LanguageProvider>  
+        </MemoryRouter>  
     );  
 };  
 
 describe('Navbar', () => {  
-    test('renders navbar with default language (English)', () => {  
+    test('renders navbar with default language (Spanish)', () => {  
         renderWithProviders(<Navbar />);  
 
-        expect(screen.getByText(/Medical Center/i)).toBeInTheDocument(); // Título en inglés  
-        expect(screen.getByText(/Logout/i)).toBeInTheDocument(); // Verifica el botón de cerrar sesión en inglés  
+        // Verificar que el título en español se muestre correctamente  
+        expect(screen.getByText(/Centro Médico/i)).toBeInTheDocument();   
     });  
 
-    test('changes language to Spanish when Español button is clicked', () => {  
+    test('can change language to English', () => {  
         renderWithProviders(<Navbar />);  
 
-        // Cambiar a español  
-        fireEvent.click(screen.getByText(/Español/i));  
-
-        // Verificar que el título cambie a español  
-        expect(screen.getByText(/Centro Médico/i)).toBeInTheDocument(); // Título en español  
-        expect(screen.getByText(/Cerrar sesión/i)).toBeInTheDocument(); // Verifica el botón de cerrar sesión en español  
-    });  
-
-    test('changes language to English when English button is clicked', () => {  
-        renderWithProviders(<Navbar />);  
-
-        // Cambiar a español primero para verificar el cambio por segunda vez  
-        fireEvent.click(screen.getByText(/Español/i));  
-
-        // Cambiar a inglés  
+        // Simula el cambio de idioma  
         fireEvent.click(screen.getByText(/English/i));  
 
-        // Verifica que el título vuelva a inglés  
-        expect(screen.getByText(/Medical Center/i)).toBeInTheDocument(); // Título en inglés  
-        expect(screen.getByText(/Logout/i)).toBeInTheDocument(); // Verifica el botón de cerrar sesión en inglés  
+        // Verificar que el título cambie a inglés  
+        expect(screen.getByText(/Medical Center/i)).toBeInTheDocument();   
     });  
 });

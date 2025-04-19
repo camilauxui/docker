@@ -14,8 +14,9 @@
     "noImplicitAny": false, // Permite el tipo 'any' implícito (puedes cambiarlo a 'true' para mayor seguridad)  
     "sourceMap": true, // Para debugging  
     "declaration": true, // Para generar archivos de definición (.d.ts)  
-    "outDir": "dist" // Carpeta de salida para los archivos compilados  
+    "outDir": "dist", // Carpeta de salida para los archivos compilados  
+    "types": ["jest", "@testing-library/jest-dom", "node"] // Incluye "node" aquí  
   },  
-  "include": ["src/**/*"],  
+  "include": ["src/**/*", "src/setupTests.ts"], // Incluye todos los archivos relevantes  
   "exclude": ["node_modules", "dist"]  
 }

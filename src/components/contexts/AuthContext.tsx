@@ -1,6 +1,6 @@
 // src/components/contexts/AuthContext.tsx  
 import React, { createContext, useState, useContext, useEffect } from 'react';  
-import { jwtDecode } from 'jwt-decode'; // Importa jwtDecode  
+import { jwtDecode } from 'jwt-decode';  
 
 interface AuthContextProps {  
   user: any | null;  
@@ -22,12 +22,10 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {  
   const [user, setUser] = useState<any | null>(() => {  
-    // Inicializa el estado 'user' al cargar el componente  
     const token = localStorage.getItem('token');  
     if (token) {  
       try {  
-        const decodedToken = jwtDecode(token);  
-        return decodedToken;  
+        return jwtDecode(token);  
       } catch (error) {  
         console.error("Error al decodificar el token inicial:", error);  
         return null;  
@@ -36,8 +34,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return null;  
   });  
 
-  const isLoggedIn = !!user; // Deriva el estado 'isLoggedIn' del estado 'user'  
-
+  const isLoggedIn = !!user;  
+  
   useEffect(() => {  
     console.log("User state changed:", user);  
   }, [user]);  
@@ -49,6 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(decodedToken);  
     } catch (error) {  
       console.error("Error al decodificar el token:", error);  
+      // Podrías considerar una mejor gestión de errores aquí  
     }  
   };  
 
@@ -71,6 +70,4 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );  
 };  
 
-export const useAuth = () => {  
-  return useContext(AuthContext);  
-};
+export const useAuth = () => useContext(AuthContext);
