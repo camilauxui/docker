@@ -55,14 +55,14 @@ http://localhost:3001/users
  http://localhost:5173/
  
  
+ __________________________________
  
- 
-# USUARIOS PARA LOGIN
+## USUARIOS PARA LOGIN
 Puedes usar cualquiera de estos usuarios para iniciar sesión.
 
 ✅ username: usuario1
 
-password: password1
+password: contrasena1
 
 name: Usuario Test
 _______________________
@@ -76,7 +76,8 @@ name: Administrador
 __________________________________________________
 
 ## Requerimiento:
-Integración de Docker en el Proyecto 
+# Integración de Docker en el Proyecto 
+
 - Crear un Dockerfile funcional para el proyecto.
 
 - Configurar docker-compose.yml si el proyecto requiere múltiples servicios.
@@ -108,9 +109,18 @@ Esto significa que todos los entornos (desarrollo, producción, etc.) pueden con
 
 __________________________________________________________
 
+
 # Iniciar el Proyecto con Docker
 
-docker-compose up --build
+## docker-compose up --build
+
+No es necesario iniciar los servidores aparte
+
+-  El proyecto estarà en la url: http://localhost/
+
+
+
+__________________________________________________________
 
 
 # 2. Implementación de Pruebas Automatizadas
