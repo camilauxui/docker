@@ -146,3 +146,22 @@ Comprueba que el título "Centro Médico" se muestre correctamente en español c
 Simula un clic en el botón de cambio de idioma a inglés y verifica que el título cambie a "Medical Center".
 
 ![test](src/assets/test.png)
+
+
+
+# Configuración de CI/CD con GitHub Actions 
+- Implementar un pipeline en GitHub Actions que incluya:
+- Instalación de dependencias.
+- Ejecución de pruebas automatizadas.
+- Construcción y verificación del contenedor Docker.
+- Asegurar que el pipeline se ejecute en cada push o pull request a la rama
+principal.
+
+- Se agrega el archivo ci.yml
+- Se configura el pipeline en GitHub Actions para que se ejecute en cada push o pull request
+- Realizar un Commit y Push:
+
+git add .github/workflows/ci.yml  
+git commit -m "Actualizar configuración de CI/CD para servir con Nginx"  
+git push 
+
