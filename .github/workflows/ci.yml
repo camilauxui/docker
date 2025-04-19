@@ -1,0 +1,40 @@
+name: CI/CD Pipeline  
+
+on:  
+  push:  
+    branches:  
+      - main  
+  pull_request:  
+    branches:  
+      - main  
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v2  
+
+      - name: Set up Node.js  
+        uses: actions/setup-node@v2  
+        with:  
+          node-version: '18' # Usa la versión de Node.js que corresponda a tu proyecto  
+
+      - name: Install dependencies  
+        run: npm install  
+
+      - name: Run tests  
+        run: npm test  
+
+      - name: Build Docker image  
+        run: |  
+          docker build -t my-app-image .  
+
+      - name: Run Docker container for verification  
+        run: |  
+          docker run -d -p 80:80 my-app-image  
+          sleep 10 # Espera un momento para que Nginx se inicie  
+          # Aquí puedes agregar pruebas para verificar que el contenedor está funcionando correctamente  
+          # Por ejemplo, puedes usar curl para verificar la respuesta del servidor  
+          curl --fail https://localhost || exit 1
