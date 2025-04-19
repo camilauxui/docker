@@ -164,3 +164,35 @@ git add .github/workflows/ci.yml
 git commit -m "Actualizar configuración de CI/CD para servir con Nginx"  
 git push 
 
+
+# Gestión de Ramas en la Nube
+
+- Crear y gestionar al menos dos ramas en GitHub
+- Una rama principal (main o master).
+- Una rama secundaria (develop o feature-branch) para pruebas y
+cambios.
+
+- Implementar buenas prácticas en el flujo de trabajo, como pull requests y
+revisiones de código antes de fusionar cambios.
+
+Cambios realizados:
+
+# Crear y cambiar a la rama develop  
+git checkout -b develop  
+git push -u origin develop  
+
+# Crear una rama de características a partir de develop  
+git checkout -b feature/nueva-funcionalidad  
+
+
+Para futuros ajustes realizar:
+
+# Hacer cambios, añadir y confirmar  
+git add .  
+git commit -m "Descripción de los cambios"  
+
+# Hacer push de la nueva rama  
+git push -u origin feature/nueva-funcionalidad  
+
+# Crear Pull Request en GitHub y solicitar revisiones  
+# Luego, fusionar cambios según sea necesario  
