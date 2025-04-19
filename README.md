@@ -195,3 +195,6 @@ git push -u origin feature/nueva-funcionalidad
  Crear Pull Request en GitHub y solicitar revisiones  
 
  Luego, fusionar cambios según sea necesario  
+ - git checkout develop 
+ - git merge feature/nueva-funcionalidad 
+ - git push origin develop  
